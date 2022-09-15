@@ -17,7 +17,7 @@ The **Movies Catalog** was developed to participate of Woovi Challenge and has t
 
 To make the setup you first need to clone this repository typing the comand below in your terminal:
 
-    https://github.com/dchueri/woovi-challenge.git
+    https://github.com/dchueri/movies-catalog.git
 
 Next, you need to access the project path: 
 
@@ -32,6 +32,66 @@ Or access the *server* path and install the application:
     cd server
     npm install    
 
+## 🔶 Queries
+ - All movies
+
+    	{
+          movies  {
+            edges  {
+              node  {
+                id
+                title
+                genre
+              }
+              cursor
+            }
+            pageInfo  {
+              hasNextPage
+              hasPreviousPage
+              startCursor
+              endCursor
+            }
+          }
+        }
+
+## 🔷 Mutations
+ - Create Movie
+ 
+		mutation{
+          CreateMovie(input: {title: "Some title", genre: "Action"}) {
+            movieEdge {
+              node {
+                id
+                title
+                genre
+              }
+            }
+            error
+          }
+        }
+
+ - Update Movie
+ 
+		mutation{
+          UpdateMovie(input: {id: "123456789", title: "Some title", genre: "Action"}) {
+            movieEdge {
+              node {
+                title
+                genre
+              }
+            }
+            error
+          }
+        }
+
+ - Delete Movie
+ 
+		mutation{
+          DeleteMovie(input: {id: "123456789"}) {
+            error
+            success
+          }
+        }
 
 ## 🛠️ Technologies
 
