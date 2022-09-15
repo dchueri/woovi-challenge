@@ -1,11 +1,14 @@
 import { GraphQLObjectType, GraphQLString } from "graphql";
-import { connectionDefinitions, globalIdField } from "graphql-relay";
+import { connectionDefinitions } from "graphql-relay";
 
 const MovieType = new GraphQLObjectType({
   name: "Movie",
   description: "Movie Type",
   fields: () => ({
-    id: globalIdField("Movie"),
+    id: {
+      type: GraphQLString,
+      resolve: (movie) => movie._id,
+    },
     title: {
       type: GraphQLString,
       resolve: (movie) => movie.title,

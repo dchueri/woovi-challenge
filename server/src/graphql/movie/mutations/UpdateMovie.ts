@@ -1,11 +1,14 @@
 import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
-import movies from "../../../graphql/movie/MovieModel";
-import { MovieEdge } from "../../../graphql/movie/MovieType";
+import movies from "../MovieModel";
+import { MovieEdge } from "../MovieType";
 
 export default mutationWithClientMutationId({
-  name: "CreateMovie",
+  name: "UpdateMovie",
   inputFields: {
+    id: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
     title: {
       type: new GraphQLNonNull(GraphQLString),
     },
@@ -13,24 +16,23 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  mutateAndGetPayload: async ({ title, genre }) => {
-    const movieAlredyExists = await movies.findOne({ title: title });
-    if (movieAlredyExists) {
-      return {
-        movie: null,
-        error: "Movie already exists",
-      };
-    }
-    const movie = new movies({
-      title: title,
-      genre: genre,
-    });
-    movie.save((err) => {
-      if (err) {
-        return { error: err.message };
-      }
-    });
-    return { movie: movie };
+  mutateAndGetPayload: async ({ id, title, genre }) => {
+    const movie = await movies
+      .findOneAndUpdate({ _id: id }, { title, genre })
+      .then((movie) => {
+        console.log(movie.id)
+        return {
+          movie: {
+            id: movie.id,
+            title: movie.title,
+            genre: movie.genre,
+          },
+        };
+      })
+      .catch((e) => {
+        return { error: "Movie not found" };
+      });
+    return movie;
   },
   outputFields: {
     movieEdge: {

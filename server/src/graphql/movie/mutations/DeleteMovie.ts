@@ -10,11 +10,11 @@ export default mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: async ({ id }) => {
-    try {
-      await movies.findOneAndDelete(id);
-    } catch (e) {
-      return e.message;
+    const deletedMovie = await movies.findByIdAndDelete({ _id: id });
+    if (deletedMovie) {
+      return { success: true };
     }
+    return { error: 'Movie does not exist' };
   },
   outputFields: {
     error: {

@@ -1,7 +1,7 @@
 import { GraphQLNonNull, GraphQLObjectType } from "graphql";
 import { connectionArgs, connectionFromArray } from "graphql-relay";
-import * as MovieLoader from "../movie/MovieLoader";
-import { MovieConnection } from "../movie/MovieType";
+import * as MovieLoader from "../../graphql/movie/MovieLoader";
+import { MovieConnection } from "../../graphql/movie/MovieType";
 
 const QueryType = new GraphQLObjectType({
   name: "Query",
