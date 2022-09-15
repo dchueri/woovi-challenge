@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+
+  woovi-challenge:
+    networks:
+      - woovi-bridge
+    build:
+      context: server
+      dockerfile: Dockerfile
+    hostname: woovi-challenge
+    container_name: woovi-challenge
+    volumes:
+      - ./woovi-challenge:/app
+    ports:
+      - 4000:4000
+
+networks:
+  woovi-bridge:
+    driver: bridge
