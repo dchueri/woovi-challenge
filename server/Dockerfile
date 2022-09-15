@@ -4,8 +4,6 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install npm -y
 
-RUN npm install -g @nestjs/cli
-
 COPY package*.json ./
 
 ARG PORT=4000
