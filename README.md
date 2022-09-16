@@ -99,7 +99,11 @@ Or access the *server* path and install the application:
 * `GraphQL` - First time using GraphQL, I thougth very interesting to learn a new paradigm to construct this API, since I started in development I have always practice API-REST and OO;
 * `KoaJS` - Used for web server;
 * `Mongoose` - ODM. 
-* `MongoDB` - Database used; and
+* `MongoDB` - Database used;
+* `ReactJS` - Library for build the front-end;
+* `Vite` - Used to base files generation for a ReactJs project;
+* `MaterialUI` - UI Tools;
+* `Relay` - Data-fetching; and
 * `Docker` - Was a docker-compose file to execute the API in containers (more stable).
 
 ## ✒️ Author
