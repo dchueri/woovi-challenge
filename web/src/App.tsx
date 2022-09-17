@@ -2,6 +2,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import "./App.css";
+import MovieForm from "./components/MovieForm";
 import MoviesList from "./components/MoviesList";
 import fetchGraphQL from "./fetchGraphQL";
 import { IMovieEdge } from "./types/MovieTypes";
@@ -59,6 +60,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <MovieForm/>
       <MoviesList moviesList={moviesList} />
     </ThemeProvider>
   );

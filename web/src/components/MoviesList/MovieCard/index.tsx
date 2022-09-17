@@ -11,7 +11,7 @@ const card = (movie: IMovie) => (
       <Typography variant="h5" component="div">
         {movie.title}
       </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+      <Typography color="text.secondary">
         {movie.genre}
       </Typography>
     </CardContent>
