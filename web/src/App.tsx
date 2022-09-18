@@ -46,7 +46,6 @@ function App() {
         }
         const data = response.data;
         setMoviesList(data.movies.edges);
-        console.log(data);
       })
       .catch((error) => {
         console.error(error);
@@ -61,7 +60,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <MovieForm/>
-      <MoviesList moviesList={moviesList} />
+      <MoviesList moviesList={moviesList} setMoviesList={setMoviesList}/>
     </ThemeProvider>
   );
 }

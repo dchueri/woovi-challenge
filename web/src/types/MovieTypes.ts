@@ -1,10 +1,10 @@
 export interface IMovie {
-    id: String,
-    title: String,
-    genre: String
+    id: string,
+    title: string,
+    genre: string
 }
 
 export interface IMovieEdge {
-    cursor: String,
+    cursor: string,
     node: IMovie
 }
