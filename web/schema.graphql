@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------- #
+
+type Movie {
+  movieEdge: MovieEdge
+  error: String
+  id: String!
+  title: String!
+  genre: String!
+}
+
+type Node {
+  id: String!
+  title: String!
+  genre: String!
+}
+
+type MovieEdge {
+  node: Node
+}
+
+type IMovieEdge {
+  node: Node
+  cursor: String
+}
+
+input CreateMovieInput {
+  title: String!
+  genre: String!
+}
+
+input DeleteMovieInput {
+  id: String!
+}
+
+type Mutation {
+  CreateMovie(input: CreateMovieInput): Movie
+  DeleteMovie(input: DeleteMovieInput): DeleteMovie
+}
+
+type Query {
+  movies: Movies
+}
+
+type DeleteMovie {
+  error: String
+}
+
+type Movies {
+  edges: [IMovieEdge]
+  pageInfo: PageInfo
+}
+
+type PageInfo {
+  hasNextPage: String
+  hasPreviousPage: String
+  startCursor: String
+  endCursor: String
+}

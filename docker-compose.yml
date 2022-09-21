@@ -24,7 +24,7 @@ services:
     hostname: woovi-web
     container_name: woovi-web
     volumes:
-      - ./web:/app
+      - ./web:/app/web
     ports:
       - 5173:5173
     depends_on:

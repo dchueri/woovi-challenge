@@ -3,42 +3,34 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
-import fetchGraphQL from "../../../fetchGraphQL";
-import { IMovie, IMovieEdge } from "../../../types/MovieTypes";
+import { Fragment } from "react";
+import { useMutation } from "react-relay";
+import { DeleteMovieMutation } from "../../../modules/DeleteMovieMutation";
+import { IMovie } from "../../../types/MovieTypes";
 
 export default function MovieCard(props: {
-  movie: IMovieEdge;
-  moviesList: IMovieEdge[];
-  setMoviesList: React.Dispatch<React.SetStateAction<IMovieEdge[]>>;
+  movie: any;
+  moviesList: any;
+  setMoviesList: React.Dispatch<React.SetStateAction<any>>;
 }) {
+  const [deleteMovieMutation] = useMutation(DeleteMovieMutation);
+
   const handleDeleteMovieOfList = (id: string) => {
     props.setMoviesList((prev) => prev.filter((movie) => movie.node.id !== id));
   };
 
   const handleDeleteMovie = async (id: string) => {
     const variables = { id: id };
-    fetchGraphQL(
-      `
-      mutation Movies($id: String!){
-        DeleteMovie(input: {id: $id}) {
-          error
-          success
-        }
-      }
-          `,
-      variables
-    )
-      .then((response) => {
-        handleDeleteMovieOfList(id);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    deleteMovieMutation({
+      variables,
+      onCompleted: (res) => console.log(res),
+      onError: (error) => console.log(error),
+    });
+    handleDeleteMovieOfList(id);
   };
 
   const card = (movie: IMovie) => (
-    <React.Fragment>
+    <Fragment>
       <CardContent>
         <Typography variant="h5" component="div">
           {movie.title}
@@ -50,7 +42,7 @@ export default function MovieCard(props: {
           }}
         />
       </CardContent>
-    </React.Fragment>
+    </Fragment>
   );
 
   return (

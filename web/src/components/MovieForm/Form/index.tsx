@@ -1,35 +1,18 @@
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
-import fetchGraphQL from "../../../fetchGraphQL";
+import { useMutation } from "react-relay";
+import { CreateMovieMutation } from "../../../modules/CreateMovieMutation";
 
 function Form() {
+  const [createMovieMutation] = useMutation(CreateMovieMutation);
+
   const handleCreateMovie = async (title: string, genre: string) => {
     const variables = { title: title, genre: genre };
-    fetchGraphQL(
-      `
-        mutation Movies($title: String!, $genre: String!){
-            CreateMovie(input: {title: $title, genre: $genre}) {
-              movieEdge {
-                node {
-                  id
-                  title
-                  genre
-                }
-              }
-              error
-            }
-        }
-    `,
-      variables
-    )
-      .then((response) => {
-          console.log(response)
-        const data = response.data;
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    createMovieMutation({
+      variables,
+      onCompleted: (res) => console.log(res),
+      onError: (error) => console.log(error),
+    });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,7 +20,6 @@ function Form() {
     const title = data.get("title")!.toString();
     const genre = data.get("genre")!.toString();
     await handleCreateMovie(title, genre);
-    console.log(title, genre);
   };
 
   return (
