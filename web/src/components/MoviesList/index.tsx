@@ -1,29 +1,24 @@
-import styled from "styled-components";
-import { IMovieEdge } from "../../types/MovieTypes";
+import { useState } from "react";
+import { AllMoviesQuery$data } from "../../modules/__generated__/AllMoviesQuery.graphql";
 import MovieCard from "./MovieCard";
 
-function MoviesList(props: {
-  moviesList: IMovieEdge[];
-  setMoviesList: React.Dispatch<React.SetStateAction<IMovieEdge[]>>;
-}) {
-  const Card = styled.div`
-    width: 60vw;
-  `;
+function MoviesList(props: { moviesList: AllMoviesQuery$data }) {
+  const [moviesList, setMoviesList] = useState(props.moviesList.movies!.edges!);
   const handlePrintMovies = () => {
-    if (props.moviesList) {
-      return props.moviesList.map((movie, index) => (
+    if (moviesList) {
+      return moviesList.map((movie, index) => (
         <MovieCard
           key={index}
           movie={movie}
-          moviesList={props.moviesList}
-          setMoviesList={props.setMoviesList}
+          moviesList={moviesList}
+          setMoviesList={setMoviesList}
         />
       ));
     }
     return <p>Nothing</p>;
   };
 
-  return <Card>{handlePrintMovies()}</Card>;
+  return <div>{handlePrintMovies()}</div>;
 }
 
 export default MoviesList;

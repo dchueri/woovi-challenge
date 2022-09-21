@@ -1,16 +1,13 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React from "react";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { useLazyLoadQuery } from "react-relay";
 import "./App.css";
 import MovieForm from "./components/MovieForm";
 import MoviesList from "./components/MoviesList";
-import fetchGraphQL from "./fetchGraphQL";
-import { IMovieEdge } from "./types/MovieTypes";
-
-const { useState, useEffect } = React;
+import { AllMovies } from "./modules/AllMoviesQuery";
+import { AllMoviesQuery } from "./modules/__generated__/AllMoviesQuery.graphql";
 
 function App() {
-  const [moviesList, setMoviesList] = useState<IMovieEdge[]>([]);
+  const moviesList = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
 
   const darkTheme = createTheme({
     palette: {
@@ -18,49 +15,11 @@ function App() {
     },
   });
 
-  useEffect(() => {
-    let isMounted = true;
-    fetchGraphQL(`
-      query Movies {
-        movies {
-          edges {
-            node {
-              id
-              title
-              genre
-            }
-            cursor
-          }
-          pageInfo {
-            hasNextPage
-            hasPreviousPage
-            startCursor
-            endCursor
-          }
-        }
-      }
-    `)
-      .then((response) => {
-        if (!isMounted) {
-          return;
-        }
-        const data = response.data;
-        setMoviesList(data.movies.edges);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <MovieForm/>
-      <MoviesList moviesList={moviesList} setMoviesList={setMoviesList}/>
+      <MovieForm />
+      <MoviesList moviesList={moviesList} />
     </ThemeProvider>
   );
 }
