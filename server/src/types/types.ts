@@ -6,3 +6,8 @@ export interface IUser extends Document {
   password: string;
   encryptPassword: (password: string) => string;
 }
+
+export default interface IUserContext extends Document {
+  name: string;
+  email: string;
+}
