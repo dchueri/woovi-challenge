@@ -55,6 +55,7 @@ Or access the *server* path and install the application:
         }
 
 ## 🔷 Mutations
+### Movies
  - Create Movie
  
 		mutation{
@@ -92,6 +93,35 @@ Or access the *server* path and install the application:
             success
           }
         }
+
+### Users
+
+- Register
+
+		mutation {
+		  RegisterUserMutation(input: {name: "Example", email: "example@example.com", password: "123456"}) {
+		    token
+		    me {
+		      id
+		      name
+		      email
+		      }
+		    error
+		  }
+		}
+
+- Login
+
+		mutation {
+		  LoginMutation(input: {email: "example@example.com", password: "123456"}) {
+		    token
+		    me {
+		      id
+		      name
+		      email
+		    }
+		  }
+		}
 
 ## 🛠️ Technologies
 
