@@ -17,7 +17,6 @@ export default mutationWithClientMutationId({
   },
   mutateAndGetPayload: async ({ title, genre }, ctx) => {
     const context = await getContext(ctx);
-    console.log(context);
     if (!context.user) {
       return { error: "You are not logged in. Please, sign in" };
     }
