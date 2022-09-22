@@ -10,7 +10,7 @@ const QueryType = new GraphQLObjectType({
     movies: {
       type: new GraphQLNonNull(MovieConnection),
       args: connectionArgs,
-      resolve: async (_, args, context) => {
+      resolve: async (_, args) => {
         const data = await MovieLoader.getAll();
         return connectionFromArray(data, args);
       },
