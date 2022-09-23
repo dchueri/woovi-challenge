@@ -1,5 +1,3 @@
-# ---------------------------------------------------------------------- #
-
 type Movie {
   movieEdge: MovieEdge
   error: String
@@ -32,13 +30,30 @@ input DeleteMovieInput {
   id: String!
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   CreateMovie(input: CreateMovieInput): Movie
   DeleteMovie(input: DeleteMovieInput): DeleteMovie
+  LoginMutation(input: LoginInput): Login
 }
 
 type Query {
   movies: Movies
+}
+
+type Login {
+  token: String
+  me: User
+}
+
+type User {
+  id: String
+  name: String
+  email: String
 }
 
 type DeleteMovie {

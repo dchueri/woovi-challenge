@@ -1,7 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { useMutation } from "react-relay";
-import { CreateMovieMutation } from "../../../modules/CreateMovieMutation";
+import { CreateMovieMutation } from "../../../modules/movie/CreateMovieMutation";
 
 function Form() {
   const [createMovieMutation] = useMutation(CreateMovieMutation);

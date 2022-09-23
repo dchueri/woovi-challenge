@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AllMoviesQuery$data } from "../../modules/__generated__/AllMoviesQuery.graphql";
+import { AllMoviesQuery$data } from "../../modules/movie/__generated__/AllMoviesQuery.graphql";
 import MovieCard from "./MovieCard";
 
 function MoviesList(props: { moviesList: AllMoviesQuery$data }) {
