@@ -1,11 +1,11 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { useLazyLoadQuery } from "react-relay";
 import "./App.css";
-import MovieForm from "./components/MovieForm";
-import MoviesList from "./components/MoviesList";
-import { AllMovies } from "./modules/AllMoviesQuery";
-import { AllMoviesQuery } from "./modules/__generated__/AllMoviesQuery.graphql";
-
+import { Copyright } from "./components/Copyrigth";
+import { AuthProvider } from "./context/AuthProvider";
+import { AllMovies } from "./modules/movie/AllMoviesQuery";
+import { AllMoviesQuery } from "./modules/movie/__generated__/AllMoviesQuery.graphql";
+import { IndexRoutes } from "./routes";
 function App() {
   const moviesList = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
 
@@ -18,8 +18,12 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <MovieForm />
-      <MoviesList moviesList={moviesList} />
+      <AuthProvider>
+        <>
+          <IndexRoutes moviesList={moviesList} />
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

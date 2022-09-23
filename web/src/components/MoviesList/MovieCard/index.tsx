@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 import { useMutation } from "react-relay";
-import { DeleteMovieMutation } from "../../../modules/DeleteMovieMutation";
+import { DeleteMovieMutation } from "../../../modules/movie/DeleteMovieMutation";
 import { IMovie } from "../../../types/MovieTypes";
 
 export default function MovieCard(props: {
