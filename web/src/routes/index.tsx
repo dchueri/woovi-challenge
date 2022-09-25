@@ -1,10 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import MoviesForm from "../components/MovieForm";
-import MoviesList from "../components/MoviesList";
+import MainPanel from "../components/MainPanel";
 import { ProtectedLayout } from "../components/ProtectedLayout";
 
-export const IndexRoutes = (props: { moviesList: any }) => {
+export const IndexRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -13,10 +12,7 @@ export const IndexRoutes = (props: { moviesList: any }) => {
           path="/"
           element={
             <ProtectedLayout>
-              <>
-               <MoviesForm/>
-                <MoviesList moviesList={props.moviesList} />
-              </>
+              <MainPanel />
             </ProtectedLayout>
           }
         />

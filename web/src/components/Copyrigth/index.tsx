@@ -1,6 +1,15 @@
-import { Link, Typography } from "@mui/material";
+import { Copyright } from "@mui/icons-material";
+import { Link, styled, Typography } from "@mui/material";
 
-export const Copyright = (props: any) => {
+export const CopyrightFooter = styled(Copyright)({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  height: "10vh",
+});
+
+export const FooterCopyright = (props: any) => {
   return (
     <Typography
       variant="body2"
@@ -8,12 +17,11 @@ export const Copyright = (props: any) => {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {"Copyright © "}
       <Link color="inherit" href="https://github.com/dchueri">
-        Diego Chueri
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+        {"Diego Chueri"}
+      </Link>
+      <p>{` ${new Date().getFullYear()}.`}</p>
     </Typography>
   );
 };
