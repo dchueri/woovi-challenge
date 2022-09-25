@@ -1,17 +1,29 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { styled } from "@mui/system";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../context/AuthProvider/util";
+
+const LoginBox = styled(Container)({
+  width: "20vw",
+  height: "100%",
+  borderRadius: "15px",
+  backgroundColor: "rgba(255,255,255,0.05)",
+  margin: "20vh auto",
+  textAlign: "center",
+  position: "fix",
+  display: "flex",
+  justifyContent: "center",
+});
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -30,16 +42,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      sx={{
-        padding: "1em",
-        borderRadius: "15px",
-        backgroundColor: "rgba(255,255,255,0.05)",
-      }}
-    >
-      <CssBaseline />
+    <LoginBox>
       <Box
         sx={{
           marginTop: 0,
@@ -91,6 +94,6 @@ export default function LoginForm() {
           </Grid>
         </Box>
       </Box>
-    </Container>
+    </LoginBox>
   );
 }

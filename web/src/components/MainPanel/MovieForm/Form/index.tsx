@@ -1,7 +1,8 @@
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { useMutation } from "react-relay";
-import { CreateMovieMutation } from "../../../modules/movie/CreateMovieMutation";
+import { CreateMovieMutation } from "../../../../modules/movie/CreateMovieMutation";
 
 function Form() {
   const [createMovieMutation] = useMutation(CreateMovieMutation);
@@ -26,7 +27,13 @@ function Form() {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ mt: 1, display: "inline" }}
+      sx={{
+        display: "flex",
+        alignContent: "center",
+        alignItems: "center",
+        gap: "1em",
+        margin: "0 auto",
+      }}
     >
       <TextField
         id="title"
@@ -42,8 +49,17 @@ function Form() {
         variant="outlined"
         required
       />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Add
+      <Button
+        type="submit"
+        variant="text"
+        sx={{
+          height: "fit-content",
+          minWidth: "min-content",
+          borderRadius: "50px",
+          padding: ".5em",
+        }}
+      >
+        <AddCircleOutlineIcon />
       </Button>
     </Box>
   );
