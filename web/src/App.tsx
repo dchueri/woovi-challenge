@@ -1,10 +1,9 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { FooterCopyright } from "./components/FooterCopyright";
 
 import { AuthProvider } from "./context/AuthProvider";
 import { IndexRoutes } from "./routes";
-import { CopyrightFooter } from "./styleds";
 function App() {
-
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
@@ -17,7 +16,7 @@ function App() {
       <AuthProvider>
         <>
           <IndexRoutes />
-          <CopyrightFooter />
+          <FooterCopyright />
         </>
       </AuthProvider>
     </ThemeProvider>

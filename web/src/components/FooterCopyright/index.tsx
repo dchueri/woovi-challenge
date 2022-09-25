@@ -7,6 +7,7 @@ export const CopyrightFooter = styled(Copyright)({
   alignItems: "center",
   textAlign: "center",
   height: "10vh",
+  width: "50vw",
 });
 
 export const FooterCopyright = (props: any) => {
@@ -19,9 +20,9 @@ export const FooterCopyright = (props: any) => {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://github.com/dchueri">
-        {"Diego Chueri"}
+        Diego Chueri
       </Link>
-      <p>{` ${new Date().getFullYear()}.`}</p>
+      {` ${new Date().getFullYear()}.`}
     </Typography>
   );
 };
