@@ -14,9 +14,13 @@ export default function MovieCard(props: { movie: IMovieEdge | null }) {
   const setMoviesList = useSetRecoilState(moviesListState);
 
   const handleDeleteMovieOfList = (id: string) => {
-    setMoviesList((prev: any) =>
-      prev.filter((movie: MovieEdge) => movie.node.id !== id)
-    );
+    setMoviesList((prev: any) => {
+      if (prev.length > 1) {
+        return prev.filter((movie: MovieEdge) => movie.node.id !== id);
+      }
+      console.log(prev.length)
+      return [];
+    });
   };
 
   const handleDeleteMovie = async (id: string) => {
