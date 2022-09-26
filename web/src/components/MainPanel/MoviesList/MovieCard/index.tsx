@@ -4,18 +4,17 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useMutation } from "react-relay";
+import { useSetRecoilState } from "recoil";
 import { DeleteMovieMutation } from "../../../../modules/movie/DeleteMovieMutation";
 import { IMovie, IMovieEdge, MovieEdge } from "../../../../types/MovieTypes";
+import { moviesListState } from "../../../../utils/atoms";
 
-export default function MovieCard(props: {
-  movie: IMovieEdge | null;
-  moviesList: any;
-  setMoviesList: React.Dispatch<React.SetStateAction<any>>;
-}) {
+export default function MovieCard(props: { movie: IMovieEdge | null }) {
   const [deleteMovieMutation] = useMutation(DeleteMovieMutation);
+  const setMoviesList = useSetRecoilState(moviesListState);
 
   const handleDeleteMovieOfList = (id: string) => {
-    props.setMoviesList((prev: any) =>
+    setMoviesList((prev: any) =>
       prev.filter((movie: MovieEdge) => movie.node.id !== id)
     );
   };

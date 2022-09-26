@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/system";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useLazyLoadQuery } from "react-relay";
 import { useRecoilState } from "recoil";
 import { AllMovies } from "../../../modules/movie/AllMoviesQuery";
@@ -28,17 +28,17 @@ const StyledContainer = styled(Box)({
 function MoviesList() {
   const list = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
   const [moviesList, setMoviesList] = useRecoilState(moviesListState);
-  const [localMovieList, setLocalMoviesList] = useState(moviesList);
-  setMoviesList(list.movies!.edges!);
+
+  useEffect(() => {
+    if (moviesList.length == 0) {
+      setMoviesList(list.movies!.edges);
+    }
+  });
+  
   const handlePrintMovies = () => {
-    if (moviesList) {
-      return localMovieList.map((movie: any, index: number) => (
-        <MovieCard
-          key={index}
-          movie={movie}
-          moviesList={localMovieList}
-          setMoviesList={setLocalMoviesList}
-        />
+    if (moviesList.length > 0) {
+      return moviesList.map((movie: any, index: number) => (
+        <MovieCard key={index} movie={movie} />
       ));
     }
     return <p>Nothing</p>;
