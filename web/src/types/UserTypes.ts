@@ -12,6 +12,7 @@ export interface User {
 export interface IContext extends IUser {
   authenticate: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  setUserRegistered: (user: IUser) => void;
 }
 
 export interface IAuthProvider {
