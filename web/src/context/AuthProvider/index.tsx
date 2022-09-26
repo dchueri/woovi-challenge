@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { useMutation } from "react-relay";
 import { LoginMutation } from "../../modules/user/LoginMutation";
 import { LoginMutation as LoginMutationType } from "../../modules/user/__generated__/LoginMutation.graphql";
-import { IAuthProvider, IContext, IUser } from "./types";
+import { IAuthProvider, IContext, IUser } from "../../types/UserTypes";
 import { getUserLocalStorage, setUserLocalStorage } from "./util";
 
 export const AuthContext = createContext<IContext>({} as IContext);
