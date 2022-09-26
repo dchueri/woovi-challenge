@@ -3,6 +3,7 @@
 /node_modules
 package-lock.json
 .env
+.npmrc
 
 # Logs
 logs
