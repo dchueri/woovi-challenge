@@ -1,6 +1,8 @@
 import { CircularProgress } from "@mui/material";
 import { Suspense } from "react";
 import styled from "styled-components";
+import MovieForm from "./MovieForm";
+import MoviesList from "./MoviesList";
 
 const Div = styled.div`
   width: 100vw;
@@ -10,10 +12,15 @@ const Div = styled.div`
 
 function MainPanel() {
   return (
-    <Suspense fallback={<CircularProgress />}>
-      <Div>
-        <CircularProgress sx={{ margin: "auto" }} />
-      </Div>
+    <Suspense
+      fallback={
+        <Div>
+          <CircularProgress />
+        </Div>
+      }
+    >
+      <MovieForm />
+      <MoviesList />
     </Suspense>
   );
 }
