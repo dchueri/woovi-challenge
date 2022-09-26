@@ -1,4 +1,4 @@
-import { IUser } from "./types";
+import { IUser } from "../../types/UserTypes";
 
 export function setUserLocalStorage(user: IUser | null) {
   localStorage.setItem("u", JSON.stringify(user));

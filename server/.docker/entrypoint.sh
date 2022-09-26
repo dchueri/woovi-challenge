@@ -5,4 +5,4 @@ echo "Instaling dependeces"
 npm install
 
 echo "Starting project"
-npm run start:dev
+npm run start
