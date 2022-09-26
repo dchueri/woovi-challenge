@@ -133,7 +133,7 @@ export default function RegisterForm() {
                 variant="body2"
                 sx={{ textAlign: "center" }}
               >
-                {"Don't have an account? Sign Up"}
+                {"Already have an account? Sign In"}
               </Link>
             </Grid>
           </Grid>
