@@ -6,16 +6,12 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
   const StyledH1 = styled.h1`
     margin: auto;
   `;
-
-  const Content = (): any => {
-    let result;
-    setTimeout(() => {
-      result = <StyledH1>You don't have access. Sign in!</StyledH1>;
-    }, 500);
-    return result;
-  };
-
+  
   const auth = useAuth();
+    setTimeout(() => {
+
+    }, 100);
+
   if (!auth.me) {
     return (
       <Container
@@ -26,7 +22,7 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
           display: "flex",
         }}
       >
-        <Content />
+        <StyledH1>You don't have access. <a href="/login">Sign in!</a></StyledH1>
       </Container>
     );
   }

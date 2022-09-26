@@ -35,19 +35,27 @@ input LoginInput {
   password: String!
 }
 
+input RegisterUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
 type Mutation {
   CreateMovie(input: CreateMovieInput): Movie
   DeleteMovie(input: DeleteMovieInput): DeleteMovie
-  LoginMutation(input: LoginInput): Login
+  LoginMutation(input: LoginInput): LoginOrRegister
+  RegisterUserMutation(input: RegisterUserInput): LoginOrRegister
 }
 
 type Query {
   movies: Movies
 }
 
-type Login {
+type LoginOrRegister {
   token: String
   me: User
+  error: String
 }
 
 type User {
