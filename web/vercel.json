@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        },
+        {
+            "source": "/login",
+            "destination": "/"
+        }
+    ]
+}

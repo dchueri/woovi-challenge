@@ -4,6 +4,7 @@ import React from "react";
 import { useMutation } from "react-relay";
 import { useRecoilState } from "recoil";
 import { CreateMovieMutation } from "../../../../modules/movie/CreateMovieMutation";
+import { CreateMovieResponse } from "../../../../types/MovieTypes";
 import { moviesListState } from "../../../../utils/atoms";
 
 function Form() {
@@ -14,9 +15,9 @@ function Form() {
     const variables = { title: title, genre: genre };
     createMovieMutation({
       variables,
-      onCompleted: (res) => {
-        if (!res.CreateMovie.error) {
-          setMoviesList([...moviesList, res.CreateMovie.movieEdge]);
+      onCompleted: (res: CreateMovieResponse) => {
+        if (!res.CreateMovie!.error) {
+          setMoviesList([...moviesList, res.CreateMovie!.movieEdge]);
         }
       },
       onError: (error) => console.log(error),

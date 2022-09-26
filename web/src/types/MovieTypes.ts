@@ -12,6 +12,15 @@ export interface Movie {
   genre: string;
 }
 
+export interface CreateMovieResponse {
+  CreateMovie?: CreateMovie;
+}
+
+export interface CreateMovie {
+  movieEdge: MovieEdge;
+  error: string;
+}
+
 export interface Node {
   id: string;
   title: string;
@@ -28,14 +37,16 @@ export interface IMovieEdge {
 }
 
 export interface Edge {
-  edges: readonly ({
-    readonly cursor: string | null;
-    readonly node: {
-        readonly genre: string;
-        readonly id: string;
-        readonly title: string;
-    } | null;
-} | null)[] | null
+  edges:
+    | readonly ({
+        readonly cursor: string | null;
+        readonly node: {
+          readonly genre: string;
+          readonly id: string;
+          readonly title: string;
+        } | null;
+      } | null)[]
+    | null;
 }
 
 export interface MovieInput {
