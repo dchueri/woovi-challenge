@@ -7,7 +7,6 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
     margin: auto;
   `;
   const auth = useAuth();
-  console.log(auth);
   if (!auth.me) {
     return (
       <Container sx={{ height: "95vh", margin: "0 auto", textAlign: "center" }}>

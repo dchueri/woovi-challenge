@@ -1,6 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { RecoilRoot } from "recoil";
 import { FooterCopyright } from "./components/FooterCopyright";
-
 import { AuthProvider } from "./context/AuthProvider";
 import { IndexRoutes } from "./routes";
 function App() {
@@ -13,12 +13,14 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AuthProvider>
-        <>
-          <IndexRoutes />
-          <FooterCopyright />
-        </>
-      </AuthProvider>
+      <RecoilRoot>
+        <AuthProvider>
+          <>
+            <IndexRoutes />
+            <FooterCopyright />
+          </>
+        </AuthProvider>
+      </RecoilRoot>
     </ThemeProvider>
   );
 }

@@ -61,10 +61,7 @@ export default function MovieCard(props: {
         display: "inline-flex",
       }}
     >
-      <Card
-        variant="outlined"
-        sx={{ borderRadius: "20px", minWidth: "7em" }}
-      >
+      <Card variant="outlined" sx={{ borderRadius: "20px", minWidth: "7em" }}>
         {card(props.movie!.node)}
       </Card>
     </Box>

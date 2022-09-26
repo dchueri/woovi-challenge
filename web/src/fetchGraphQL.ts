@@ -3,7 +3,7 @@ import { getUserLocalStorage } from "./context/AuthProvider/util";
 async function fetchGraphQL(text: any, variables?: any) {
   let jwt = getUserLocalStorage();
   if (!jwt) {
-    jwt = '';
+    jwt = {token: ''};
   }
   const response = await fetch("http://localhost:4000/", {
     method: "POST",
