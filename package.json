@@ -6,7 +6,6 @@
     "react-error-overlay": "^6.0.9"
   },
   "dependencies": {
-    "react-scripts": "^5.0.1",
-    "recoil": "^0.7.5"
+    "react-scripts": "^5.0.1"
   }
 }
