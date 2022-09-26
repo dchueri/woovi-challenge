@@ -1,7 +1,11 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/system";
 import { useState } from "react";
-import { AllMoviesQuery$data } from "../../../modules/movie/__generated__/AllMoviesQuery.graphql";
+import { useLazyLoadQuery } from "react-relay";
+import { useRecoilState } from "recoil";
+import { AllMovies } from "../../../modules/movie/AllMoviesQuery";
+import { AllMoviesQuery } from "../../../modules/movie/__generated__/AllMoviesQuery.graphql";
+import { moviesListState } from "../../../utils/atoms";
 import MovieCard from "./MovieCard";
 
 const Body = styled(Container)({
@@ -21,16 +25,19 @@ const StyledContainer = styled(Box)({
   margin: "auto",
 });
 
-function MoviesList(props: { moviesList: AllMoviesQuery$data }) {
-  const [moviesList, setMoviesList] = useState(props.moviesList.movies!.edges!);
+function MoviesList() {
+  const list = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
+  const [moviesList, setMoviesList] = useRecoilState(moviesListState);
+  const [localMovieList, setLocalMoviesList] = useState(moviesList);
+  setMoviesList(list.movies!.edges!);
   const handlePrintMovies = () => {
     if (moviesList) {
-      return moviesList.map((movie: any, index) => (
+      return localMovieList.map((movie: any, index: number) => (
         <MovieCard
           key={index}
           movie={movie}
-          moviesList={moviesList}
-          setMoviesList={setMoviesList}
+          moviesList={localMovieList}
+          setMoviesList={setLocalMoviesList}
         />
       ));
     }
