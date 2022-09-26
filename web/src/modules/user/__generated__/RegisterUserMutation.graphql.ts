@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9483a1db603dcbcb910d5f9bd01d1561>>
+ * @generated SignedSource<<fe1edbc83c61514b65f6e1937b6c07f1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,12 +9,14 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
-export type LoginMutation$variables = {
+export type RegisterUserMutation$variables = {
   email: string;
+  name: string;
   password: string;
 };
-export type LoginMutation$data = {
-  readonly LoginMutation: {
+export type RegisterUserMutation$data = {
+  readonly RegisterUserMutation: {
+    readonly error: string | null;
     readonly me: {
       readonly email: string | null;
       readonly id: string | null;
@@ -23,25 +25,28 @@ export type LoginMutation$data = {
     readonly token: string | null;
   } | null;
 };
-export type LoginMutation = {
-  response: LoginMutation$data;
-  variables: LoginMutation$variables;
+export type RegisterUserMutation = {
+  response: RegisterUserMutation$data;
+  variables: RegisterUserMutation$variables;
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "email"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "password"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "email"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "name"
+},
+v2 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "password"
+},
+v3 = [
   {
     "alias": null,
     "args": [
@@ -51,6 +56,11 @@ v1 = [
             "kind": "Variable",
             "name": "email",
             "variableName": "email"
+          },
+          {
+            "kind": "Variable",
+            "name": "name",
+            "variableName": "name"
           },
           {
             "kind": "Variable",
@@ -64,7 +74,7 @@ v1 = [
     ],
     "concreteType": "LoginOrRegister",
     "kind": "LinkedField",
-    "name": "LoginMutation",
+    "name": "RegisterUserMutation",
     "plural": false,
     "selections": [
       {
@@ -105,6 +115,13 @@ v1 = [
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "error",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -112,32 +129,40 @@ v1 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/),
+      (v2/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "LoginMutation",
-    "selections": (v1/*: any*/),
+    "name": "RegisterUserMutation",
+    "selections": (v3/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v1/*: any*/),
+      (v0/*: any*/),
+      (v2/*: any*/)
+    ],
     "kind": "Operation",
-    "name": "LoginMutation",
-    "selections": (v1/*: any*/)
+    "name": "RegisterUserMutation",
+    "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "9bafbb26a56dcad0d27dd54d63ff7e71",
+    "cacheID": "b5157d36531ef9431173d7be703bc07b",
     "id": null,
     "metadata": {},
-    "name": "LoginMutation",
+    "name": "RegisterUserMutation",
     "operationKind": "mutation",
-    "text": "mutation LoginMutation(\n  $email: String!\n  $password: String!\n) {\n  LoginMutation(input: {email: $email, password: $password}) {\n    token\n    me {\n      id\n      name\n      email\n    }\n  }\n}\n"
+    "text": "mutation RegisterUserMutation(\n  $name: String!\n  $email: String!\n  $password: String!\n) {\n  RegisterUserMutation(input: {name: $name, email: $email, password: $password}) {\n    token\n    me {\n      id\n      name\n      email\n    }\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c649ecaa25db26903e7a284ca2c52e52";
+(node as any).hash = "1cd8cb020f6a29934c9c9fc5ded92c12";
 
 export default node;

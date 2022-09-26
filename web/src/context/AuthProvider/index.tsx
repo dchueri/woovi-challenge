@@ -18,6 +18,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     }
   }, []);
 
+  async function setUserRegistered(user: IUser) {
+    setUser(user);
+    setUserLocalStorage(user);
+  }
+
   async function authenticate(email: string, password: string) {
     let payload: any;
     const variables = { email: email, password: password };
@@ -44,7 +49,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   }
 
   return (
-    <AuthContext.Provider value={{ ...user, authenticate, logout }}>
+    <AuthContext.Provider
+      value={{ ...user, authenticate, logout, setUserRegistered }}
+    >
       {children}
     </AuthContext.Provider>
   );
