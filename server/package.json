@@ -1,11 +1,11 @@
 {
   "name": "woovi-challenge",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "deploy",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "ts-node-dev --ignore-watch node_modules ./src/server.ts"
+    "start": "ts-node-dev --ignore-watch node_modules ./src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,10 @@
     "koa-graphql": "^0.12.0",
     "koa-mount": "^4.0.0",
     "mongoose": "^6.6.0",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "dataloader": "2.1.0"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
