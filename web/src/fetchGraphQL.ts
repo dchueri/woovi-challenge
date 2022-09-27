@@ -5,6 +5,7 @@ async function fetchGraphQL(text: any, variables?: any) {
   if (!jwt) {
     jwt = { token: "" };
   }
+
   const response = await fetch("https://woovi-server.herokuapp.com/", {
     method: "POST",
     headers: {

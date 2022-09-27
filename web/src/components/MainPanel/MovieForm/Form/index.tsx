@@ -2,24 +2,23 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { useMutation } from "react-relay";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { CreateMovieMutation } from "../../../../modules/movie/CreateMovieMutation";
-import { CreateMovieResponse } from "../../../../types/MovieTypes";
-import { moviesListState } from "../../../../utils/atoms";
+import { idOfListState } from "../../../../utils/atoms";
 
 function Form() {
   const [createMovieMutation] = useMutation(CreateMovieMutation);
-  const [moviesList, setMoviesList] = useRecoilState(moviesListState);
+  const idOfList = useRecoilValue(idOfListState);
 
   const handleCreateMovie = async (title: string, genre: string) => {
-    const variables = { title: title, genre: genre };
+    const variables = {
+      title: title,
+      genre: genre,
+      connections: [idOfList],
+    };
+
     createMovieMutation({
       variables,
-      onCompleted: (res: CreateMovieResponse) => {
-        if (!res.CreateMovie!.error) {
-          setMoviesList([...moviesList, res.CreateMovie!.movieEdge]);
-        }
-      },
       onError: (error) => console.log(error),
     });
   };

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d25c6e523789132954ddd0270140896b>>
+ * @generated SignedSource<<b1911d5bbc0ee87853ddb02b04e54cd8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,6 +10,7 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type CreateMovieMutation$variables = {
+  connections: ReadonlyArray<string>;
   genre: string;
   title: string;
 };
@@ -17,6 +18,7 @@ export type CreateMovieMutation$data = {
   readonly CreateMovie: {
     readonly error: string | null;
     readonly movieEdge: {
+      readonly cursor: string | null;
       readonly node: {
         readonly genre: string;
         readonly id: string;
@@ -34,127 +36,173 @@ const node: ConcreteRequest = (function(){
 var v0 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "genre"
+  "name": "connections"
 },
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
+  "name": "genre"
+},
+v2 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
   "name": "title"
 },
-v2 = [
+v3 = [
   {
-    "alias": null,
-    "args": [
+    "fields": [
       {
-        "fields": [
-          {
-            "kind": "Variable",
-            "name": "genre",
-            "variableName": "genre"
-          },
-          {
-            "kind": "Variable",
-            "name": "title",
-            "variableName": "title"
-          }
-        ],
-        "kind": "ObjectValue",
-        "name": "input"
-      }
-    ],
-    "concreteType": "Movie",
-    "kind": "LinkedField",
-    "name": "CreateMovie",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "MovieEdge",
-        "kind": "LinkedField",
-        "name": "movieEdge",
-        "plural": false,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "Node",
-            "kind": "LinkedField",
-            "name": "node",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "id",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "title",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "genre",
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
+        "kind": "Variable",
+        "name": "genre",
+        "variableName": "genre"
       },
       {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "error",
-        "storageKey": null
+        "kind": "Variable",
+        "name": "title",
+        "variableName": "title"
       }
     ],
-    "storageKey": null
+    "kind": "ObjectValue",
+    "name": "input"
   }
-];
+],
+v4 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "MovieEdge",
+  "kind": "LinkedField",
+  "name": "movieEdge",
+  "plural": false,
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "cursor",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Node",
+      "kind": "LinkedField",
+      "name": "node",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "id",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "title",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "genre",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    }
+  ],
+  "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "error",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": [
       (v0/*: any*/),
-      (v1/*: any*/)
+      (v1/*: any*/),
+      (v2/*: any*/)
     ],
     "kind": "Fragment",
     "metadata": null,
     "name": "CreateMovieMutation",
-    "selections": (v2/*: any*/),
+    "selections": [
+      {
+        "alias": null,
+        "args": (v3/*: any*/),
+        "concreteType": "Movie",
+        "kind": "LinkedField",
+        "name": "CreateMovie",
+        "plural": false,
+        "selections": [
+          (v4/*: any*/),
+          (v5/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ],
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
     "argumentDefinitions": [
+      (v2/*: any*/),
       (v1/*: any*/),
       (v0/*: any*/)
     ],
     "kind": "Operation",
     "name": "CreateMovieMutation",
-    "selections": (v2/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v3/*: any*/),
+        "concreteType": "Movie",
+        "kind": "LinkedField",
+        "name": "CreateMovie",
+        "plural": false,
+        "selections": [
+          (v4/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "filters": null,
+            "handle": "appendEdge",
+            "key": "",
+            "kind": "LinkedHandle",
+            "name": "movieEdge",
+            "handleArgs": [
+              {
+                "kind": "Variable",
+                "name": "connections",
+                "variableName": "connections"
+              }
+            ]
+          },
+          (v5/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ]
   },
   "params": {
-    "cacheID": "88d8641915ef00efa5cd94b4d44ce6bd",
+    "cacheID": "89d6ce75885bf132ecd01868c1cff6a9",
     "id": null,
     "metadata": {},
     "name": "CreateMovieMutation",
     "operationKind": "mutation",
-    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre}) {\n    movieEdge {\n      node {\n        id\n        title\n        genre\n      }\n    }\n    error\n  }\n}\n"
+    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n      }\n    }\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "fbca06f4ab55b02c007dcbe3bc222b8e";
+(node as any).hash = "d76698eae1e6beb5908fcda837659157";
 
 export default node;
