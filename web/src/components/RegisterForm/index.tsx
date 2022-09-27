@@ -12,10 +12,13 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-relay";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../context/AuthProvider/util";
 import { RegisterUserMutation } from "../../modules/user/RegisterUserMutation";
 import { IUser, RegisterUserResponse } from "../../types/UserTypes";
+import { alertDispatch, Severity } from "../../utils/alerts";
+import { alertState } from "../../utils/atom";
 
 const RegisterBox = styled(Container)({
   width: "20vw",
@@ -34,6 +37,7 @@ export default function RegisterForm() {
   const navigate = useNavigate();
   const [registerUserMutation] = useMutation(RegisterUserMutation);
   const [newUser, setNewUser] = useState<IUser>();
+  const setAlertState = useSetRecoilState(alertState);
   const auth = useAuth();
 
   useEffect(() => {
@@ -50,12 +54,24 @@ export default function RegisterForm() {
       variables,
       onCompleted: (res: RegisterUserResponse) => {
         if (!res.RegisterUserMutation!.token) {
-          return console.log(res.RegisterUserMutation!.error);
+          const alert = {
+            display: true,
+            severity: Severity.warning,
+            content: res.RegisterUserMutation!.error,
+          };
+          alertDispatch(alert, setAlertState);
+          return;
         }
         const payload = {
           token: res.RegisterUserMutation?.token,
           me: res.RegisterUserMutation?.me,
         };
+        const alert = {
+          display: true,
+          severity: Severity.success,
+          content: 'You have been registered! Welcome!',
+        };
+        alertDispatch(alert, setAlertState);
         auth.setUserRegistered(payload);
         setNewUser(payload);
       },
@@ -87,7 +103,7 @@ export default function RegisterForm() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -106,6 +122,7 @@ export default function RegisterForm() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            type="email"
             autoFocus
           />
           <TextField
