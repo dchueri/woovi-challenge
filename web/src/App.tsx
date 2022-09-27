@@ -13,7 +13,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
         <AuthProvider>
-          <>
+          <> 
             <IndexRoutes />
             <FooterCopyright />
           </>
