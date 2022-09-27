@@ -11,11 +11,14 @@ import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-relay";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../context/AuthProvider/util";
 import { LoginMutation } from "../../modules/user/LoginMutation";
 import { LoginMutation as LoginMutationType } from "../../modules/user/__generated__/LoginMutation.graphql";
 import { IUser } from "../../types/UserTypes";
+import { alertDispatch, Severity } from "../../utils/alerts";
+import { alertState } from "../../utils/atom";
 
 const LoginBox = styled(Container)({
   width: "20vw",
@@ -32,6 +35,7 @@ const LoginBox = styled(Container)({
 
 export default function LoginForm() {
   const [loginMutation] = useMutation<LoginMutationType>(LoginMutation);
+  const setAlertState = useSetRecoilState(alertState);
   const navigate = useNavigate();
   const auth = useAuth();
   const [newUser, setNewUser] = useState<IUser | null>();
@@ -51,16 +55,30 @@ export default function LoginForm() {
       variables,
       onCompleted: (res) => {
         if (!res.LoginMutation) {
+          const alert = {
+            display: true,
+            severity: Severity.error,
+            content: "Email or password is invalid. Please, try again!",
+          };
+          alertDispatch(alert, setAlertState);
           return;
         }
         payload = {
           token: res.LoginMutation?.token,
           me: res.LoginMutation?.me,
         };
+        const alert = {
+          display: true,
+          severity: Severity.success,
+          content: `Welcome ${res.LoginMutation.me?.name}`,
+        };
+        alertDispatch(alert, setAlertState);
         auth.setUserRegistered(payload);
         setNewUser(payload);
       },
-      onError: (error) => console.log(error),
+      onError: (error) => {
+        console.log(error);
+      },
     });
   }
 
@@ -89,7 +107,7 @@ export default function LoginForm() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -98,6 +116,7 @@ export default function LoginForm() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            type="email"
             autoFocus
           />
           <TextField
@@ -133,11 +152,4 @@ export default function LoginForm() {
       </Box>
     </LoginBox>
   );
-}
-function loginMutation(arg0: {
-  variables: { email: string; password: string };
-  onCompleted: (res: any) => void;
-  onError: (error: any) => void;
-}) {
-  throw new Error("Function not implemented.");
 }

@@ -1,8 +1,12 @@
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Button, CircularProgress } from "@mui/material";
 import { Suspense } from "react";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { useAuth } from "../../context/AuthProvider/useAuth";
+import { getUserLocalStorage } from "../../context/AuthProvider/util";
+import { alertDispatch, Severity } from "../../utils/alerts";
+import { alertState } from "../../utils/atom";
 import MovieForm from "./MovieForm";
 import MoviesList from "./MoviesList";
 
@@ -25,8 +29,16 @@ const LogoutDiv = styled.div`
 
 function MainPanel() {
   const auth = useAuth();
+  const user = getUserLocalStorage();
+  const setAlertState = useSetRecoilState(alertState);
 
   const logoutHandle = () => {
+    const alert = {
+      display: true,
+      severity: Severity.success,
+      content: `I hope see you soon ${user.me.name}`,
+    };
+    alertDispatch(alert, setAlertState);
     auth.logout();
   };
 

@@ -2,10 +2,8 @@ import { Box, Container } from "@mui/material";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useLazyLoadQuery } from "react-relay";
-import { useSetRecoilState } from "recoil";
 import { AllMovies } from "../../../modules/movie/AllMoviesQuery";
 import { AllMoviesQuery } from "../../../modules/movie/__generated__/AllMoviesQuery.graphql";
-import { idOfListState } from "../../../utils/atoms";
 import MovieCard from "./MovieCard";
 
 const Body = styled(Container)({
@@ -28,11 +26,9 @@ const StyledContainer = styled(Box)({
 function MoviesList() {
   const list = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
   const [moviesList, setMoviesList] = useState(list.movies!.edges);
-  const setIdOfList = useSetRecoilState(idOfListState);
 
   useEffect(() => {
     setMoviesList(list.movies!.edges);
-    setIdOfList(list.movies!.__id);
   });
 
   const handlePrintMovies = () => {

@@ -1,5 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { RecoilRoot } from "recoil";
+import Alerts from "./components/Alerts";
 import { FooterCopyright } from "./components/FooterCopyright";
 import { AuthProvider } from "./context/AuthProvider";
 import { IndexRoutes } from "./routes";
@@ -17,6 +18,7 @@ function App() {
         <AuthProvider>
           <>
             <IndexRoutes />
+            <Alerts/>
             <FooterCopyright />
           </>
         </AuthProvider>

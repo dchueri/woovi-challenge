@@ -3,18 +3,18 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useMutation } from "react-relay";
-import { useRecoilValue } from "recoil";
+import { ConnectionHandler, useMutation } from "react-relay";
+import { ROOT_ID } from "relay-runtime";
 import { DeleteMovieMutation } from "../../../../modules/movie/DeleteMovieMutation";
 import { IMovie, IMovieEdge } from "../../../../types/MovieTypes";
-import { idOfListState } from "../../../../utils/atoms";
 
 export default function MovieCard(props: { movie: IMovieEdge | null }) {
   const [deleteMovieMutation] = useMutation(DeleteMovieMutation);
-  const idOfList = useRecoilValue(idOfListState);
+
+  const connectionID = ConnectionHandler.getConnectionID(ROOT_ID, "All_movies");
 
   const handleDeleteMovie = async (id: string) => {
-    const variables = { id: id, connections: [idOfList] };
+    const variables = { id: id, connections: [connectionID] };
     deleteMovieMutation({
       variables,
       onError: (error) => console.log(error),
