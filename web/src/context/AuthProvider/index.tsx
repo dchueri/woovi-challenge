@@ -38,6 +38,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         };
         setUser(payload);
         setUserLocalStorage(payload);
+        const user = getUserLocalStorage();
+        if (!user) {
+          return console.log("Login failed");
+        }
+        //navigate("/");
       },
       onError: (error) => console.log(error),
     });

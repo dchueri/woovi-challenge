@@ -8,10 +8,14 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/system";
-import * as React from "react";
+import { useEffect, useState } from "react";
+import { useMutation } from "react-relay";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../context/AuthProvider/util";
+import { LoginMutation } from "../../modules/user/LoginMutation";
+import { LoginMutation as LoginMutationType } from "../../modules/user/__generated__/LoginMutation.graphql";
+import { IUser } from "../../types/UserTypes";
 
 const LoginBox = styled(Container)({
   width: "20vw",
@@ -27,19 +31,45 @@ const LoginBox = styled(Container)({
 });
 
 export default function LoginForm() {
+  const [loginMutation] = useMutation<LoginMutationType>(LoginMutation);
   const navigate = useNavigate();
   const auth = useAuth();
+  const [newUser, setNewUser] = useState<IUser | null>();
+
+  useEffect(() => {
+    const user = getUserLocalStorage();
+    if (!user) {
+      return;
+    }
+    navigate("/");
+  }, [newUser]);
+
+  async function authenticate(email: string, password: string) {
+    let payload: any;
+    const variables = { email: email, password: password };
+    loginMutation({
+      variables,
+      onCompleted: (res) => {
+        if (!res.LoginMutation) {
+          return;
+        }
+        payload = {
+          token: res.LoginMutation?.token,
+          me: res.LoginMutation?.me,
+        };
+        auth.setUserRegistered(payload);
+        setNewUser(payload);
+      },
+      onError: (error) => console.log(error),
+    });
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email")!.toString();
     const password = data.get("password")!.toString();
-    await auth.authenticate(email, password);
-    const user = getUserLocalStorage();
-    if (!user.token) {
-      return console.log("Login failed");
-    }
-    navigate("/");
+    await authenticate(email, password);
   };
 
   return (
@@ -51,7 +81,9 @@ export default function LoginForm() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ bgcolor: "primary.main", margin: "0.5em auto 0.5em auto" }}>
+        <Avatar
+          sx={{ bgcolor: "primary.main", margin: "0.5em auto 0.5em auto" }}
+        >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -88,7 +120,11 @@ export default function LoginForm() {
           </Button>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
-              <Link href="/register" variant="body2" sx={{ textAlign: "center" }}>
+              <Link
+                href="/register"
+                variant="body2"
+                sx={{ textAlign: "center" }}
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -97,4 +133,11 @@ export default function LoginForm() {
       </Box>
     </LoginBox>
   );
+}
+function loginMutation(arg0: {
+  variables: { email: string; password: string };
+  onCompleted: (res: any) => void;
+  onError: (error: any) => void;
+}) {
+  throw new Error("Function not implemented.");
 }
