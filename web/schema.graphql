@@ -14,6 +14,7 @@ type Node {
 
 type MovieEdge {
   node: Node
+  cursor: String
 }
 
 type IMovieEdge {
@@ -49,7 +50,14 @@ type Mutation {
 }
 
 type Query {
-  movies: Movies
+  movies(first: Int): Movies
+}
+
+input MoviesQueryInput {
+  after: String
+  before: String
+  first: Int
+  last: Int
 }
 
 type LoginOrRegister {
@@ -65,6 +73,7 @@ type User {
 }
 
 type DeleteMovie {
+  deletedId: ID
   error: String
 }
 

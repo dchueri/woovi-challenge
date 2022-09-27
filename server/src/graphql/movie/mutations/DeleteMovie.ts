@@ -18,7 +18,7 @@ export default mutationWithClientMutationId({
 
     const deletedMovie = await movies.findByIdAndDelete({ _id: id });
     if (deletedMovie) {
-      return { success: true };
+      return { deletedId: id };
     }
     return { error: "Movie does not exist" };
   },
@@ -27,9 +27,9 @@ export default mutationWithClientMutationId({
       type: GraphQLString,
       resolve: ({ error }: { error: string }) => error,
     },
-    success: {
+    deletedId: {
       type: GraphQLString,
-      resolve: ({ success }: { success: string }) => success,
+      resolve: ({ deletedId }: { deletedId: string }) => deletedId,
     },
   },
 });

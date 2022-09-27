@@ -4,33 +4,21 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useMutation } from "react-relay";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { DeleteMovieMutation } from "../../../../modules/movie/DeleteMovieMutation";
-import { IMovie, IMovieEdge, MovieEdge } from "../../../../types/MovieTypes";
-import { moviesListState } from "../../../../utils/atoms";
+import { IMovie, IMovieEdge } from "../../../../types/MovieTypes";
+import { idOfListState } from "../../../../utils/atoms";
 
 export default function MovieCard(props: { movie: IMovieEdge | null }) {
   const [deleteMovieMutation] = useMutation(DeleteMovieMutation);
-  const setMoviesList = useSetRecoilState(moviesListState);
-
-  const handleDeleteMovieOfList = (id: string) => {
-    setMoviesList((prev: any) => {
-      if (prev.length > 1) {
-        return prev.filter((movie: MovieEdge) => movie.node.id !== id);
-      }
-      console.log(prev.length)
-      return [];
-    });
-  };
+  const idOfList = useRecoilValue(idOfListState);
 
   const handleDeleteMovie = async (id: string) => {
-    const variables = { id: id };
+    const variables = { id: id, connections: [idOfList] };
     deleteMovieMutation({
       variables,
-      onCompleted: (res) => console.log(res),
       onError: (error) => console.log(error),
     });
-    handleDeleteMovieOfList(id);
   };
 
   const card = (movie: IMovie) => (

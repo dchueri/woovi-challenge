@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2e0d8a3820ff450c1ea654079ef5e703>>
+ * @generated SignedSource<<0837f698fc399688137827140227d572>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,10 +10,12 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type DeleteMovieMutation$variables = {
+  connections: ReadonlyArray<string>;
   id: string;
 };
 export type DeleteMovieMutation$data = {
   readonly DeleteMovie: {
+    readonly deletedId: string | null;
     readonly error: string | null;
   } | null;
 };
@@ -23,73 +25,121 @@ export type DeleteMovieMutation = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "connections"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "id"
+},
+v2 = [
   {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "id"
+    "fields": [
+      {
+        "kind": "Variable",
+        "name": "id",
+        "variableName": "id"
+      }
+    ],
+    "kind": "ObjectValue",
+    "name": "input"
   }
 ],
-v1 = [
-  {
-    "alias": null,
-    "args": [
-      {
-        "fields": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "id"
-          }
-        ],
-        "kind": "ObjectValue",
-        "name": "input"
-      }
-    ],
-    "concreteType": "DeleteMovie",
-    "kind": "LinkedField",
-    "name": "DeleteMovie",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "error",
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
-  }
-];
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "deletedId",
+  "storageKey": null
+},
+v4 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "error",
+  "storageKey": null
+};
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "DeleteMovieMutation",
-    "selections": (v1/*: any*/),
+    "selections": [
+      {
+        "alias": null,
+        "args": (v2/*: any*/),
+        "concreteType": "DeleteMovie",
+        "kind": "LinkedField",
+        "name": "DeleteMovie",
+        "plural": false,
+        "selections": [
+          (v3/*: any*/),
+          (v4/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ],
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v1/*: any*/),
+      (v0/*: any*/)
+    ],
     "kind": "Operation",
     "name": "DeleteMovieMutation",
-    "selections": (v1/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v2/*: any*/),
+        "concreteType": "DeleteMovie",
+        "kind": "LinkedField",
+        "name": "DeleteMovie",
+        "plural": false,
+        "selections": [
+          (v3/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "filters": null,
+            "handle": "deleteEdge",
+            "key": "",
+            "kind": "ScalarHandle",
+            "name": "deletedId",
+            "handleArgs": [
+              {
+                "kind": "Variable",
+                "name": "connections",
+                "variableName": "connections"
+              }
+            ]
+          },
+          (v4/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ]
   },
   "params": {
-    "cacheID": "239bb6ffd37d006dd952623cbc193050",
+    "cacheID": "9d054a5d69cd150c42590a278d0484e9",
     "id": null,
     "metadata": {},
     "name": "DeleteMovieMutation",
     "operationKind": "mutation",
-    "text": "mutation DeleteMovieMutation(\n  $id: String!\n) {\n  DeleteMovie(input: {id: $id}) {\n    error\n  }\n}\n"
+    "text": "mutation DeleteMovieMutation(\n  $id: String!\n) {\n  DeleteMovie(input: {id: $id}) {\n    deletedId\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c957aaebcdc3b0c20d728035e6357b2c";
+(node as any).hash = "997eb9d21fd682d1b7ff41bceab699b4";
 
 export default node;

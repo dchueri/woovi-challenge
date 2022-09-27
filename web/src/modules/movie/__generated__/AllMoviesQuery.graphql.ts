@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<77df51f0d8f8fb527f5c4b1e37bcd066>>
+ * @generated SignedSource<<c1af72c83b301462e20fbc8199811daf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,9 +9,12 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type AllMoviesQuery$variables = {};
+export type AllMoviesQuery$variables = {
+  first?: number | null;
+};
 export type AllMoviesQuery$data = {
   readonly movies: {
+    readonly __id: string;
     readonly edges: ReadonlyArray<{
       readonly cursor: string | null;
       readonly node: {
@@ -36,58 +39,54 @@ export type AllMoviesQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "first"
+  }
+],
+v1 = [
+  {
     "alias": null,
     "args": null,
-    "concreteType": "Movies",
+    "concreteType": "IMovieEdge",
     "kind": "LinkedField",
-    "name": "movies",
-    "plural": false,
+    "name": "edges",
+    "plural": true,
     "selections": [
       {
         "alias": null,
         "args": null,
-        "concreteType": "IMovieEdge",
+        "concreteType": "Node",
         "kind": "LinkedField",
-        "name": "edges",
-        "plural": true,
+        "name": "node",
+        "plural": false,
         "selections": [
           {
             "alias": null,
             "args": null,
-            "concreteType": "Node",
-            "kind": "LinkedField",
-            "name": "node",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "id",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "title",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "genre",
-                "storageKey": null
-              }
-            ],
+            "kind": "ScalarField",
+            "name": "id",
             "storageKey": null
           },
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "cursor",
+            "name": "title",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "genre",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "__typename",
             "storageKey": null
           }
         ],
@@ -96,74 +95,142 @@ var v0 = [
       {
         "alias": null,
         "args": null,
-        "concreteType": "PageInfo",
-        "kind": "LinkedField",
-        "name": "pageInfo",
-        "plural": false,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "hasNextPage",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "hasPreviousPage",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "startCursor",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "endCursor",
-            "storageKey": null
-          }
-        ],
+        "kind": "ScalarField",
+        "name": "cursor",
         "storageKey": null
       }
     ],
     "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "PageInfo",
+    "kind": "LinkedField",
+    "name": "pageInfo",
+    "plural": false,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "hasNextPage",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "hasPreviousPage",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "startCursor",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "endCursor",
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
+  },
+  {
+    "kind": "ClientExtension",
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "__id",
+        "storageKey": null
+      }
+    ]
+  }
+],
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "first",
+    "variableName": "first"
   }
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "AllMoviesQuery",
-    "selections": (v0/*: any*/),
+    "selections": [
+      {
+        "alias": "movies",
+        "args": null,
+        "concreteType": "Movies",
+        "kind": "LinkedField",
+        "name": "__All_movies_connection",
+        "plural": false,
+        "selections": (v1/*: any*/),
+        "storageKey": null
+      }
+    ],
     "type": "Query",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "AllMoviesQuery",
-    "selections": (v0/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v2/*: any*/),
+        "concreteType": "Movies",
+        "kind": "LinkedField",
+        "name": "movies",
+        "plural": false,
+        "selections": (v1/*: any*/),
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": (v2/*: any*/),
+        "filters": null,
+        "handle": "connection",
+        "key": "All_movies",
+        "kind": "LinkedHandle",
+        "name": "movies"
+      }
+    ]
   },
   "params": {
-    "cacheID": "f7c2440de9acbfda5fb473e01d1b134e",
+    "cacheID": "0db54599d3f9d04309ba27d388a4cd34",
     "id": null,
-    "metadata": {},
+    "metadata": {
+      "connection": [
+        {
+          "count": "first",
+          "cursor": null,
+          "direction": "forward",
+          "path": [
+            "movies"
+          ]
+        }
+      ]
+    },
     "name": "AllMoviesQuery",
     "operationKind": "query",
-    "text": "query AllMoviesQuery {\n  movies {\n    edges {\n      node {\n        id\n        title\n        genre\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "49f122e7fdac78cf2063c2ee1d6d2352";
+(node as any).hash = "8e42b645c468c39012712720fe1c28fa";
 
 export default node;

@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const moviesListState = atom({
-  key: "moviesList",
-  default: [] as any
+export const idOfListState = atom({
+  key: "idOfListState",
+  default: ''
 });
