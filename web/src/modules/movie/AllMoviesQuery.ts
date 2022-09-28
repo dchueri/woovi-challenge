@@ -9,6 +9,7 @@ export const AllMovies = graphql`
           id
           title
           genre
+          image
         }
         cursor
       }

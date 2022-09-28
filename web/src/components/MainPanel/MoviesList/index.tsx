@@ -8,7 +8,7 @@ import MovieCard from "./MovieCard";
 
 const Body = styled(Container)({
   width: "100vw",
-  height: "75vh",
+  minHeight: "75vh",
   display: "flex",
 });
 

@@ -5,8 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
+import styled from "styled-components";
 import { DeleteMovieMutation } from "../../../../modules/movie/DeleteMovieMutation";
 import { IMovie, IMovieEdge } from "../../../../types/MovieTypes";
+
+const Img = styled.img`
+  max-width: 10em;
+`;
 
 export default function MovieCard(props: { movie: IMovieEdge | null }) {
   const [deleteMovieMutation] = useMutation(DeleteMovieMutation);
@@ -31,6 +36,7 @@ export default function MovieCard(props: { movie: IMovieEdge | null }) {
         padding: "1em",
       }}
     >
+      <Img src={movie.image} />
       <Typography variant="h5" component="div">
         {movie.title}
       </Typography>

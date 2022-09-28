@@ -18,6 +18,15 @@ const Div = styled.div`
   align-items: center;
 `;
 
+const WebKit = styled.div`
+  body::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1px;
+    height: 15px;
+    border: 1px solid black;
+  }
+`;
+
 const LogoutDiv = styled.div`
   width: 100vw;
   height: 15vh;
@@ -50,24 +59,26 @@ function MainPanel() {
         </Div>
       }
     >
-      <LogoutDiv>
-        <Button
-          onClick={logoutHandle}
-          variant="text"
-          size="small"
-          sx={{
-            margin: "2vw",
-            borderRadius: "50px",
-            height: "fit-content",
-            minWidth: "fit-content",
-            padding: "1em",
-          }}
-        >
-          <LogoutIcon />
-        </Button>
-      </LogoutDiv>
-      <MovieForm />
-      <MoviesList />
+      <WebKit>
+        <LogoutDiv>
+          <Button
+            onClick={logoutHandle}
+            variant="text"
+            size="small"
+            sx={{
+              margin: "2vw",
+              borderRadius: "50px",
+              height: "fit-content",
+              minWidth: "fit-content",
+              padding: "1em",
+            }}
+          >
+            <LogoutIcon />
+          </Button>
+        </LogoutDiv>
+        <MovieForm />
+        <MoviesList />
+      </WebKit>
     </Suspense>
   );
 }
