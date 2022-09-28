@@ -16,6 +16,9 @@ export default mutationWithClientMutationId({
     genre: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    image: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
   },
   mutateAndGetPayload: async ({ id, title, genre }, ctx) => {
     const context = await getContext(ctx);
@@ -32,6 +35,7 @@ export default mutationWithClientMutationId({
             id: movie.id,
             title: movie.title,
             genre: movie.genre,
+            image: movie.image,
           },
         };
       })
