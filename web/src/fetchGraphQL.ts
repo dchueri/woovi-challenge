@@ -6,7 +6,7 @@ async function fetchGraphQL(text: any, variables?: any) {
     jwt = { token: "" };
   }
 
-  const response = await fetch("https://woovi-server.herokuapp.com/", {
+  const response = await fetch(import.meta.env.VITE_ENV_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

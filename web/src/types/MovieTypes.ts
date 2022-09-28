@@ -2,6 +2,7 @@ export interface IMovie {
   id: string;
   title: string;
   genre: string;
+  image: string;
 }
 
 export interface Movie {
@@ -10,6 +11,7 @@ export interface Movie {
   id: string;
   title: string;
   genre: string;
+  image: string;
 }
 
 export interface CreateMovieResponse {
@@ -25,6 +27,7 @@ export interface Node {
   id: string;
   title: string;
   genre: string;
+  image: string;
 }
 
 export interface MovieEdge {
@@ -44,6 +47,7 @@ export interface Edge {
           readonly genre: string;
           readonly id: string;
           readonly title: string;
+          readonly image: string;
         } | null;
       } | null)[]
     | null;
@@ -52,6 +56,7 @@ export interface Edge {
 export interface MovieInput {
   title: string;
   genre: string;
+  image: string;
 }
 
 export interface Movies {

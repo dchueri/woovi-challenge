@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b1911d5bbc0ee87853ddb02b04e54cd8>>
+ * @generated SignedSource<<8b2225451db2c10a1af0520ff6f33ce9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,7 @@ import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type CreateMovieMutation$variables = {
   connections: ReadonlyArray<string>;
   genre: string;
+  image: string;
   title: string;
 };
 export type CreateMovieMutation$data = {
@@ -22,6 +23,7 @@ export type CreateMovieMutation$data = {
       readonly node: {
         readonly genre: string;
         readonly id: string;
+        readonly image: string | null;
         readonly title: string;
       } | null;
     } | null;
@@ -46,15 +48,25 @@ v1 = {
 v2 = {
   "defaultValue": null,
   "kind": "LocalArgument",
+  "name": "image"
+},
+v3 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
   "name": "title"
 },
-v3 = [
+v4 = [
   {
     "fields": [
       {
         "kind": "Variable",
         "name": "genre",
         "variableName": "genre"
+      },
+      {
+        "kind": "Variable",
+        "name": "image",
+        "variableName": "image"
       },
       {
         "kind": "Variable",
@@ -66,7 +78,7 @@ v3 = [
     "name": "input"
   }
 ],
-v4 = {
+v5 = {
   "alias": null,
   "args": null,
   "concreteType": "MovieEdge",
@@ -109,6 +121,13 @@ v4 = {
           "kind": "ScalarField",
           "name": "genre",
           "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "image",
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -116,7 +135,7 @@ v4 = {
   ],
   "storageKey": null
 },
-v5 = {
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -128,7 +147,8 @@ return {
     "argumentDefinitions": [
       (v0/*: any*/),
       (v1/*: any*/),
-      (v2/*: any*/)
+      (v2/*: any*/),
+      (v3/*: any*/)
     ],
     "kind": "Fragment",
     "metadata": null,
@@ -136,14 +156,14 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v4/*: any*/),
         "concreteType": "Movie",
         "kind": "LinkedField",
         "name": "CreateMovie",
         "plural": false,
         "selections": [
-          (v4/*: any*/),
-          (v5/*: any*/)
+          (v5/*: any*/),
+          (v6/*: any*/)
         ],
         "storageKey": null
       }
@@ -154,8 +174,9 @@ return {
   "kind": "Request",
   "operation": {
     "argumentDefinitions": [
-      (v2/*: any*/),
+      (v3/*: any*/),
       (v1/*: any*/),
+      (v2/*: any*/),
       (v0/*: any*/)
     ],
     "kind": "Operation",
@@ -163,13 +184,13 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v4/*: any*/),
         "concreteType": "Movie",
         "kind": "LinkedField",
         "name": "CreateMovie",
         "plural": false,
         "selections": [
-          (v4/*: any*/),
+          (v5/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -186,23 +207,23 @@ return {
               }
             ]
           },
-          (v5/*: any*/)
+          (v6/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "89d6ce75885bf132ecd01868c1cff6a9",
+    "cacheID": "bf53ceec177622028e1ba64329d6d83f",
     "id": null,
     "metadata": {},
     "name": "CreateMovieMutation",
     "operationKind": "mutation",
-    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n      }\n    }\n    error\n  }\n}\n"
+    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre, image: $image}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n        image\n      }\n    }\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "d76698eae1e6beb5908fcda837659157";
+(node as any).hash = "e3049e31feec53fc77a5439f2151035e";
 
 export default node;
