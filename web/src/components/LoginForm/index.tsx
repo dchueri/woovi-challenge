@@ -1,8 +1,8 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { LoadingButton } from "@mui/lab";
 import { Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
@@ -35,6 +35,7 @@ const LoginBox = styled(Container)({
 
 export default function LoginForm() {
   const [loginMutation] = useMutation<LoginMutationType>(LoginMutation);
+  const [loading, setLoading] = useState(false);
   const setAlertState = useSetRecoilState(alertState);
   const navigate = useNavigate();
   const auth = useAuth();
@@ -61,6 +62,7 @@ export default function LoginForm() {
             content: "Email or password is invalid. Please, try again!",
           };
           alertDispatch(alert, setAlertState);
+          setLoading(false)
           return;
         }
         payload = {
@@ -84,6 +86,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(!loading)
     const data = new FormData(event.currentTarget);
     const email = data.get("email")!.toString();
     const password = data.get("password")!.toString();
@@ -129,14 +132,15 @@ export default function LoginForm() {
             id="password"
             autoComplete="current-password"
           />
-          <Button
+          <LoadingButton
             type="submit"
             fullWidth
             variant="contained"
+            loading={loading}
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
-          </Button>
+          </LoadingButton>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
               <Link

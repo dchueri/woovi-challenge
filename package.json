@@ -6,6 +6,9 @@
     "react-error-overlay": "^6.0.9"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@mui/lab": "^5.0.0-alpha.101",
     "react-scripts": "^5.0.1"
   },
   "scripts": {
