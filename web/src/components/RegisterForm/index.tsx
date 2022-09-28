@@ -1,8 +1,8 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { LoadingButton } from "@mui/lab";
 import { Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
@@ -36,6 +36,7 @@ const RegisterBox = styled(Container)({
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [registerUserMutation] = useMutation(RegisterUserMutation);
+  const [loading, setLoading] = useState(false);
   const [newUser, setNewUser] = useState<IUser>();
   const setAlertState = useSetRecoilState(alertState);
   const auth = useAuth();
@@ -60,6 +61,7 @@ export default function RegisterForm() {
             content: res.RegisterUserMutation!.error,
           };
           alertDispatch(alert, setAlertState);
+          setLoading(false);
           return;
         }
         const payload = {
@@ -69,7 +71,7 @@ export default function RegisterForm() {
         const alert = {
           display: true,
           severity: Severity.success,
-          content: 'You have been registered! Welcome!',
+          content: "You have been registered! Welcome!",
         };
         alertDispatch(alert, setAlertState);
         auth.setUserRegistered(payload);
@@ -81,6 +83,7 @@ export default function RegisterForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(!loading)
     const data = new FormData(event.currentTarget);
     const name = data.get("name")!.toString();
     const email = data.get("email")!.toString();
@@ -135,18 +138,19 @@ export default function RegisterForm() {
             id="password"
             autoComplete="current-password"
           />
-          <Button
+          <LoadingButton
             type="submit"
             fullWidth
             variant="contained"
+            loading={loading}
             sx={{ mt: 3, mb: 2 }}
           >
             Sign up
-          </Button>
+          </LoadingButton>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
               <Link
-                href="/register"
+                href="/login"
                 variant="body2"
                 sx={{ textAlign: "center" }}
               >
