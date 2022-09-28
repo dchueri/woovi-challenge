@@ -1,5 +1,6 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/system";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLazyLoadQuery } from "react-relay";
 import { AllMovies } from "../../../modules/movie/AllMoviesQuery";
@@ -40,10 +41,22 @@ function MoviesList() {
     return <p>Nothing</p>;
   };
 
+  const variants = {
+    enter: { transition: { staggerChildren: 0.1 } },
+    exit: { transition: { staggerChildren: 0.1 } },
+  };
+
   return (
-    <Body>
-      <StyledContainer>{handlePrintMovies()}</StyledContainer>
-    </Body>
+    <motion.div
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      variants={variants}
+    >
+      <Body>
+        <StyledContainer>{handlePrintMovies()}</StyledContainer>
+      </Body>
+    </motion.div>
   );
 }
 
