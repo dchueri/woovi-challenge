@@ -17,6 +17,10 @@ const MovieType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (movie) => movie.genre,
     },
+    image: {
+      type: GraphQLString,
+      resolve: (movie) => movie.image,
+    },
   }),
 });
 
