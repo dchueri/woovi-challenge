@@ -13,6 +13,10 @@
             "destination": "/"
         },
         {
+            "source": "/recovery/(.*)",
+            "destination": "/"
+        },
+        {
             "source": "/recovery/:recoveryToken",
             "destination": "/"
         }
