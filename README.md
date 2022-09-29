@@ -135,6 +135,7 @@ Or access the *server* path and install the application:
 ### Front-end
 * `ReactJS` - Library for build the front-end;
 * `Vite` - Used to base files generation for a ReactJs project;
+* `Recoil` - State management;
 * `MaterialUI` - UI Tools; and
 * `Relay` - Data-fetching.
 
