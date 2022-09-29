@@ -27,8 +27,7 @@ export const UserType = new GraphQLObjectType<IUser>({
   interfaces: () => [nodeInterface],
 });
 
-export const UserConnection = connectionDefinitions({
-  name: "UserConnection",
+export const {connectionType: UserConnection, edgeType: UserEdge} = connectionDefinitions({
   nodeType: UserType,
 });
 
