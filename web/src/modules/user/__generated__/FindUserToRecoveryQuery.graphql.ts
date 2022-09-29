@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<50b4c95614162cbe21e1a047424d8f47>>
+ * @generated SignedSource<<3cba7e123dbf9fb0794d20c9a7bc6a1d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,7 +10,7 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 export type FindUserToRecoveryQuery$variables = {
-  recoveryToken: string;
+  recovery: string;
 };
 export type FindUserToRecoveryQuery$data = {
   readonly user: {
@@ -29,7 +29,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "recoveryToken"
+    "name": "recovery"
   }
 ],
 v1 = [
@@ -38,8 +38,8 @@ v1 = [
     "args": [
       {
         "kind": "Variable",
-        "name": "recoveryToken",
-        "variableName": "recoveryToken"
+        "name": "recovery",
+        "variableName": "recovery"
       }
     ],
     "concreteType": "User",
@@ -90,16 +90,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "243fa9097fb1602b083c699ee0a981e3",
+    "cacheID": "8ef7dad8eb3a4185b4e9aa9849ce5dcb",
     "id": null,
     "metadata": {},
     "name": "FindUserToRecoveryQuery",
     "operationKind": "query",
-    "text": "query FindUserToRecoveryQuery(\n  $recoveryToken: String!\n) {\n  user(recoveryToken: $recoveryToken) {\n    id\n    name\n    email\n  }\n}\n"
+    "text": "query FindUserToRecoveryQuery(\n  $recovery: String!\n) {\n  user(recovery: $recovery) {\n    id\n    name\n    email\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "5a8a53e37ed7821b7a8e862d03405beb";
+(node as any).hash = "7e4b67b040b67a9b3124a655010eb161";
 
 export default node;

@@ -23,10 +23,10 @@ export default function PasswordChangeForm() {
     useMutation<UpdateUserMutationType>(UpdateUserMutation);
   const [loading, setLoading] = useState(false);
   const setAlertState = useSetRecoilState(alertState);
-  const { recoveryToken } = useParams();
+  const { recovery } = useParams();
   const data = useLazyLoadQuery<FindUserToRecoveryQueryType>(
     FindUserToRecovery,
-    { recoveryToken: recoveryToken! }
+    { recovery: recovery! }
   );
   const navigate = useNavigate();
 

@@ -24,13 +24,13 @@ export default function PasswordRecoveryForm() {
   const setAlertState = useSetRecoilState(alertState);
 
   async function recoveryTokenGenerate(email: string) {
-    const recoveryToken = uuidv4();
-    const link = import.meta.env.VITE_WEB_HOST + "recovery/" + recoveryToken;
-    const variables = { email: email, recoveryToken: recoveryToken };
+    const recovery = uuidv4();
+    const link = import.meta.env.VITE_WEB_HOST + "recovery/" + recovery;
     const emailParams = { email: email, link: link };
+    const variables = { email: email, recovery: recovery };
     updateUserMutation({
       variables,
-      onCompleted: (res) => {
+      onCompleted: () => {
         emailjs.send(
           import.meta.env.VITE_SERVICE_ID,
           import.meta.env.VITE_TEMPLATE_ID,
