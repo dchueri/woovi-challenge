@@ -10,6 +10,7 @@
     "relay": "relay-compiler"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
@@ -24,7 +25,8 @@
     "react-router-dom": "^6.4.1",
     "recoil": "^0.7.5",
     "relay-runtime": "^14.1.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

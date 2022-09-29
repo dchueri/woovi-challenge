@@ -1,13 +1,11 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { LoadingButton } from "@mui/lab";
-import { Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-relay";
 import { useNavigate } from "react-router-dom";
@@ -19,19 +17,7 @@ import { LoginMutation as LoginMutationType } from "../../modules/user/__generat
 import { IUser } from "../../types/UserTypes";
 import { alertDispatch, Severity } from "../../utils/alerts";
 import { alertState } from "../../utils/atom";
-
-const LoginBox = styled(Container)({
-  width: "20vw",
-  minWidth: "25em",
-  height: "100%",
-  borderRadius: "15px",
-  backgroundColor: "rgba(255,255,255,0.05)",
-  margin: "20vh auto",
-  textAlign: "center",
-  display: "flex",
-  justifyContent: "center",
-  padding: "1em",
-});
+import { LoginBox } from "../styleds";
 
 export default function LoginForm() {
   const [loginMutation] = useMutation<LoginMutationType>(LoginMutation);
@@ -62,7 +48,7 @@ export default function LoginForm() {
             content: "Email or password is invalid. Please, try again!",
           };
           alertDispatch(alert, setAlertState);
-          setLoading(false)
+          setLoading(false);
           return;
         }
         payload = {
@@ -86,7 +72,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(!loading)
+    setLoading(!loading);
     const data = new FormData(event.currentTarget);
     const email = data.get("email")!.toString();
     const password = data.get("password")!.toString();
@@ -132,6 +118,11 @@ export default function LoginForm() {
             id="password"
             autoComplete="current-password"
           />
+          <Grid item sx={{ width: "100%", textAlign: "end" }}>
+            <Link href="/recovery" variant="body2">
+              {"Forgot password ?"}
+            </Link>
+          </Grid>
           <LoadingButton
             type="submit"
             fullWidth
@@ -142,7 +133,7 @@ export default function LoginForm() {
             Sign In
           </LoadingButton>
           <Grid container>
-            <Grid item sx={{ width: "100%" }}>
+            <Grid item xs={12} sx={{ width: "100%" }}>
               <Link
                 href="/register"
                 variant="body2"
