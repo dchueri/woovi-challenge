@@ -50,10 +50,24 @@ type Mutation {
   DeleteMovie(input: DeleteMovieInput): DeleteMovie
   LoginMutation(input: LoginInput): LoginOrRegister
   RegisterUserMutation(input: RegisterUserInput): LoginOrRegister
+  UpdateUserMutation(input: UpdateUserInput): SimpleReturn
 }
 
 type Query {
   movies(first: Int): Movies
+  user(recoveryToken: String!): User
+}
+
+type SimpleReturn {
+  success: String
+  error: String
+}
+
+input UpdateUserInput {
+  email: String!
+  name: String
+  password: String
+  recoveryToken: String
 }
 
 input MoviesQueryInput {

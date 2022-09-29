@@ -38,3 +38,9 @@ export interface Node {
   title: string;
   genre: string;
 }
+
+export interface EmailParams {
+  email: string;
+  name: string;
+  link: string;
+}
