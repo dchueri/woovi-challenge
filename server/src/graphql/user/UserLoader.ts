@@ -8,6 +8,14 @@ const Loader = createLoader({
   loaderName: "UserLoader",
 });
 
+export async function getByRecoveryToken(recoveryToken) {
+  const user = await UserModel.findOne({ recovery: recoveryToken });
+  if (!user) {
+    return null;
+  }
+  return user;
+}
+
 export default Loader;
 export const { Wrapper: User, getLoader, clearCache, load, loadAll } = Loader;
 
