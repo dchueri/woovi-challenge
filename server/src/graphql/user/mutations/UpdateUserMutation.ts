@@ -1,6 +1,7 @@
 import * as bcrypt from "bcrypt";
 import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
+import { UserUpdate } from "src/types/types";
 
 import UserModel from "../UserModel";
 
@@ -10,29 +11,41 @@ export const UpdateUserMutation = mutationWithClientMutationId({
     email: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: GraphQLString },
     password: { type: GraphQLString },
-    recoveryToken: { type: GraphQLString },
+    recovery: { type: GraphQLString },
   },
-  mutateAndGetPayload: async ({ email, recoveryToken, name, password }) => {
-    const user = await UserModel.findOne({ email });
+  mutateAndGetPayload: async ({ email, recovery, name, password }) => {
+    const payload = { email } as UserUpdate;
+    let user;
+
+    if (password) {
+      const hashPass = await bcrypt.hash(password, 10);
+      payload.password = hashPass;
+      payload.recovery = null;
+    }
+
+    if (recovery) {
+      await UserModel.findOneAndUpdate(
+        { email },
+        { $set: { recovery } }
+      );
+      return;
+    }
+
+    if (name) {
+      payload.name = name;
+    }
+
+    user = await UserModel.findOneAndUpdate(
+      { email },
+      { $set: { ...payload } }
+    );
 
     if (!user) {
       return { error: "E-mail doesn't exists." };
     }
 
-    user.recovery = recoveryToken;
-
-    if (name) {
-      user.name = name;
-    }
-    if (password) {
-      const hashPass = await bcrypt.hash(password, 10);
-      user.password = hashPass;
-    }
-    
-    await user.save();
-
     return {
-      success: `User updated.`,
+      success: `User updated ${user.name}.`,
     };
   },
   outputFields: {

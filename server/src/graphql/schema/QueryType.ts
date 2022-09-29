@@ -20,12 +20,12 @@ const QueryType = new GraphQLObjectType({
     user: {
       type: UserType,
       args: {
-        recoveryToken: {
+        recovery: {
           type: new GraphQLNonNull(GraphQLString),
         },
       },
       resolve: async (_, args) => {
-        const user = await getByRecoveryToken(args.recoveryToken);
+        const user = await getByRecoveryToken(args.recovery);
         return { id: user.id, name: user.name, email: user.email };
       },
     },
