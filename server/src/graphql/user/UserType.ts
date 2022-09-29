@@ -19,6 +19,10 @@ export const UserType = new GraphQLObjectType<IUser>({
       type: new GraphQLNonNull(GraphQLString),
       resolve: (user) => user.email,
     },
+    recovery: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (user) => user.recovery,
+    },
   }),
   interfaces: () => [nodeInterface],
 });
