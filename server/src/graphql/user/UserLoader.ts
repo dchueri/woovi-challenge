@@ -8,8 +8,8 @@ const Loader = createLoader({
   loaderName: "UserLoader",
 });
 
-export async function getByRecoveryToken(recoveryToken) {
-  const user = await UserModel.findOne({ recovery: recoveryToken });
+export async function getByRecoveryToken(recovery) {
+  const user = await UserModel.findOne({ recovery: recovery });
   if (!user) {
     return null;
   }
