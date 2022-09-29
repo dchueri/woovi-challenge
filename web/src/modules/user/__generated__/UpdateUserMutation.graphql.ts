@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<df69f617f8aedfb849c43fe039418ad2>>
+ * @generated SignedSource<<59f93812a7c14ddef8cc95f39e23f831>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -8,12 +8,12 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Mutation } from 'relay-runtime';
+import { ConcreteRequest } from 'relay-runtime';
 export type UpdateUserMutation$variables = {
   email: string;
   name?: string | null;
   password?: string | null;
-  recoveryToken?: string | null;
+  recovery?: string | null;
 };
 export type UpdateUserMutation$data = {
   readonly UpdateUserMutation: {
@@ -45,7 +45,7 @@ v2 = {
 v3 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "recoveryToken"
+  "name": "recovery"
 },
 v4 = [
   {
@@ -70,8 +70,8 @@ v4 = [
           },
           {
             "kind": "Variable",
-            "name": "recoveryToken",
-            "variableName": "recoveryToken"
+            "name": "recovery",
+            "variableName": "recovery"
           }
         ],
         "kind": "ObjectValue",
@@ -129,16 +129,16 @@ return {
     "selections": (v4/*: any*/)
   },
   "params": {
-    "cacheID": "53239e9214a50265a70dcf9598ddb6c5",
+    "cacheID": "b697008dbd175c151ea70f9c53ebbe05",
     "id": null,
     "metadata": {},
     "name": "UpdateUserMutation",
     "operationKind": "mutation",
-    "text": "mutation UpdateUserMutation(\n  $email: String!\n  $password: String\n  $name: String\n  $recoveryToken: String\n) {\n  UpdateUserMutation(input: {email: $email, password: $password, name: $name, recoveryToken: $recoveryToken}) {\n    success\n    error\n  }\n}\n"
+    "text": "mutation UpdateUserMutation(\n  $email: String!\n  $password: String\n  $name: String\n  $recovery: String\n) {\n  UpdateUserMutation(input: {email: $email, password: $password, name: $name, recovery: $recovery}) {\n    success\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "0de1911a37d14aead806ae078935ed06";
+(node as any).hash = "9c79fbe72fd2ef201f1a23aa0f279852";
 
 export default node;

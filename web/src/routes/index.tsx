@@ -15,7 +15,7 @@ export const IndexRoutes = () => {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/recovery" element={<PasswordRecoveryForm />} />
-          <Route path="/recovery/:recoveryToken" element={<PasswordChangeForm />} />
+          <Route path="/recovery/:recovery" element={<PasswordChangeForm />} />
           <Route
             path="/"
             element={

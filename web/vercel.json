@@ -17,7 +17,7 @@
             "destination": "/"
         },
         {
-            "source": "/recovery/:recoveryToken",
+            "source": "/recovery/:recovery",
             "destination": "/"
         }
     ]
