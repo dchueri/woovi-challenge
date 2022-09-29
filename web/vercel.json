@@ -7,6 +7,14 @@
         {
             "source": "/login",
             "destination": "/"
+        },
+        {
+            "source": "/recovery",
+            "destination": "/"
+        },
+        {
+            "source": "/recovery/*",
+            "destination": "/"
         }
     ]
 }
