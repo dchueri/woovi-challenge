@@ -19,3 +19,9 @@ export default interface IUserContext extends Document {
   name: string;
   email: string;
 }
+
+export default interface IMovie extends Document {
+  title: string;
+  genre: string;
+  image: string;
+}

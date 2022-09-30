@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 import { IUser } from "../../types/types";
 
 const userSchema = new mongoose.Schema(
@@ -22,6 +22,6 @@ userSchema.methods = {
   },
 };
 
-const UserModel = mongoose.model<IUser>("Users", userSchema);
+const UserModel: Model<IUser> = mongoose.model<IUser>("Users", userSchema);
 
 export default UserModel;

@@ -14,7 +14,7 @@ type ContextVars = {
 export const getContext = async (ctx: ContextVars): Promise<GraphQLContext> => {
   const dataloaders = getAllDataLoaders();
 
-  const authorization = ctx.req.headers.authorization;
+  const authorization = ctx.req?.headers.authorization;
   if (!authorization) {
     return {
       req: ctx.req,
@@ -37,7 +37,7 @@ export const getContext = async (ctx: ContextVars): Promise<GraphQLContext> => {
   }
 
   const user = await UserModel.findById(authUser.id);
-  user.password = "***"
+  user.password = "***";
   return {
     req: ctx.req,
     dataloaders,
