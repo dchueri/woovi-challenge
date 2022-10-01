@@ -41,7 +41,7 @@ export default function LoginForm() {
     loginMutation({
       variables,
       onCompleted: (res) => {
-        if (!res.LoginMutation) {
+        if (res.LoginMutation!.error) {
           const alert = {
             display: true,
             severity: Severity.error,
@@ -58,7 +58,7 @@ export default function LoginForm() {
         const alert = {
           display: true,
           severity: Severity.success,
-          content: `Welcome ${res.LoginMutation.me?.name}`,
+          content: `Welcome ${res.LoginMutation!.me!.name}`,
         };
         alertDispatch(alert, setAlertState);
         auth.setUserRegistered(payload);
