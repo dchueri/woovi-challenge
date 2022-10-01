@@ -22,6 +22,7 @@ lerna-debug.log*
 /coverage
 /.nyc_output
 __snapshots__
+.ts.snap
 
 # IDEs and editors
 /.idea
