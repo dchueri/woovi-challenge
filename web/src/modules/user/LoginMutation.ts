@@ -9,6 +9,7 @@ mutation LoginMutation($email: String!, $password: String!) {
         name
         email
       }
+      error
     }
   }
 `;

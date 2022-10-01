@@ -41,7 +41,8 @@ export default function LoginForm() {
     loginMutation({
       variables,
       onCompleted: (res) => {
-        if (!res.LoginMutation) {
+        console.log(res.LoginMutation)
+        if (res.LoginMutation.error) {
           const alert = {
             display: true,
             severity: Severity.error,

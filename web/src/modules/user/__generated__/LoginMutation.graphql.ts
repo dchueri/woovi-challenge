@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9483a1db603dcbcb910d5f9bd01d1561>>
+ * @generated SignedSource<<407cb8c985e63e016966d5f748122c02>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,7 @@ export type LoginMutation$variables = {
 };
 export type LoginMutation$data = {
   readonly LoginMutation: {
+    readonly error: string | null;
     readonly me: {
       readonly email: string | null;
       readonly id: string | null;
@@ -105,6 +106,13 @@ v1 = [
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "error",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -128,16 +136,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "9bafbb26a56dcad0d27dd54d63ff7e71",
+    "cacheID": "1ee92383feab20d75ec19b539ec0cebd",
     "id": null,
     "metadata": {},
     "name": "LoginMutation",
     "operationKind": "mutation",
-    "text": "mutation LoginMutation(\n  $email: String!\n  $password: String!\n) {\n  LoginMutation(input: {email: $email, password: $password}) {\n    token\n    me {\n      id\n      name\n      email\n    }\n  }\n}\n"
+    "text": "mutation LoginMutation(\n  $email: String!\n  $password: String!\n) {\n  LoginMutation(input: {email: $email, password: $password}) {\n    token\n    me {\n      id\n      name\n      email\n    }\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c649ecaa25db26903e7a284ca2c52e52";
+(node as any).hash = "ab6168ab629810161489ed0f1e1824bc";
 
 export default node;
