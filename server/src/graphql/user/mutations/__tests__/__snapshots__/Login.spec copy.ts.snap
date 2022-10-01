@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should login a user 1`] = `
+{
+  "LoginMutation": {
+    "me": {
+      "email": "user1@example.com",
+      "id": "FROZEN-ID",
+      "name": "user#1",
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzg1NTI2MmFlMTE5OWZkYmUyMGEzNyIsImlhdCI6MTY2NDYzNjE5OH0.Crtl5VXjhLq4EJF_kEPYEzK1UcLH_C2oKsWW7s1kcaU",
+  },
+}
+`;
+
+exports[`should not login with wrong password 1`] = `
+{
+  "LoginMutation": {
+    "error": "User or password is invalid. Please, try again",
+    "me": "EMPTY",
+    "token": "EMPTY",
+  },
+}
+`;

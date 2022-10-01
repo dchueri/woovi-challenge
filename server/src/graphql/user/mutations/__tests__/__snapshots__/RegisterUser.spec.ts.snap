@@ -21,7 +21,7 @@ exports[`should register a user 1`] = `
       "id": "FROZEN-ID",
       "name": "test",
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ2MzI2NTF9.QLXpNUjMg7Kvj86NClQfycGaukz4nDusflsdq4bAQ48",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ2MzYxOTh9.av8B3atDJaTrfxBRQoAGHUg-EL-ng-4uUuT52qvXCaA",
   },
 }
 `;
