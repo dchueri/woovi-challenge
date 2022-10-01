@@ -14,22 +14,18 @@ export const LoginMutation = mutationWithClientMutationId({
     password: { type: new GraphQLNonNull(GraphQLString) },
   },
   mutateAndGetPayload: async ({ email, password }) => {
-    try {
-      const user = await UserModel.findOne({ email });
-      const isValidPassword = await bcrypt.compareSync(password, user.password);
-      if (!user || !isValidPassword) {
-        throw new Error("User or password is invalid. Please, try again");
-      }
-
-      const token = generateToken(user._id);
-
-      return {
-        token,
-        user,
-      };
-    } catch (e) {
-      console.log(e);
+    const user = await UserModel.findOne({ email });
+    const isValidPassword = await bcrypt.compareSync(password, user.password);
+    if (!user || !isValidPassword) {
+      return { error: "User or password is invalid. Please, try again" };
     }
+
+    const token = generateToken(user._id);
+
+    return {
+      token,
+      user,
+    };
   },
   outputFields: {
     token: {
@@ -39,6 +35,10 @@ export const LoginMutation = mutationWithClientMutationId({
     me: {
       type: UserType,
       resolve: ({ user }) => user,
+    },
+    error: {
+      type: GraphQLString,
+      resolve: ({ error }) => error,
     },
   },
 });
