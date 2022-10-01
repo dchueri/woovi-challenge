@@ -1,11 +1,10 @@
 import * as bcrypt from "bcrypt";
 import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
+import { generateToken } from "../../../auth";
 
 import UserModel from "../UserModel";
 import { UserType } from "../UserType";
-
-import { generateToken } from "../../../auth";
 
 export const RegisterUserMutation = mutationWithClientMutationId({
   name: "UserRegister",
@@ -32,10 +31,12 @@ export const RegisterUserMutation = mutationWithClientMutationId({
 
       await user.save();
 
-      const token = generateToken(user._id);
+      const createdUser = await UserModel.findById(user.id);
 
+      const token = generateToken(createdUser.id);
+      
       return {
-        id: user._id,
+        me: createdUser,
         success: "User has registered with success",
         token,
       };
@@ -50,7 +51,7 @@ export const RegisterUserMutation = mutationWithClientMutationId({
     },
     me: {
       type: UserType,
-      resolve: async ({ id }) => await UserModel.findById(id),
+      resolve: ({ me }) => me,
     },
     success: {
       type: GraphQLString,
