@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be update just title of movie 1`] = `
+{
+  "UpdateMovie": {
+    "error": "EMPTY",
+    "movieEdge": {
+      "node": {
+        "genre": "test",
+        "id": "EMPTY",
+        "image": "test",
+        "title": "content#1",
+      },
+    },
+  },
+}
+`;
+
+exports[`should be update one movie 1`] = `
+{
+  "UpdateMovie": {
+    "error": "EMPTY",
+    "movieEdge": {
+      "node": {
+        "genre": "test",
+        "id": "EMPTY",
+        "image": "test",
+        "title": "content#0",
+      },
+    },
+  },
+}
+`;
+
+exports[`should not be update a movie with invalid id 1`] = `
+{
+  "UpdateMovie": {
+    "error": "Movie not found",
+    "movieEdge": "EMPTY",
+  },
+}
+`;
+
+exports[`should not be update a movie without auth 1`] = `
+{
+  "UpdateMovie": "EMPTY",
+}
+`;
+
+exports[`should not be update a movie without id input 1`] = `undefined`;
