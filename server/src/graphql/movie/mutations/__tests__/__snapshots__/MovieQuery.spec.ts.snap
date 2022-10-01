@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should all posts 1`] = `
+exports[`should be return all movies 1`] = `
 {
   "movies": {
     "edges": [
@@ -14,16 +14,10 @@ exports[`should all posts 1`] = `
 }
 `;
 
-exports[`should be return all movies 1`] = `
+exports[`should be return an empty movies list 1`] = `
 {
   "movies": {
-    "edges": [
-      {
-        "node": {
-          "title": "content#0",
-        },
-      },
-    ],
+    "edges": [],
   },
 }
 `;

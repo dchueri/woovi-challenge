@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be create one movie 1`] = `
+{
+  "CreateMovie": {
+    "error": "EMPTY",
+    "movieEdge": {
+      "node": {
+        "genre": "test",
+        "id": "FROZEN-ID",
+        "image": "img",
+        "title": "test",
+      },
+    },
+  },
+}
+`;
+
+exports[`should not be create a movie with incomplete input 1`] = `undefined`;
+
+exports[`should not be create one movie if no auth 1`] = `
+{
+  "CreateMovie": {
+    "error": "You are not logged in. Please, sign in",
+    "movieEdge": "EMPTY",
+  },
+}
+`;
