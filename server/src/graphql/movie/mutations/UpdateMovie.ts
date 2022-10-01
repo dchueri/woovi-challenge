@@ -11,25 +11,24 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString),
     },
     title: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     genre: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     image: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
   },
-  mutateAndGetPayload: async ({ id, title, genre }, ctx) => {
+  mutateAndGetPayload: async ({ id, title, genre, image }, ctx) => {
     const context = await getContext(ctx);
     if (!context.user) {
       return { error: "You are not logged in. Please, sign in" };
     }
 
     const movie = await movies
-      .findOneAndUpdate({ _id: id }, { title, genre })
+      .findOneAndUpdate({ _id: id }, { title, genre, image })
       .then((movie) => {
-        console.log(movie.id);
         return {
           movie: {
             id: movie.id,

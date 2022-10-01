@@ -25,3 +25,9 @@ export default interface IMovie extends Document {
   genre: string;
   image: string;
 }
+
+export interface MovieUpdate extends Document {
+  title?: string;
+  genre?: string;
+  image?: string;
+}
