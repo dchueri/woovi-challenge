@@ -4,6 +4,7 @@
 package-lock.json
 .env
 .npmrc
+junit.xml
 
 # Logs
 logs

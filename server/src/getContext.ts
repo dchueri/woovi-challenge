@@ -13,7 +13,6 @@ type ContextVars = {
 
 export const getContext = async (ctx: ContextVars): Promise<GraphQLContext> => {
   const dataloaders = getAllDataLoaders();
-
   const authorization = ctx.req?.headers.authorization;
   if (!authorization) {
     return {
