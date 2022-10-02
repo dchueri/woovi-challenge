@@ -4,7 +4,7 @@ import React from "react";
 import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
 import { CreateMovieMutation } from "../../../../modules/movie/CreateMovieMutation";
-import { getMovieImage } from "../../../../utils/moviesDB";
+import { getMovieInfos } from "../../../../utils/moviesDB";
 
 function Form() {
   const [createMovieMutation] = useMutation(CreateMovieMutation);
@@ -14,12 +14,14 @@ function Form() {
   const handleCreateMovie = async (
     title: string,
     genre: string,
-    image: string
+    image: string,
+    description: string
   ) => {
     const variables = {
       title: title,
       genre: genre,
       image: image,
+      description: description,
       connections: [connectionID],
     };
 
@@ -34,8 +36,10 @@ function Form() {
     const data = new FormData(event.currentTarget);
     const title = data.get("title")!.toString();
     const genre = data.get("genre")!.toString();
-    const image = await getMovieImage(title);
-    await handleCreateMovie(title, genre, image);
+    const movieInfos = await getMovieInfos(title);
+    const image = movieInfos.image;
+    const description = movieInfos.description;
+    await handleCreateMovie(title, genre, image, description);
   };
 
   return (

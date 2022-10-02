@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<40b72da2d40980fcd17b155f52126eb4>>
+ * @generated SignedSource<<994e52df8b44ca9966bb73d0fca87c23>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,6 +18,7 @@ export type AllMoviesQuery$data = {
     readonly edges: ReadonlyArray<{
       readonly cursor: string | null;
       readonly node: {
+        readonly description: string | null;
         readonly genre: string;
         readonly id: string;
         readonly image: string | null;
@@ -88,6 +89,13 @@ v1 = [
             "args": null,
             "kind": "ScalarField",
             "name": "image",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "description",
             "storageKey": null
           },
           {
@@ -218,7 +226,7 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d36dbca2e111c89d5b90a6652c6d5aa1",
+    "cacheID": "1bb23bf2fa74cbd5693f53ba47ef2f09",
     "id": null,
     "metadata": {
       "connection": [
@@ -234,11 +242,11 @@ return {
     },
     "name": "AllMoviesQuery",
     "operationKind": "query",
-    "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "8eb62e97169fcd9497aa2123122ffa3c";
+(node as any).hash = "3c517b98b5d483fcb7287ac4d3203f0a";
 
 export default node;

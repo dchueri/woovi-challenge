@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8b2225451db2c10a1af0520ff6f33ce9>>
+ * @generated SignedSource<<67415193ecf9e9bf63c87f95ac0f4019>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,6 +11,7 @@
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type CreateMovieMutation$variables = {
   connections: ReadonlyArray<string>;
+  description: string;
   genre: string;
   image: string;
   title: string;
@@ -21,6 +22,7 @@ export type CreateMovieMutation$data = {
     readonly movieEdge: {
       readonly cursor: string | null;
       readonly node: {
+        readonly description: string | null;
         readonly genre: string;
         readonly id: string;
         readonly image: string | null;
@@ -43,21 +45,31 @@ var v0 = {
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "genre"
+  "name": "description"
 },
 v2 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "image"
+  "name": "genre"
 },
 v3 = {
   "defaultValue": null,
   "kind": "LocalArgument",
+  "name": "image"
+},
+v4 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
   "name": "title"
 },
-v4 = [
+v5 = [
   {
     "fields": [
+      {
+        "kind": "Variable",
+        "name": "description",
+        "variableName": "description"
+      },
       {
         "kind": "Variable",
         "name": "genre",
@@ -78,7 +90,7 @@ v4 = [
     "name": "input"
   }
 ],
-v5 = {
+v6 = {
   "alias": null,
   "args": null,
   "concreteType": "MovieEdge",
@@ -128,6 +140,13 @@ v5 = {
           "kind": "ScalarField",
           "name": "image",
           "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "description",
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -135,7 +154,7 @@ v5 = {
   ],
   "storageKey": null
 },
-v6 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -148,7 +167,8 @@ return {
       (v0/*: any*/),
       (v1/*: any*/),
       (v2/*: any*/),
-      (v3/*: any*/)
+      (v3/*: any*/),
+      (v4/*: any*/)
     ],
     "kind": "Fragment",
     "metadata": null,
@@ -156,14 +176,14 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v4/*: any*/),
+        "args": (v5/*: any*/),
         "concreteType": "Movie",
         "kind": "LinkedField",
         "name": "CreateMovie",
         "plural": false,
         "selections": [
-          (v5/*: any*/),
-          (v6/*: any*/)
+          (v6/*: any*/),
+          (v7/*: any*/)
         ],
         "storageKey": null
       }
@@ -174,9 +194,10 @@ return {
   "kind": "Request",
   "operation": {
     "argumentDefinitions": [
+      (v4/*: any*/),
+      (v2/*: any*/),
       (v3/*: any*/),
       (v1/*: any*/),
-      (v2/*: any*/),
       (v0/*: any*/)
     ],
     "kind": "Operation",
@@ -184,13 +205,13 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v4/*: any*/),
+        "args": (v5/*: any*/),
         "concreteType": "Movie",
         "kind": "LinkedField",
         "name": "CreateMovie",
         "plural": false,
         "selections": [
-          (v5/*: any*/),
+          (v6/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -207,23 +228,23 @@ return {
               }
             ]
           },
-          (v6/*: any*/)
+          (v7/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "bf53ceec177622028e1ba64329d6d83f",
+    "cacheID": "60f95f87e01bcd4733c4ef757655794d",
     "id": null,
     "metadata": {},
     "name": "CreateMovieMutation",
     "operationKind": "mutation",
-    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre, image: $image}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n        image\n      }\n    }\n    error\n  }\n}\n"
+    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n  $description: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre, image: $image, description: $description}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n        image\n        description\n      }\n    }\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "e3049e31feec53fc77a5439f2151035e";
+(node as any).hash = "1ce1e531e718e3841b8a6f98c84d471b";
 
 export default node;
