@@ -57,8 +57,20 @@ export default function MovieCard(props: { movie: IMovieEdge }) {
           {movie.title}
         </Typography>
         <Typography color="text.secondary">{movie.genre}</Typography>
-        <Grid sx={{ display: "flex", alignItems: "center", width: "100%" }}>
-          <Grid  sx={{ display: "flex", gap: '0.2em'}}>
+        <Grid
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Grid
+            sx={{
+              display: "flex",
+              gap: "0.2em",
+            }}
+          >
             <Typography color="text.secondary">{movie.average}</Typography>
             <StarOutlineIcon />
           </Grid>
