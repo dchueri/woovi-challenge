@@ -11,6 +11,7 @@ export const AllMovies = graphql`
           genre
           image
           description
+          average
         }
         cursor
       }

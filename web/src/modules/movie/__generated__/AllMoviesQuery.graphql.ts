@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<994e52df8b44ca9966bb73d0fca87c23>>
+ * @generated SignedSource<<11f47ace9ab2fabf30879f1b0edb0630>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,10 +18,11 @@ export type AllMoviesQuery$data = {
     readonly edges: ReadonlyArray<{
       readonly cursor: string | null;
       readonly node: {
-        readonly description: string | null;
+        readonly average: number;
+        readonly description: string;
         readonly genre: string;
         readonly id: string;
-        readonly image: string | null;
+        readonly image: string;
         readonly title: string;
       } | null;
     } | null> | null;
@@ -96,6 +97,13 @@ v1 = [
             "args": null,
             "kind": "ScalarField",
             "name": "description",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "average",
             "storageKey": null
           },
           {
@@ -226,7 +234,7 @@ return {
     ]
   },
   "params": {
-    "cacheID": "1bb23bf2fa74cbd5693f53ba47ef2f09",
+    "cacheID": "1a1bc41e631a590de3fe17cb61b4931c",
     "id": null,
     "metadata": {
       "connection": [
@@ -242,11 +250,11 @@ return {
     },
     "name": "AllMoviesQuery",
     "operationKind": "query",
-    "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+    "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        description\n        average\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "3c517b98b5d483fcb7287ac4d3203f0a";
+(node as any).hash = "639e7fe9d9c8fb4bab54691d912e60a1";
 
 export default node;

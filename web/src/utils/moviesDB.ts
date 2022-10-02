@@ -12,6 +12,8 @@ export async function getMovieInfos(title: string) {
 
   const image = `https://image.tmdb.org/t/p/original/${res.data.results[0].poster_path}`;
   const description = res.data.results[0].overview;
-  const moviesInfos = { image, description };
+  const averageString = (res.data.results[0].vote_average / 2).toFixed(1);
+  const average = parseFloat(averageString);
+  const moviesInfos = { image, description, average };
   return moviesInfos;
 }
