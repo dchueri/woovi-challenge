@@ -19,15 +19,21 @@ export default mutationWithClientMutationId({
     image: {
       type: GraphQLString,
     },
+    description: {
+      type: GraphQLString,
+    },
   },
-  mutateAndGetPayload: async ({ id, title, genre, image }, ctx) => {
+  mutateAndGetPayload: async (
+    { id, title, genre, image, description },
+    ctx
+  ) => {
     const context = await getContext(ctx);
     if (!context.user) {
       return { error: "You are not logged in. Please, sign in" };
     }
 
     const movie = await movies
-      .findOneAndUpdate({ _id: id }, { title, genre, image })
+      .findOneAndUpdate({ _id: id }, { title, genre, image, description })
       .then((movie) => {
         return {
           movie: {
@@ -35,6 +41,7 @@ export default mutationWithClientMutationId({
             title: movie.title,
             genre: movie.genre,
             image: movie.image,
+            description: movie.description,
           },
         };
       })

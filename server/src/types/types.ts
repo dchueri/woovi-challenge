@@ -24,10 +24,12 @@ export default interface IMovie extends Document {
   title: string;
   genre: string;
   image: string;
+  description: string;
 }
 
 export interface MovieUpdate extends Document {
   title?: string;
   genre?: string;
   image?: string;
+  description?: string;
 }
