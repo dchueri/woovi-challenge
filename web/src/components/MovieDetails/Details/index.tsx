@@ -1,7 +1,7 @@
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { IMovie } from "../../../types/MovieTypes";
 import "./style.css";
@@ -56,6 +56,7 @@ const Modal = (props: { movie: IMovie; closeWindow: () => void }) => {
           <p className="movie__genre">{props.movie.genre}</p>
         </motion.div>
         <motion.div className="movie__row" variants={rowVariants}>
+          <Typography color="text.secondary">{props.movie.average}</Typography>
           <StarOutlineIcon />
           <ChatBubbleOutlineIcon />
         </motion.div>
