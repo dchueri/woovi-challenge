@@ -50,6 +50,7 @@ it("should be create one movie", async () => {
       genre: "test",
       image: "img",
       description: "some description",
+      average: 3.5,
     },
   };
   const rootValue = {};
@@ -78,6 +79,7 @@ it("should not be create a movie with incomplete input", async () => {
                     genre
                     image
                     description
+                    average
                   }
                 }
                 error
@@ -122,6 +124,7 @@ it("should not be create one movie if no auth", async () => {
                 genre
                 image
                 description
+                average
               }
             }
             error
@@ -137,6 +140,7 @@ it("should not be create one movie if no auth", async () => {
       genre: "test",
       image: "img",
       description: "some description",
+      average: 3.5,
     },
   };
   const rootValue = {};

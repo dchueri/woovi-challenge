@@ -25,6 +25,7 @@ export default interface IMovie extends Document {
   genre: string;
   image: string;
   description: string;
+  average: number;
 }
 
 export interface MovieUpdate extends Document {
@@ -32,4 +33,5 @@ export interface MovieUpdate extends Document {
   genre?: string;
   image?: string;
   description?: string;
+  average?: number;
 }

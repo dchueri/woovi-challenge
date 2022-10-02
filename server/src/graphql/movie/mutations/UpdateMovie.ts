@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLString } from "graphql";
+import { GraphQLFloat, GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
 import { getContext } from "../../../getContext";
 import movies from "../MovieModel";
@@ -22,9 +22,12 @@ export default mutationWithClientMutationId({
     description: {
       type: GraphQLString,
     },
+    average: {
+      type: GraphQLFloat,
+    },
   },
   mutateAndGetPayload: async (
-    { id, title, genre, image, description },
+    { id, title, genre, image, description, average },
     ctx
   ) => {
     const context = await getContext(ctx);
@@ -33,7 +36,10 @@ export default mutationWithClientMutationId({
     }
 
     const movie = await movies
-      .findOneAndUpdate({ _id: id }, { title, genre, image, description })
+      .findOneAndUpdate(
+        { _id: id },
+        { title, genre, image, description, average }
+      )
       .then((movie) => {
         return {
           movie: {
@@ -42,6 +48,7 @@ export default mutationWithClientMutationId({
             genre: movie.genre,
             image: movie.image,
             description: movie.description,
+            average: movie.average,
           },
         };
       })

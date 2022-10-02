@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLString } from "graphql";
+import { GraphQLFloat, GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
 import { getContext } from "../../../getContext";
 
@@ -19,9 +19,15 @@ export default mutationWithClientMutationId({
     },
     description: {
       type: new GraphQLNonNull(GraphQLString),
-    }
+    },
+    average: {
+      type: new GraphQLNonNull(GraphQLFloat),
+    },
   },
-  mutateAndGetPayload: async ({ title, genre, image, description }, ctx) => {
+  mutateAndGetPayload: async (
+    { title, genre, image, description, average },
+    ctx
+  ) => {
     const context = await getContext(ctx);
     if (!context.user) {
       return { error: "You are not logged in. Please, sign in" };
@@ -38,6 +44,7 @@ export default mutationWithClientMutationId({
       genre: genre,
       image: image,
       description: description,
+      average: average,
     });
     movie.save((err) => {
       if (err) {
