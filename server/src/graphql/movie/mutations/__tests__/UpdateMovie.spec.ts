@@ -34,6 +34,8 @@ it("should be update one movie", async () => {
           id
           genre
           image
+          description
+          average
         }
       }
       error
@@ -47,6 +49,8 @@ it("should be update one movie", async () => {
       title: "updated",
       genre: "updated",
       image: "updated",
+      description: "updated",
+      average: 3.5,
     },
   };
   const rootValue = {};
@@ -87,6 +91,8 @@ it("should be update just title of movie", async () => {
             id
             genre
             image
+            description
+            average
           }
         }
         error
@@ -140,6 +146,8 @@ it("should not be update a movie without id input", async () => {
               id
               genre
               image
+              description
+              average
             }
           }
           error
@@ -188,6 +196,8 @@ it("should not be update a movie with invalid id", async () => {
               id
               genre
               image
+              description
+              average
             }
           }
           error
@@ -234,6 +244,8 @@ it("should not be update a movie without auth", async () => {
             id
             genre
             image
+            description
+            average
           }
         }
         error
@@ -247,6 +259,8 @@ it("should not be update a movie without auth", async () => {
       title: "updated",
       genre: "updated",
       image: "updated",
+      description: "updated",
+      average: 3.5,
     },
   };
   const rootValue = {};

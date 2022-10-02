@@ -19,6 +19,7 @@ export const createMovie = async (args: DeepPartial<IMovie> = {}) => {
     genre: "test",
     image: "test",
     description: "test description",
+    average: 3,
     ...rest,
   }).save();
 };

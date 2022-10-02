@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLFloat, GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionDefinitions } from "graphql-relay";
 
 const MovieType = new GraphQLObjectType({
@@ -24,6 +24,10 @@ const MovieType = new GraphQLObjectType({
     description: {
       type: GraphQLString,
       resolve: (movie) => movie.description,
+    },
+    average: {
+      type: GraphQLFloat,
+      resolve: (movie) => movie.average,
     },
   }),
 });
