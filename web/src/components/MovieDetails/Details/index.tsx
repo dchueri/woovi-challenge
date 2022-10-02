@@ -63,7 +63,7 @@ const Modal = (props: { movie: IMovie; closeWindow: () => void }) => {
           className="movie__description-wrapper"
           variants={rowVariants}
         >
-          <p className="movie__description">Some sinopse</p>
+          <p className="movie__description">{props.movie.description}</p>
         </motion.div>
       </motion.div>
     </motion.div>

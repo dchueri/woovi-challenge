@@ -5,6 +5,7 @@ type Movie {
   title: String!
   genre: String!
   image: String
+  description: String
 }
 
 type Node {
@@ -12,6 +13,7 @@ type Node {
   title: String!
   genre: String!
   image: String
+  description: String
 }
 
 type MovieEdge {
@@ -28,6 +30,7 @@ input CreateMovieInput {
   title: String!
   genre: String!
   image: String
+  description: String
 }
 
 input DeleteMovieInput {

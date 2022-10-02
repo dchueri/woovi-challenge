@@ -5,9 +5,13 @@ const api = axios.create({
   timeout: 1000,
 });
 
-export async function getMovieImage(title: string) {
+export async function getMovieInfos(title: string) {
   const res = await api.get(
     `/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&query=${title}`
   );
-  return `https://image.tmdb.org/t/p/original/${res.data.results[0].poster_path}`;
+
+  const image = `https://image.tmdb.org/t/p/original/${res.data.results[0].poster_path}`;
+  const description = res.data.results[0].overview;
+  const moviesInfos = { image, description };
+  return moviesInfos;
 }

@@ -10,6 +10,7 @@ export const AllMovies = graphql`
           title
           genre
           image
+          description
         }
         cursor
       }
