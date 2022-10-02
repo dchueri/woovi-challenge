@@ -1,5 +1,6 @@
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { Button } from "@mui/material";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import { Button, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -56,14 +57,20 @@ export default function MovieCard(props: { movie: IMovieEdge }) {
           {movie.title}
         </Typography>
         <Typography color="text.secondary">{movie.genre}</Typography>
-        <Button color="error" sx={{ minWidth: "auto", borderRadius: "50px" }}>
-          <DeleteForeverOutlinedIcon
-            color="action"
-            onClick={() => {
-              handleDeleteMovie(movie.id);
-            }}
-          />
-        </Button>
+        <Grid sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+          <Grid  sx={{ display: "flex", gap: '0.2em'}}>
+            <Typography color="text.secondary">{movie.average}</Typography>
+            <StarOutlineIcon />
+          </Grid>
+          <Button color="error" sx={{ minWidth: "auto", borderRadius: "50px" }}>
+            <DeleteForeverOutlinedIcon
+              color="action"
+              onClick={() => {
+                handleDeleteMovie(movie.id);
+              }}
+            />
+          </Button>
+        </Grid>
       </CardContent>
     </motion.div>
   );

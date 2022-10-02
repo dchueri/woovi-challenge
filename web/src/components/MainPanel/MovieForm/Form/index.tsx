@@ -15,13 +15,15 @@ function Form() {
     title: string,
     genre: string,
     image: string,
-    description: string
+    description: string,
+    average: number
   ) => {
     const variables = {
       title: title,
       genre: genre,
       image: image,
       description: description,
+      average: average,
       connections: [connectionID],
     };
 
@@ -39,7 +41,8 @@ function Form() {
     const movieInfos = await getMovieInfos(title);
     const image = movieInfos.image;
     const description = movieInfos.description;
-    await handleCreateMovie(title, genre, image, description);
+    const average = movieInfos.average;
+    await handleCreateMovie(title, genre, image, description, average);
   };
 
   return (

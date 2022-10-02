@@ -4,16 +4,18 @@ type Movie {
   id: String!
   title: String!
   genre: String!
-  image: String
-  description: String
+  image: String!
+  description: String!
+  average: Float!
 }
 
 type Node {
   id: String!
   title: String!
   genre: String!
-  image: String
-  description: String
+  image: String!
+  description: String!
+  average: Float!
 }
 
 type MovieEdge {
@@ -29,8 +31,9 @@ type IMovieEdge {
 input CreateMovieInput {
   title: String!
   genre: String!
-  image: String
-  description: String
+  image: String!
+  description: String!
+  average: Float!
 }
 
 input DeleteMovieInput {

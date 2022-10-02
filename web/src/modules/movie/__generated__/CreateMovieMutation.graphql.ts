@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<67415193ecf9e9bf63c87f95ac0f4019>>
+ * @generated SignedSource<<19b953aaa324172c6519f57c7f6c0cf4>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,6 +10,7 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type CreateMovieMutation$variables = {
+  average: number;
   connections: ReadonlyArray<string>;
   description: string;
   genre: string;
@@ -22,10 +23,11 @@ export type CreateMovieMutation$data = {
     readonly movieEdge: {
       readonly cursor: string | null;
       readonly node: {
-        readonly description: string | null;
+        readonly average: number;
+        readonly description: string;
         readonly genre: string;
         readonly id: string;
-        readonly image: string | null;
+        readonly image: string;
         readonly title: string;
       } | null;
     } | null;
@@ -40,31 +42,41 @@ const node: ConcreteRequest = (function(){
 var v0 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "connections"
+  "name": "average"
 },
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "description"
+  "name": "connections"
 },
 v2 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "genre"
+  "name": "description"
 },
 v3 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "image"
+  "name": "genre"
 },
 v4 = {
   "defaultValue": null,
   "kind": "LocalArgument",
+  "name": "image"
+},
+v5 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
   "name": "title"
 },
-v5 = [
+v6 = [
   {
     "fields": [
+      {
+        "kind": "Variable",
+        "name": "average",
+        "variableName": "average"
+      },
       {
         "kind": "Variable",
         "name": "description",
@@ -90,7 +102,7 @@ v5 = [
     "name": "input"
   }
 ],
-v6 = {
+v7 = {
   "alias": null,
   "args": null,
   "concreteType": "MovieEdge",
@@ -147,6 +159,13 @@ v6 = {
           "kind": "ScalarField",
           "name": "description",
           "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "average",
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -154,7 +173,7 @@ v6 = {
   ],
   "storageKey": null
 },
-v7 = {
+v8 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -168,7 +187,8 @@ return {
       (v1/*: any*/),
       (v2/*: any*/),
       (v3/*: any*/),
-      (v4/*: any*/)
+      (v4/*: any*/),
+      (v5/*: any*/)
     ],
     "kind": "Fragment",
     "metadata": null,
@@ -176,14 +196,14 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v5/*: any*/),
+        "args": (v6/*: any*/),
         "concreteType": "Movie",
         "kind": "LinkedField",
         "name": "CreateMovie",
         "plural": false,
         "selections": [
-          (v6/*: any*/),
-          (v7/*: any*/)
+          (v7/*: any*/),
+          (v8/*: any*/)
         ],
         "storageKey": null
       }
@@ -194,24 +214,25 @@ return {
   "kind": "Request",
   "operation": {
     "argumentDefinitions": [
+      (v5/*: any*/),
+      (v3/*: any*/),
       (v4/*: any*/),
       (v2/*: any*/),
-      (v3/*: any*/),
-      (v1/*: any*/),
-      (v0/*: any*/)
+      (v0/*: any*/),
+      (v1/*: any*/)
     ],
     "kind": "Operation",
     "name": "CreateMovieMutation",
     "selections": [
       {
         "alias": null,
-        "args": (v5/*: any*/),
+        "args": (v6/*: any*/),
         "concreteType": "Movie",
         "kind": "LinkedField",
         "name": "CreateMovie",
         "plural": false,
         "selections": [
-          (v6/*: any*/),
+          (v7/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -228,23 +249,23 @@ return {
               }
             ]
           },
-          (v7/*: any*/)
+          (v8/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "60f95f87e01bcd4733c4ef757655794d",
+    "cacheID": "8208b7708900ac9b92dde8060dd7cb9e",
     "id": null,
     "metadata": {},
     "name": "CreateMovieMutation",
     "operationKind": "mutation",
-    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n  $description: String!\n) {\n  CreateMovie(input: {title: $title, genre: $genre, image: $image, description: $description}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n        image\n        description\n      }\n    }\n    error\n  }\n}\n"
+    "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n  $description: String!\n  $average: Float!\n) {\n  CreateMovie(input: {title: $title, genre: $genre, image: $image, description: $description, average: $average}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n        image\n        description\n        average\n      }\n    }\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "1ce1e531e718e3841b8a6f98c84d471b";
+(node as any).hash = "ba6bd6380fabb186b255ab8274c30679";
 
 export default node;
