@@ -17,8 +17,11 @@ export default mutationWithClientMutationId({
     image: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    description: {
+      type: new GraphQLNonNull(GraphQLString),
+    }
   },
-  mutateAndGetPayload: async ({ title, genre, image }, ctx) => {
+  mutateAndGetPayload: async ({ title, genre, image, description }, ctx) => {
     const context = await getContext(ctx);
     if (!context.user) {
       return { error: "You are not logged in. Please, sign in" };
@@ -34,6 +37,7 @@ export default mutationWithClientMutationId({
       title: title,
       genre: genre,
       image: image,
+      description: description,
     });
     movie.save((err) => {
       if (err) {

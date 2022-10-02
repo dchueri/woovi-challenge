@@ -2,10 +2,10 @@ import { graphql } from "graphql";
 import { createUser } from "../../../user/fixture/createUser";
 
 import {
-    clearDbAndRestartCounters,
-    connectMongoose,
-    disconnectMongoose,
-    sanitizeTestObject
+  clearDbAndRestartCounters,
+  connectMongoose,
+  disconnectMongoose,
+  sanitizeTestObject
 } from "../../../../../test";
 import { generateToken } from "../../../../auth";
 import { getContext } from "../../../../getContext";
@@ -27,6 +27,7 @@ it("should be create one movie", async () => {
                   title
                   genre
                   image
+                  description
                 }
               }
               error
@@ -44,7 +45,12 @@ it("should be create one movie", async () => {
   const contextValue = await getContext({ ...context });
 
   const variableValues = {
-    input: { title: "test", genre: "test", image: "img" },
+    input: {
+      title: "test",
+      genre: "test",
+      image: "img",
+      description: "some description",
+    },
   };
   const rootValue = {};
 
@@ -71,6 +77,7 @@ it("should not be create a movie with incomplete input", async () => {
                     title
                     genre
                     image
+                    description
                   }
                 }
                 error
@@ -87,7 +94,7 @@ it("should not be create a movie with incomplete input", async () => {
   const contextValue = await getContext({ ...context });
 
   const variableValues = {
-    input: { genre: "test", image: "img" },
+    input: { genre: "test", image: "img", description: "some description" },
   };
   const rootValue = {};
 
@@ -114,6 +121,7 @@ it("should not be create one movie if no auth", async () => {
                 title
                 genre
                 image
+                description
               }
             }
             error
@@ -124,7 +132,12 @@ it("should not be create one movie if no auth", async () => {
   const contextValue = await getContext({ user });
 
   const variableValues = {
-    input: { title: "test", genre: "test", image: "img" },
+    input: {
+      title: "test",
+      genre: "test",
+      image: "img",
+      description: "some description",
+    },
   };
   const rootValue = {};
 
