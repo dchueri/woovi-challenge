@@ -19,7 +19,7 @@ export default function ThemeToggle() {
         bgcolor: "background.default",
         color: "text.primary",
         borderRadius: 1,
-        padding: "3em",
+        padding: "0em 3em",
         height: '5vh'
       }}
     >
