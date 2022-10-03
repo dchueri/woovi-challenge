@@ -5,12 +5,16 @@
             "destination": "/"
         },
         {
+            "source": "/movies",
+            "destination": "/movies"
+        },
+        {
             "source": "/login",
-            "destination": "/"
+            "destination": "/login"
         },
         {
             "source": "/recovery",
-            "destination": "/"
+            "destination": "/recovery"
         },
         {
             "source": "/recovery/(.*)",
