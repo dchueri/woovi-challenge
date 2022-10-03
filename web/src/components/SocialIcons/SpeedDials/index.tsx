@@ -30,9 +30,7 @@ export const SpeedDials = () => {
       icon={<i className={`${action.x_icon}`}></i>}
       tooltipTitle={action.title}
       onClick={handleClose}
-      href={action.url}
-      rel="noopener noreferrer"
-      underline="none"
+      ref={action.url}
       color="inherit"
     />
   ));

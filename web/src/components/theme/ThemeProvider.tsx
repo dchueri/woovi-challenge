@@ -20,7 +20,7 @@ export const ThemeProviders = ({ children }: { children: JSX.Element }) => {
     () =>
       createTheme({
         palette: {
-          mode: dark,
+          mode: dark as 'dark' | 'light',
         },
       }),
     [dark]
