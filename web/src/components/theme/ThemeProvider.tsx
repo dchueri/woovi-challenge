@@ -20,7 +20,27 @@ export const ThemeProviders = ({ children }: { children: JSX.Element }) => {
     () =>
       createTheme({
         palette: {
-          mode: dark as 'dark' | 'light',
+          mode: dark as "dark" | "light",
+        },
+        components: {
+          MuiCssBaseline: {
+            styleOverrides: {
+              body: {
+                "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
+                  backgroundColor: "#121212",
+                },
+                "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
+                  borderRadius: 8,
+                  backgroundColor: "#6b6b6b",
+                  minHeight: 24,
+                  border: "3px solid #121212",
+                },
+                "&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner": {
+                  backgroundColor: "primary",
+                },
+              },
+            },
+          },
         },
       }),
     [dark]
@@ -28,9 +48,7 @@ export const ThemeProviders = ({ children }: { children: JSX.Element }) => {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ColorModeContext.Provider>
   );
 };
