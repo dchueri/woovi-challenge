@@ -1,6 +1,6 @@
 import { GraphQLObjectType } from "graphql";
-import MovieMutations from "../../graphql/movie/mutations";
-import UserMutations from "../user/mutations";
+import MovieMutations from "../../modules/movie/mutations";
+import UserMutations from "../../modules/user/mutations";
 
 const MutationType = new GraphQLObjectType({
   name: "Mutation",

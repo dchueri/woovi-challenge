@@ -2,14 +2,14 @@ import { graphql } from "graphql";
 import { createUser } from "../../../user/fixture/createUser";
 
 import {
-    clearDbAndRestartCounters,
-    connectMongoose,
-    disconnectMongoose,
-    sanitizeTestObject
+  clearDbAndRestartCounters,
+  connectMongoose,
+  disconnectMongoose,
+  sanitizeTestObject
 } from "../../../../../test";
 import { generateToken } from "../../../../auth";
 import { getContext } from "../../../../getContext";
-import { schema } from "../../../schema";
+import { schema } from "../../../../graphql/schema";
 import { createMovie } from "../../fixture/createMovie";
 
 beforeAll(connectMongoose);
