@@ -3,13 +3,13 @@ import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLazyLoadQuery } from "react-relay";
-import { AllMovies } from "../../../modules/movie/AllMoviesQuery";
-import { AllMoviesQuery } from "../../../modules/movie/__generated__/AllMoviesQuery.graphql";
+import { AllMovies } from "../../modules/movie/AllMoviesQuery";
+import { AllMoviesQuery } from "../../modules/movie/__generated__/AllMoviesQuery.graphql";
 import MovieCard from "./MovieCard";
 
 const Body = styled(Container)({
   width: "100vw",
-  minHeight: "75vh",
+  minHeight: "65vh",
   display: "flex",
 });
 
@@ -18,9 +18,11 @@ const StyledContainer = styled(Box)({
   borderRadius: "20px",
   boxShadow: "10px 10px 10px 0px rgba(0,0,0,0.75)",
   padding: "1em",
-  width: "60vw",
-  minHeight: "60vh",
+  width: "fit-content",
+  maxWidth: "60vw",
+  minWidth: "50vw",
   height: "fit-content",
+  minHeight: "40vh",
   margin: "auto",
 });
 

@@ -8,7 +8,6 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/system";
-import * as React from "react";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-relay";
 import { useNavigate } from "react-router-dom";

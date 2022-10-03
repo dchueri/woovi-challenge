@@ -10,14 +10,14 @@ import { useEffect, useState } from "react";
 import { useLazyLoadQuery, useMutation } from "react-relay";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { FindUserToRecovery } from "../../../modules/user/FindUserToRecoveryQuery";
-import { UpdateUserMutation } from "../../../modules/user/UpdateUserMutation";
-import { FindUserToRecoveryQuery as FindUserToRecoveryQueryType } from "../../../modules/user/__generated__/FindUserToRecoveryQuery.graphql";
-import { UpdateUserMutation as UpdateUserMutationType } from "../../../modules/user/__generated__/UpdateUserMutation.graphql";
-import routesConfig from "../../../routes/routesConfig.json";
-import { alertDispatch, Severity } from "../../../utils/alerts";
-import { alertState } from "../../../utils/atom";
-import { LoginBox } from "../../styleds";
+import { LoginBox } from "../components/styleds";
+import { FindUserToRecovery } from "../modules/user/FindUserToRecoveryQuery";
+import { UpdateUserMutation } from "../modules/user/UpdateUserMutation";
+import { FindUserToRecoveryQuery as FindUserToRecoveryQueryType } from "../modules/user/__generated__/FindUserToRecoveryQuery.graphql";
+import { UpdateUserMutation as UpdateUserMutationType } from "../modules/user/__generated__/UpdateUserMutation.graphql";
+import routesConfig from "../routes/routesConfig.json";
+import { alertDispatch, Severity } from "../utils/alerts";
+import { alertState } from "../utils/atom";
 
 export default function PasswordChangeForm() {
   const [updateUserMutation] =

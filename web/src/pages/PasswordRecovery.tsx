@@ -11,11 +11,12 @@ import { useState } from "react";
 import { useMutation } from "react-relay";
 import { useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
-import { UpdateUserMutation } from "../../modules/user/UpdateUserMutation";
-import { UpdateUserMutation as UpdateUserMutationType } from "../../modules/user/__generated__/UpdateUserMutation.graphql";
-import { alertDispatch, Severity } from "../../utils/alerts";
-import { alertState } from "../../utils/atom";
-import { LoginBox } from "../styleds";
+import { LoginBox } from "../components/styleds";
+import { UpdateUserMutation } from "../modules/user/UpdateUserMutation";
+import { UpdateUserMutation as UpdateUserMutationType } from "../modules/user/__generated__/UpdateUserMutation.graphql";
+import routesConfig from "../routes/routesConfig.json";
+import { alertDispatch, Severity } from "../utils/alerts";
+import { alertState } from "../utils/atom";
 
 export default function PasswordRecoveryForm() {
   const [updateUserMutation] =
@@ -103,7 +104,11 @@ export default function PasswordRecoveryForm() {
           </LoadingButton>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
-              <Link href="/login" variant="body2" sx={{ textAlign: "center" }}>
+              <Link
+                href={routesConfig.login}
+                variant="body2"
+                sx={{ textAlign: "center" }}
+              >
                 {"Go back to login page"}
               </Link>
             </Grid>

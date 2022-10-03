@@ -16,17 +16,15 @@ function Home() {
   const classes = useStyles();
 
   return (
-    <>
-      <div className={classes.root} id="home">
-        <Content />
-        <Hidden mdDown>
-          <SocialIcons />
-        </Hidden>
-        <Hidden mdUp>
-          <SpeedDials />
-        </Hidden>
-      </div>
-    </>
+    <div className={classes.root} id="home">
+      <Content />
+      <Hidden mdDown>
+        <SocialIcons />
+      </Hidden>
+      <Hidden mdUp>
+        <SpeedDials />
+      </Hidden>
+    </div>
   );
 }
 
