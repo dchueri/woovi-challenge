@@ -1,0 +1,14 @@
+{
+    "profiles": [
+        {
+            "title": "Login",
+            "url": "/login",
+            "x_icon": "fas fa-user"
+        },
+        {
+            "title": "Register",
+            "url": "/register",
+            "x_icon": "fas fa-plus"
+        }
+    ]
+}

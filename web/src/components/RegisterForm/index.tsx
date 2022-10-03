@@ -16,6 +16,7 @@ import { useSetRecoilState } from "recoil";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../context/AuthProvider/util";
 import { RegisterUserMutation } from "../../modules/user/RegisterUserMutation";
+import routesConfig from "../../routes/routesConfig.json";
 import { IUser, RegisterUserResponse } from "../../types/UserTypes";
 import { alertDispatch, Severity } from "../../utils/alerts";
 import { alertState } from "../../utils/atom";
@@ -46,7 +47,7 @@ export default function RegisterForm() {
     if (!user) {
       return;
     }
-    navigate("/");
+    navigate(routesConfig.movies);
   }, [newUser]);
 
   const createUser = async (name: string, email: string, password: string) => {
@@ -83,7 +84,7 @@ export default function RegisterForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(!loading)
+    setLoading(!loading);
     const data = new FormData(event.currentTarget);
     const name = data.get("name")!.toString();
     const email = data.get("email")!.toString();
@@ -149,11 +150,7 @@ export default function RegisterForm() {
           </LoadingButton>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
-              <Link
-                href="/login"
-                variant="body2"
-                sx={{ textAlign: "center" }}
-              >
+              <Link href="/login" variant="body2" sx={{ textAlign: "center" }}>
                 {"Already have an account? Sign In"}
               </Link>
             </Grid>

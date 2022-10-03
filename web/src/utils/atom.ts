@@ -5,3 +5,8 @@ export const alertState = atom({
   key: "alertState",
   default: {} as Alert,
 });
+
+export const darkState = atom({
+  key: "darkState",
+  default: "dark",
+});

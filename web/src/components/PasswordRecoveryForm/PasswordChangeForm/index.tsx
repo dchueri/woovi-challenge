@@ -14,6 +14,7 @@ import { FindUserToRecovery } from "../../../modules/user/FindUserToRecoveryQuer
 import { UpdateUserMutation } from "../../../modules/user/UpdateUserMutation";
 import { FindUserToRecoveryQuery as FindUserToRecoveryQueryType } from "../../../modules/user/__generated__/FindUserToRecoveryQuery.graphql";
 import { UpdateUserMutation as UpdateUserMutationType } from "../../../modules/user/__generated__/UpdateUserMutation.graphql";
+import routesConfig from "../../../routes/routesConfig.json";
 import { alertDispatch, Severity } from "../../../utils/alerts";
 import { alertState } from "../../../utils/atom";
 import { LoginBox } from "../../styleds";
@@ -32,7 +33,7 @@ export default function PasswordChangeForm() {
 
   useEffect(() => {
     if (!data.user) {
-      navigate("/");
+      navigate(routesConfig.home);
       return;
     }
   });
@@ -50,7 +51,7 @@ export default function PasswordChangeForm() {
         };
         alertDispatch(alert, setAlertState);
         setLoading(false);
-        navigate("/login");
+        navigate(routesConfig.login);
         return;
       },
       onError: (error) => {
@@ -129,7 +130,11 @@ export default function PasswordChangeForm() {
           </LoadingButton>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
-              <Link href="/login" variant="body2" sx={{ textAlign: "center" }}>
+              <Link
+                href={routesConfig.login}
+                variant="body2"
+                sx={{ textAlign: "center" }}
+              >
                 {"Go back to login page"}
               </Link>
             </Grid>

@@ -13,6 +13,7 @@
     "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.10.3",
     "@mui/lab": "^5.0.0-alpha.101",
     "@mui/material": "^5.10.5",
@@ -26,6 +27,7 @@
     "recoil": "^0.7.5",
     "relay-runtime": "^14.1.0",
     "styled-components": "^5.3.5",
+    "use-dencrypt-effect": "^1.0.2",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
