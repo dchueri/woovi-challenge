@@ -8,7 +8,7 @@ import {
   sanitizeTestObject
 } from "../../../../../test";
 import { getContext } from "../../../../getContext";
-import { schema } from "../../../schema";
+import { schema } from "../../../../graphql/schema";
 import { createMovie } from "../../fixture/createMovie";
 
 beforeAll(connectMongoose);

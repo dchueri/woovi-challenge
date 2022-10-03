@@ -2,7 +2,7 @@ import { connectionDefinitions } from "@entria/graphql-mongo-helpers";
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { globalIdField } from "graphql-relay";
 
-import { nodeInterface, registerTypeLoader } from "../typeRegister";
+import { nodeInterface, registerTypeLoader } from "../../graphql/typeRegister";
 
 import { IUser } from "../../types/types";
 import { load } from "./UserLoader";

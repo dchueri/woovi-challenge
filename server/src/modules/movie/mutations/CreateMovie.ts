@@ -2,8 +2,8 @@ import { GraphQLFloat, GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
 import { getContext } from "../../../getContext";
 
-import movies from "../../../graphql/movie/MovieModel";
-import { MovieEdge } from "../../../graphql/movie/MovieType";
+import movies from "../MovieModel";
+import { MovieEdge } from "../MovieType";
 
 export default mutationWithClientMutationId({
   name: "CreateMovie",

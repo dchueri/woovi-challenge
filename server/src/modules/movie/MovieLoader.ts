@@ -1,4 +1,4 @@
-import movies from "../../graphql/movie/MovieModel";
+import movies from "./MovieModel";
 
 export async function getAll() {
   const moviesList = await movies.find({});
