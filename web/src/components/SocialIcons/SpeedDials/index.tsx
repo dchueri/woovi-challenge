@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@material-ui/lab";
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import routesConfig from "../../../routes/routesConfig.json";
 import resume from "../resume.json";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,25 +14,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SpeedDials = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClose = () => {
+  const handleClose = (route: string) => {
     setOpen(false);
+    if (route === "Login") {
+      navigate(routesConfig.login);
+    }
+    if (route === "Register") {
+      navigate(routesConfig.register);
+    }
   };
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const actionIcons = resume.profiles.map((action: any) => (
+  const actionIcons = resume.profiles.map((action: any, index: number) => (
     <SpeedDialAction
-      key={action.title.toLowerCase()}
+      key={index}
       icon={<i className={`${action.x_icon}`}></i>}
       tooltipTitle={action.title}
-      onClick={handleClose}
-      ref={action.url}
+      onClick={() => handleClose(action.title)}
       color="inherit"
     />
   ));
@@ -42,7 +50,7 @@ export const SpeedDials = () => {
         className={classes.speedDial}
         hidden={false}
         icon={<SpeedDialIcon />}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         onOpen={handleOpen}
         open={open}
         direction="down"
