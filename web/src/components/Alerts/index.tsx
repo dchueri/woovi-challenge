@@ -16,7 +16,8 @@ function Alerts() {
     width: 100vw;
     position: fixed;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    margin: 0 2em;
     align-items: center;
     display: ${alert.display ? null : "none"};
   `;

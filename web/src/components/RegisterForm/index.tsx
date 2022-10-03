@@ -26,7 +26,7 @@ const RegisterBox = styled(Container)({
   height: "100%",
   borderRadius: "15px",
   backgroundColor: "rgba(255,255,255,0.05)",
-  margin: "20vh auto",
+  margin: "17vh auto",
   textAlign: "center",
   display: "flex",
   justifyContent: "center",
