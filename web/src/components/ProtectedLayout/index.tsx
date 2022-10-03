@@ -15,7 +15,7 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
     return (
       <Container
         sx={{
-          height: "90vh",
+          height: "80vh",
           margin: "0 auto",
           textAlign: "center",
           display: "flex",

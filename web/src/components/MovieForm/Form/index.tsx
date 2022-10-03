@@ -3,8 +3,8 @@ import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
-import { CreateMovieMutation } from "../../../../modules/movie/CreateMovieMutation";
-import { getMovieInfos } from "../../../../utils/moviesDB";
+import { CreateMovieMutation } from "../../../modules/movie/CreateMovieMutation";
+import { getMovieInfos } from "../../../utils/moviesDB";
 
 function Form() {
   const [createMovieMutation] = useMutation(CreateMovieMutation);
@@ -57,6 +57,18 @@ function Form() {
         margin: "0 auto",
       }}
     >
+      <Button
+        type="submit"
+        variant="text"
+        sx={{
+          height: "fit-content",
+          minWidth: "min-content",
+          borderRadius: "50px",
+          padding: ".5em",
+        }}
+      >
+        <AddCircleOutlineIcon />
+      </Button>
       <TextField
         id="title"
         name="title"
@@ -71,18 +83,6 @@ function Form() {
         variant="outlined"
         required
       />
-      <Button
-        type="submit"
-        variant="text"
-        sx={{
-          height: "fit-content",
-          minWidth: "min-content",
-          borderRadius: "50px",
-          padding: ".5em",
-        }}
-      >
-        <AddCircleOutlineIcon />
-      </Button>
     </Box>
   );
 }

@@ -10,10 +10,10 @@ import { useState } from "react";
 import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
 import styled from "styled-components";
-import { DeleteMovieMutation } from "../../../../modules/movie/DeleteMovieMutation";
-import { IMovie, IMovieEdge } from "../../../../types/MovieTypes";
-import MovieDetails from "../../../MovieDetails";
-import Details from "../../../MovieDetails/Details";
+import { DeleteMovieMutation } from "../../../modules/movie/DeleteMovieMutation";
+import { IMovie, IMovieEdge } from "../../../types/MovieTypes";
+import MovieDetails from "../../MovieDetails";
+import Details from "../../MovieDetails/Details";
 
 const Img = styled.img`
   width: 10em;
