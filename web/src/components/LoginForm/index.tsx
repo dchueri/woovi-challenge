@@ -14,6 +14,7 @@ import { useAuth } from "../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../context/AuthProvider/util";
 import { LoginMutation } from "../../modules/user/LoginMutation";
 import { LoginMutation as LoginMutationType } from "../../modules/user/__generated__/LoginMutation.graphql";
+import routesConfig from "../../routes/routesConfig.json";
 import { IUser } from "../../types/UserTypes";
 import { alertDispatch, Severity } from "../../utils/alerts";
 import { alertState } from "../../utils/atom";
@@ -32,7 +33,7 @@ export default function LoginForm() {
     if (!user) {
       return;
     }
-    navigate("/");
+    navigate(routesConfig.movies);
   }, [newUser]);
 
   async function authenticate(email: string, password: string) {
@@ -119,7 +120,7 @@ export default function LoginForm() {
             autoComplete="current-password"
           />
           <Grid item sx={{ width: "100%", textAlign: "end" }}>
-            <Link href="/recovery" variant="body2">
+            <Link href={routesConfig.recovery} variant="body2">
               {"Forgot password ?"}
             </Link>
           </Grid>
@@ -135,7 +136,7 @@ export default function LoginForm() {
           <Grid container>
             <Grid item xs={12} sx={{ width: "100%" }}>
               <Link
-                href="/register"
+                href={routesConfig.register}
                 variant="body2"
                 sx={{ textAlign: "center" }}
               >
