@@ -1,0 +1,28 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        },
+        {
+            "source": "/movies",
+            "destination": "/movies"
+        },
+        {
+            "source": "/login",
+            "destination": "/login"
+        },
+        {
+            "source": "/recovery",
+            "destination": "/recovery"
+        },
+        {
+            "source": "/recovery/(.*)",
+            "destination": "/"
+        },
+        {
+            "source": "/recovery/:recovery",
+            "destination": "/"
+        }
+    ]
+}

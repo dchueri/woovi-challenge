@@ -1,0 +1,113 @@
+type Movie {
+  movieEdge: MovieEdge
+  error: String
+  id: String!
+  title: String!
+  genre: String!
+  image: String!
+  description: String!
+  average: Float!
+}
+
+type Node {
+  id: String!
+  title: String!
+  genre: String!
+  image: String!
+  description: String!
+  average: Float!
+}
+
+type MovieEdge {
+  node: Node
+  cursor: String
+}
+
+type IMovieEdge {
+  node: Node
+  cursor: String
+}
+
+input CreateMovieInput {
+  title: String!
+  genre: String!
+  image: String!
+  description: String!
+  average: Float!
+}
+
+input DeleteMovieInput {
+  id: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RegisterUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  CreateMovie(input: CreateMovieInput): Movie
+  DeleteMovie(input: DeleteMovieInput): DeleteMovie
+  LoginMutation(input: LoginInput): LoginOrRegister
+  RegisterUserMutation(input: RegisterUserInput): LoginOrRegister
+  UpdateUserMutation(input: UpdateUserInput): SimpleReturn
+}
+
+type Query {
+  movies(first: Int): Movies
+  user(recovery: String!): User
+}
+
+type SimpleReturn {
+  success: String
+  error: String
+}
+
+input UpdateUserInput {
+  email: String!
+  name: String
+  password: String
+  recovery: String
+}
+
+input MoviesQueryInput {
+  after: String
+  before: String
+  first: Int
+  last: Int
+}
+
+type LoginOrRegister {
+  token: String
+  me: User
+  error: String
+}
+
+type User {
+  id: String
+  name: String
+  email: String
+}
+
+type DeleteMovie {
+  deletedId: ID
+  error: String
+}
+
+type Movies {
+  edges: [IMovieEdge]
+  pageInfo: PageInfo
+}
+
+type PageInfo {
+  hasNextPage: String
+  hasPreviousPage: String
+  startCursor: String
+  endCursor: String
+}
