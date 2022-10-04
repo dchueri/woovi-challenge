@@ -1,7 +1,6 @@
-version: '3.9'
+version: "3.9"
 
 services:
-
   woovi-challenge:
     networks:
       - woovi-bridge
@@ -11,7 +10,7 @@ services:
     hostname: woovi-challenge
     container_name: woovi-challenge
     volumes:
-      - ./server:/app
+      - ./packages/server:/app
     ports:
       - 4000:4000
 
@@ -24,7 +23,7 @@ services:
     hostname: woovi-web
     container_name: woovi-web
     volumes:
-      - ./web:/app/web
+      - ./packages/web:/app/web
     ports:
       - 5173:5173
     depends_on:

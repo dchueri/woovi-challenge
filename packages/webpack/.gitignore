@@ -3,8 +3,6 @@
 /node_modules
 package-lock.json
 .env
-.npmrc
-junit.xml
 
 # Logs
 logs
@@ -16,13 +14,11 @@ yarn-error.log*
 lerna-debug.log*
 
 # OS
-.DS_Store
+.DS_StoreF
 
 # Tests
 /coverage
 /.nyc_output
-__snapshots__
-.ts.snap
 
 # IDEs and editors
 /.idea
