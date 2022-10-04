@@ -1,9 +1,9 @@
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionArgs, connectionFromArray } from "graphql-relay";
-import * as MovieLoader from "../../modules/movie/MovieLoader";
-import { MovieConnection } from "../../modules/movie/MovieType";
-import { getByRecoveryToken } from "../../modules/user/UserLoader";
-import { UserType } from "../../modules/user/UserType";
+import * as MovieLoader from "../modules/movie/MovieLoader";
+import { MovieConnection } from "../modules/movie/MovieType";
+import { getByRecoveryToken } from "../modules/user/UserLoader";
+import { UserType } from "../modules/user/UserType";
 
 const QueryType = new GraphQLObjectType({
   name: "Query",

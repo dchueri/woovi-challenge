@@ -2,9 +2,9 @@ import { connectionDefinitions } from "@entria/graphql-mongo-helpers";
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { globalIdField } from "graphql-relay";
 
-import { nodeInterface, registerTypeLoader } from "../../graphql/typeRegister";
+import { nodeInterface, registerTypeLoader } from "../node/typeRegister";
 
-import { IUser } from "../../types/types";
+import { IUser } from "../../types";
 import { load } from "./UserLoader";
 
 export const UserType = new GraphQLObjectType<IUser>({
@@ -27,8 +27,9 @@ export const UserType = new GraphQLObjectType<IUser>({
   interfaces: () => [nodeInterface],
 });
 
-export const {connectionType: UserConnection, edgeType: UserEdge} = connectionDefinitions({
-  nodeType: UserType,
-});
+export const { connectionType: UserConnection, edgeType: UserEdge } =
+  connectionDefinitions({
+    nodeType: UserType,
+  });
 
 registerTypeLoader(UserType, load);

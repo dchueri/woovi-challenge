@@ -5,7 +5,7 @@ import {
   disconnectMongoose,
   sanitizeTestObject
 } from "../../../../../test";
-import { schema } from "../../../../graphql/schema";
+import { schema } from "../../../../schema";
 import { createUser } from "../../fixture/createUser";
 
 beforeAll(connectMongoose);

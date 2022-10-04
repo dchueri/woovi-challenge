@@ -1,9 +1,9 @@
 import { verify } from "jsonwebtoken";
 import { Context, Request } from "koa";
-import { getAllDataLoaders } from "./graphql/loaderRegister";
 import { GraphQLContext } from "./graphql/types";
+import { getAllDataLoaders } from "./modules/loader/loaderRegister";
 import UserModel from "./modules/user/UserModel";
-import IUserContext from "./types/types";
+import IUserContext from "./types";
 
 type ContextVars = {
   user?: IUserContext;

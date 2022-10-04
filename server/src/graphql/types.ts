@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { IUser } from "../types/types";
+import { IUser } from "../types";
 
-import { DataLoaders } from "../graphql/loaderRegister";
+import { DataLoaders } from "../modules/loader/loaderRegister";
 
 declare type ObjectId = mongoose.Schema.Types.ObjectId;
 

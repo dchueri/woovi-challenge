@@ -1,7 +1,7 @@
 import * as bcrypt from "bcrypt";
 import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
-import { UserUpdate } from "src/types/types";
+import { UserUpdate } from "../../../types";
 
 import UserModel from "../UserModel";
 
