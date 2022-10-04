@@ -9,7 +9,7 @@ import {
 } from "../../../../../test";
 import { generateToken } from "../../../../auth";
 import { getContext } from "../../../../getContext";
-import { schema } from "../../../../graphql/schema";
+import { schema } from "../../../../schema";
 
 beforeAll(connectMongoose);
 

@@ -2,7 +2,7 @@ import { GraphQLObjectType } from "graphql";
 
 import { fromGlobalId, nodeDefinitions } from "graphql-relay";
 
-import { GraphQLContext } from "./types";
+import { GraphQLContext } from "../../graphql/types";
 
 type Load = (context: GraphQLContext, id: string) => any;
 type TypeLoaders = {
@@ -23,7 +23,7 @@ export const { nodeField, nodesField, nodeInterface } = nodeDefinitions(
     return (load && load(context, id)) || null;
   },
   (obj) => {
-    const { type }:any = typesLoaders[obj.constructor.name] || { type: null };
+    const { type }: any = typesLoaders[obj.constructor.name] || { type: null };
 
     return type;
   }

@@ -1,5 +1,5 @@
 import * as jwt from "jsonwebtoken";
-import { IUser } from "./types/types";
+import { IUser } from "./types";
 require('dotenv').config()
 
 export const generateToken = (user: IUser) => {

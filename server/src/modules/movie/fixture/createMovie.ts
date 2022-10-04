@@ -1,6 +1,6 @@
 import { getCounter, getOrCreate } from "../../../../test";
 import { DeepPartial } from "../../../../test/deepPartial";
-import IMovie from "../../../types/types";
+import { IMovie } from "../../../types";
 import { createUser } from "../../user/fixture/createUser";
 import User from "../../user/UserModel";
 import Movie from "../MovieModel";

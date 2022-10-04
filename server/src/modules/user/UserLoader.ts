@@ -1,6 +1,6 @@
 import { createLoader } from "@entria/graphql-mongo-helpers";
 
-import { registerLoader } from "../../graphql/loaderRegister";
+import { registerLoader } from "../loader/loaderRegister";
 import UserModel from "./UserModel";
 
 const Loader = createLoader({

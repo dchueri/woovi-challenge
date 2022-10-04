@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export interface IUser extends Document {
   name: string;
@@ -20,7 +20,7 @@ export default interface IUserContext extends Document {
   email: string;
 }
 
-export default interface IMovie extends Document {
+export interface IMovie extends Document {
   title: string;
   genre: string;
   image: string;
@@ -34,4 +34,12 @@ export interface MovieUpdate extends Document {
   image?: string;
   description?: string;
   average?: number;
+}
+
+export interface IComment extends Document {
+  user: Types.ObjectId;
+  movie: Types.ObjectId;
+  text: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
