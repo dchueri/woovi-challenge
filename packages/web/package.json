@@ -9,6 +9,9 @@
     "preview": "vite preview",
     "relay": "relay-compiler"
   },
+  "devDependencies": {
+    "relay-compiler": "^14.1.0"
+  },
   "relay": {
     "src": "./src/",
     "schema": "./schema.graphql",
