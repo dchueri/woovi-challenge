@@ -99,7 +99,9 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/server",
+      "packages/babel",
+      "packages/webpack"
     ]
   },
   "scripts": {
