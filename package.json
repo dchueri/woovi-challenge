@@ -101,13 +101,14 @@
     "packages": [
       "packages/server",
       "packages/babel",
-      "packages/webpack"
+      "packages/webpack",
+      "packages/web"
     ]
   },
   "scripts": {
     "prepare": "husky install",
     "server": "ts-node-dev --ignore-watch node_modules ./packages/server/src/server.ts",
-    "start": "concurrently --kill-others \"yarn workspace @movies-catalog/web start\" \"yarn workspace @movies-catalog/server start\""
+    "start": "concurrently --kill-others \"yarn workspace @movies-catalog/web dev\" \"yarn workspace @movies-catalog/server start\""
   },
   "husky": {
     "hooks": {
