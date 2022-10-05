@@ -5,6 +5,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   recovery?: string;
+  helperSeen?: boolean;
   encryptPassword: (password: string) => string;
 }
 
@@ -13,6 +14,7 @@ export interface UserUpdate extends Document {
   name?: string;
   password?: string;
   recovery?: string;
+  helperSeen?: boolean;
 }
 
 export default interface IUserContext extends Document {

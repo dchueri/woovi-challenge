@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt";
-import { GraphQLNonNull, GraphQLString } from "graphql";
+import { GraphQLBoolean, GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
 import { UserUpdate } from "../../../types";
 
@@ -12,10 +12,35 @@ export const UpdateUserMutation = mutationWithClientMutationId({
     name: { type: GraphQLString },
     password: { type: GraphQLString },
     recovery: { type: GraphQLString },
+    helperSeen: { type: GraphQLBoolean },
   },
-  mutateAndGetPayload: async ({ email, recovery, name, password }) => {
+  mutateAndGetPayload: async ({
+    email,
+    recovery,
+    name,
+    password,
+    helperSeen,
+  }) => {
     const payload = { email } as UserUpdate;
     let user;
+
+    if (helperSeen) {
+      await UserModel.findOneAndUpdate({ email }, { $set: { helperSeen } });
+      return {
+        success: `helper status defined`,
+      };
+    }
+
+    if (recovery) {
+      await UserModel.findOneAndUpdate({ email }, { $set: { recovery } });
+      return {
+        success: `recovery token defined`,
+      };
+    }
+
+    if (name) {
+      payload.name = name;
+    }
 
     if (password) {
       const hashPass = await bcrypt.hash(password, 10);
@@ -23,21 +48,10 @@ export const UpdateUserMutation = mutationWithClientMutationId({
       payload.recovery = null;
     }
 
-    if (recovery) {
-      await UserModel.findOneAndUpdate(
-        { email },
-        { $set: { recovery } }
-      );
-      return;
-    }
-
-    if (name) {
-      payload.name = name;
-    }
-
     user = await UserModel.findOneAndUpdate(
       { email },
-      { $set: { ...payload } }
+      { $set: { ...payload } },
+      { new: true }
     );
 
     if (!user) {

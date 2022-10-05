@@ -1,5 +1,10 @@
 import { connectionDefinitions } from "@entria/graphql-mongo-helpers";
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
+import {
+  GraphQLBoolean,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLString
+} from "graphql";
 import { globalIdField } from "graphql-relay";
 
 import { nodeInterface, registerTypeLoader } from "../node/typeRegister";
@@ -21,6 +26,10 @@ export const UserType = new GraphQLObjectType<IUser>({
     },
     recovery: {
       type: new GraphQLNonNull(GraphQLString),
+      resolve: (user) => user.recovery,
+    },
+    helperSeen: {
+      type: new GraphQLNonNull(GraphQLBoolean),
       resolve: (user) => user.recovery,
     },
   }),
