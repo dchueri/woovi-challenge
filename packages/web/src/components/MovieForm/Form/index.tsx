@@ -37,11 +37,11 @@ function Form() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const title = data.get("title")!.toString();
-    const genre = data.get("genre")!.toString();
     const movieInfos = await getMovieInfos(title);
     const image = movieInfos.image;
     const description = movieInfos.description;
     const average = movieInfos.average;
+    const genre = movieInfos.genre;
     await handleCreateMovie(title, genre, image, description, average);
   };
 
@@ -73,13 +73,6 @@ function Form() {
         id="title"
         name="title"
         label="Title"
-        variant="outlined"
-        required
-      />
-      <TextField
-        id="genre"
-        name="genre"
-        label="Genre"
         variant="outlined"
         required
       />
