@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "main.tsx",
   "scripts": {
     "dev": "npm run relay && vite --host",
     "start": "npm run relay && tsc && vite build",
