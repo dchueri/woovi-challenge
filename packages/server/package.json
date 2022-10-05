@@ -4,7 +4,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "jest",
-    "server": "ts-node-dev --ignore-watch node_modules ./src/server.ts"
+    "start": "ts-node-dev --ignore-watch node_modules ./src/server.ts"
     },
   "keywords": [],
   "author": "",
@@ -48,6 +48,6 @@
     "uuidv4": "^6.2.13"
   },
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   }
 }
