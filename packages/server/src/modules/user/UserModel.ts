@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     recovery: { type: String, required: false },
     movies: { type: [Schema.Types.ObjectId] },
+    helperSeen: { type: Boolean, required: false },
   },
   { collection: "Users" }
 );
