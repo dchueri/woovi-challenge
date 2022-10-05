@@ -1,12 +1,11 @@
 {
-  "name": "@movies-catalog/web",
+  "name": "web",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "main": "main.tsx",
   "scripts": {
     "dev": "npm run relay && vite --host",
-    "start": "npm run relay && tsc && vite build",
+    "build": "npm run relay && tsc && vite build",
     "preview": "vite preview",
     "relay": "relay-compiler"
   },
