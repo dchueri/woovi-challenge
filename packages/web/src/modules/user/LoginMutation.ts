@@ -8,6 +8,7 @@ mutation LoginMutation($email: String!, $password: String!) {
         id
         name
         email
+        helperSeen
       }
       error
     }
