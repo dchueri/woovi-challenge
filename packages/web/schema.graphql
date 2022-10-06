@@ -74,6 +74,7 @@ input UpdateUserInput {
   name: String
   password: String
   recovery: String
+  helperSeen: Boolean
 }
 
 input MoviesQueryInput {
@@ -93,6 +94,7 @@ type User {
   id: String
   name: String
   email: String
+  helperSeen: Boolean
 }
 
 type DeleteMovie {

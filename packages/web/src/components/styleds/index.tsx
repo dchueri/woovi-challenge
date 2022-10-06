@@ -12,4 +12,5 @@ export const LoginBox = styled(Container)({
   display: "flex",
   justifyContent: "center",
   padding: "1em",
+  zIndex: 2, 
 });

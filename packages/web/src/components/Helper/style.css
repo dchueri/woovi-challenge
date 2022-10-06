@@ -1,0 +1,28 @@
+.overlay_helper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  z-index: 1;
+}
+
+@media screen {
+  .overlay_helper {
+    overflow-y: scroll;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8vh 0;
+    z-index: 1;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .overlay_helper {
+    justify-content: center;
+    z-index: 1;
+  }
+}

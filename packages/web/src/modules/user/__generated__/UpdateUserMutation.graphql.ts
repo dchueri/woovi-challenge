@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<59f93812a7c14ddef8cc95f39e23f831>>
+ * @generated SignedSource<<0d2e8dbdfe325d93d97ed48301f0783a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,6 +11,7 @@
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type UpdateUserMutation$variables = {
   email: string;
+  helperSeen?: boolean | null;
   name?: string | null;
   password?: string | null;
   recovery?: string | null;
@@ -35,19 +36,24 @@ var v0 = {
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "name"
+  "name": "helperSeen"
 },
 v2 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "password"
+  "name": "name"
 },
 v3 = {
   "defaultValue": null,
   "kind": "LocalArgument",
+  "name": "password"
+},
+v4 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
   "name": "recovery"
 },
-v4 = [
+v5 = [
   {
     "alias": null,
     "args": [
@@ -57,6 +63,11 @@ v4 = [
             "kind": "Variable",
             "name": "email",
             "variableName": "email"
+          },
+          {
+            "kind": "Variable",
+            "name": "helperSeen",
+            "variableName": "helperSeen"
           },
           {
             "kind": "Variable",
@@ -107,12 +118,13 @@ return {
       (v0/*: any*/),
       (v1/*: any*/),
       (v2/*: any*/),
-      (v3/*: any*/)
+      (v3/*: any*/),
+      (v4/*: any*/)
     ],
     "kind": "Fragment",
     "metadata": null,
     "name": "UpdateUserMutation",
-    "selections": (v4/*: any*/),
+    "selections": (v5/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
@@ -120,25 +132,26 @@ return {
   "operation": {
     "argumentDefinitions": [
       (v0/*: any*/),
+      (v3/*: any*/),
       (v2/*: any*/),
-      (v1/*: any*/),
-      (v3/*: any*/)
+      (v4/*: any*/),
+      (v1/*: any*/)
     ],
     "kind": "Operation",
     "name": "UpdateUserMutation",
-    "selections": (v4/*: any*/)
+    "selections": (v5/*: any*/)
   },
   "params": {
-    "cacheID": "b697008dbd175c151ea70f9c53ebbe05",
+    "cacheID": "2a4e9678309c024b2d28fa2b78baa0e3",
     "id": null,
     "metadata": {},
     "name": "UpdateUserMutation",
     "operationKind": "mutation",
-    "text": "mutation UpdateUserMutation(\n  $email: String!\n  $password: String\n  $name: String\n  $recovery: String\n) {\n  UpdateUserMutation(input: {email: $email, password: $password, name: $name, recovery: $recovery}) {\n    success\n    error\n  }\n}\n"
+    "text": "mutation UpdateUserMutation(\n  $email: String!\n  $password: String\n  $name: String\n  $recovery: String\n  $helperSeen: Boolean\n) {\n  UpdateUserMutation(input: {email: $email, password: $password, name: $name, recovery: $recovery, helperSeen: $helperSeen}) {\n    success\n    error\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "9c79fbe72fd2ef201f1a23aa0f279852";
+(node as any).hash = "471744506c187c878352a25138c1dfa5";
 
 export default node;
