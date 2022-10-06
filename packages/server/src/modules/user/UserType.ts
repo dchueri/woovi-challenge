@@ -29,8 +29,8 @@ export const UserType = new GraphQLObjectType<IUser>({
       resolve: (user) => user.recovery,
     },
     helperSeen: {
-      type: new GraphQLNonNull(GraphQLBoolean),
-      resolve: (user) => user.recovery,
+      type: GraphQLBoolean,
+      resolve: (user) => user.helperSeen,
     },
   }),
   interfaces: () => [nodeInterface],
