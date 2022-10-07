@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import { Suspense, useEffect, useState } from "react";
+import { getUserLocalStorage, setUserLocalStorage } from "../modules/auth/util";
 
 import { useMutation } from "react-relay";
 import styled from "styled-components";
@@ -8,10 +9,6 @@ import HelperCards from "../components/Helper/HelperCards";
 import { LogoutButton } from "../components/LogoutButton";
 import MovieForm from "../components/MovieForm";
 import MoviesList from "../components/MoviesList";
-import {
-  getUserLocalStorage,
-  setUserLocalStorage
-} from "../context/AuthProvider/util";
 import { UpdateUserMutation } from "../modules/user/UpdateUserMutation";
 import { UpdateUserMutation as UpdateUserMutationType } from "../modules/user/__generated__/UpdateUserMutation.graphql";
 

@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import styled from "styled-components";
-import { useAuth } from "../../context/AuthProvider/useAuth";
-import routesConfig from "../../routes/routesConfig.json";
+import { useAuth } from "../../modules/auth/useAuth";
+import allRoutes from "../../routes/routesConfig.js";
 
 export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
   const StyledH1 = styled.h1`
@@ -10,7 +10,6 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
 
   const auth = useAuth();
   setTimeout(() => {}, 100);
-
   if (!auth.me) {
     return (
       <Container
@@ -22,7 +21,7 @@ export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
         }}
       >
         <StyledH1>
-          You don't have access. <a href={routesConfig.login}>Sign in!</a>
+          You don't have access. <a href={allRoutes.login}>Sign in!</a>
         </StyledH1>
       </Container>
     );

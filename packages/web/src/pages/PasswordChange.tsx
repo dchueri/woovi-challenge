@@ -15,7 +15,7 @@ import { FindUserToRecovery } from "../modules/user/FindUserToRecoveryQuery";
 import { UpdateUserMutation } from "../modules/user/UpdateUserMutation";
 import { FindUserToRecoveryQuery as FindUserToRecoveryQueryType } from "../modules/user/__generated__/FindUserToRecoveryQuery.graphql";
 import { UpdateUserMutation as UpdateUserMutationType } from "../modules/user/__generated__/UpdateUserMutation.graphql";
-import routesConfig from "../routes/routesConfig.json";
+import allRoutes from "../routes/routesConfig.js";
 import { alertDispatch, Severity } from "../utils/alerts";
 import { alertState } from "../utils/atom";
 
@@ -33,7 +33,7 @@ export default function PasswordChangeForm() {
 
   useEffect(() => {
     if (!data.user) {
-      navigate(routesConfig.home);
+      navigate(allRoutes.home);
       return;
     }
   });
@@ -51,7 +51,7 @@ export default function PasswordChangeForm() {
         };
         alertDispatch(alert, setAlertState);
         setLoading(false);
-        navigate(routesConfig.login);
+        navigate(allRoutes.login);
         return;
       },
       onError: (error) => {
@@ -131,7 +131,7 @@ export default function PasswordChangeForm() {
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
               <Link
-                href={routesConfig.login}
+                href={allRoutes.login}
                 variant="body2"
                 sx={{ textAlign: "center" }}
               >

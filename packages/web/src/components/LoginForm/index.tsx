@@ -1,24 +1,24 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { LoadingButton } from "@mui/lab";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
-import { useMutation } from "react-relay";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { useAuth } from "../../context/AuthProvider/useAuth";
-import { getUserLocalStorage } from "../../context/AuthProvider/util";
-import { LoginMutation } from "../../modules/user/LoginMutation";
-import { LoginMutation as LoginMutationType } from "../../modules/user/__generated__/LoginMutation.graphql";
-import routesConfig from "../../routes/routesConfig.json";
-import { IUser } from "../../types/UserTypes";
-import { alertDispatch, Severity } from "../../utils/alerts";
-import { alertState } from "../../utils/atom";
-import { LoginBox } from "../styleds";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { LoadingButton } from '@mui/lab';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
+import { useMutation } from 'react-relay';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { useAuth } from '../../modules/auth/useAuth';
+import { getUserLocalStorage } from '../../modules/auth/util';
+import { LoginMutation } from '../../modules/user/LoginMutation';
+import { LoginMutation as LoginMutationType } from '../../modules/user/__generated__/LoginMutation.graphql';
+import allRoutes from '../../routes/routesConfig.js';
+import { IUser } from '../../types/UserTypes';
+import { alertDispatch, Severity } from '../../utils/alerts';
+import { alertState } from '../../utils/atom';
+import { LoginBox } from '../styleds';
 
 export default function LoginForm() {
   const [loginMutation] = useMutation<LoginMutationType>(LoginMutation);
@@ -33,7 +33,7 @@ export default function LoginForm() {
     if (!user) {
       return;
     }
-    navigate(routesConfig.movies);
+    navigate(allRoutes.movies);
   }, [newUser]);
 
   async function authenticate(email: string, password: string) {
@@ -41,12 +41,12 @@ export default function LoginForm() {
     const variables = { email: email, password: password };
     loginMutation({
       variables,
-      onCompleted: (res) => {
-        if (res.LoginMutation!.error) {
+      onCompleted: res => {
+        if (!res.LoginMutation?.token) {
           const alert = {
             display: true,
             severity: Severity.error,
-            content: "Email or password is invalid. Please, try again!",
+            content: 'Email or password is invalid. Please, try again!',
           };
           alertDispatch(alert, setAlertState);
           setLoading(false);
@@ -62,7 +62,8 @@ export default function LoginForm() {
           content: `Welcome ${res.LoginMutation!.me!.name}`,
         };
         alertDispatch(alert, setAlertState);
-        auth.setUserRegistered(payload);
+        auth.signin(payload);
+        navigate(allRoutes.movies);
         setNewUser(payload);
       },
       onError: (error) => {
@@ -75,8 +76,8 @@ export default function LoginForm() {
     event.preventDefault();
     setLoading(!loading);
     const data = new FormData(event.currentTarget);
-    const email = data.get("email")!.toString();
-    const password = data.get("password")!.toString();
+    const email = data.get('email')!.toString();
+    const password = data.get('password')!.toString();
     await authenticate(email, password);
   };
 
@@ -85,12 +86,12 @@ export default function LoginForm() {
       <Box
         sx={{
           marginTop: 0,
-          display: "content",
-          alignItems: "center",
+          display: 'content',
+          alignItems: 'center',
         }}
       >
         <Avatar
-          sx={{ bgcolor: "primary.main", margin: "0.5em auto 0.5em auto" }}
+          sx={{ bgcolor: 'primary.main', margin: '0.5em auto 0.5em auto' }}
         >
           <LockOutlinedIcon />
         </Avatar>
@@ -119,9 +120,9 @@ export default function LoginForm() {
             id="password"
             autoComplete="current-password"
           />
-          <Grid item sx={{ width: "100%", textAlign: "end" }}>
-            <Link href={routesConfig.recovery} variant="body2">
-              {"Forgot password ?"}
+          <Grid item sx={{ width: '100%', textAlign: 'end' }}>
+            <Link href={allRoutes.recovery} variant="body2">
+              {'Forgot password ?'}
             </Link>
           </Grid>
           <LoadingButton
@@ -134,12 +135,8 @@ export default function LoginForm() {
             Sign In
           </LoadingButton>
           <Grid container>
-            <Grid item xs={12} sx={{ width: "100%" }}>
-              <Link
-                href={routesConfig.register}
-                variant="body2"
-                sx={{ textAlign: "center" }}
-              >
+            <Grid item xs={12} sx={{ width: '100%' }}>
+              <Link href={allRoutes.register} variant="body2" sx={{ textAlign: 'center' }}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

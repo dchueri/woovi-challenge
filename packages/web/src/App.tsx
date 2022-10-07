@@ -1,31 +1,28 @@
-import { CssBaseline } from "@mui/material";
-import { RecoilRoot } from "recoil";
-import Alerts from "./components/Alerts";
-import { FooterCopyright } from "./components/FooterCopyright";
-import { ThemeProviders } from "./components/theme/ThemeProvider";
-import ThemeToggle from "./components/theme/ThemeToggle";
-import { AuthProvider } from "./context/AuthProvider";
-import { IndexRoutes } from "./routes";
+import React from 'react';
 
-function App() {
+import { CssBaseline } from '@mui/material';
+import { AnimatePresence } from 'framer-motion';
+import { RecoilRoot } from 'recoil';
+import Alerts from './components/Alerts';
+import { FooterCopyright } from './components/FooterCopyright';
+import ThemeToggle from './components/theme/ThemeToggle';
+import { Providers } from './Providers';
+import { IndexRoutes } from './routes';
 
-  return (
+export const App = () => (
+  <Providers>
     <RecoilRoot>
-      <ThemeProviders>
-        <>
-          <CssBaseline />
-          <AuthProvider>
-            <>
-              <IndexRoutes />
-              <Alerts />
-              <ThemeToggle />
-              <FooterCopyright />
-            </>
-          </AuthProvider>
-        </>
-      </ThemeProviders>
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <React.Suspense fallback={'Loading...'}>
+          <>
+            <CssBaseline />
+            <IndexRoutes />
+            <Alerts />
+            <ThemeToggle />
+            <FooterCopyright />
+          </>
+        </React.Suspense>
+      </AnimatePresence>
     </RecoilRoot>
-  );
-}
-
-export default App;
+  </Providers>
+);

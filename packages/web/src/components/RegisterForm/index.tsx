@@ -12,10 +12,10 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-relay";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { useAuth } from "../../context/AuthProvider/useAuth";
-import { getUserLocalStorage } from "../../context/AuthProvider/util";
+import { useAuth } from '../../modules/auth/useAuth';
+import { getUserLocalStorage } from "../../modules/auth/util";
 import { RegisterUserMutation } from "../../modules/user/RegisterUserMutation";
-import routesConfig from "../../routes/routesConfig.json";
+import allRoutes from "../../routes/routesConfig";
 import { IUser, RegisterUserResponse } from "../../types/UserTypes";
 import { alertDispatch, Severity } from "../../utils/alerts";
 import { alertState } from "../../utils/atom";
@@ -46,7 +46,7 @@ export default function RegisterForm() {
     if (!user) {
       return;
     }
-    navigate(routesConfig.movies);
+    navigate(allRoutes.movies);
   }, [newUser]);
 
   const createUser = async (name: string, email: string, password: string) => {
@@ -74,7 +74,7 @@ export default function RegisterForm() {
           content: "You have been registered! Welcome!",
         };
         alertDispatch(alert, setAlertState);
-        auth.setUserRegistered(payload);
+        auth.signin(payload);
         setNewUser(payload);
       },
       onError: (error) => console.log(error),
@@ -149,7 +149,7 @@ export default function RegisterForm() {
           </LoadingButton>
           <Grid container>
             <Grid item sx={{ width: "100%" }}>
-              <Link href="/login" variant="body2" sx={{ textAlign: "center" }}>
+              <Link href={allRoutes.login} variant="body2" sx={{ textAlign: "center" }}>
                 {"Already have an account? Sign In"}
               </Link>
             </Grid>
