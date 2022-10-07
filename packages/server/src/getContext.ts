@@ -1,9 +1,9 @@
-import { verify } from "jsonwebtoken";
-import { Context, Request } from "koa";
-import { GraphQLContext } from "./graphql/types";
-import { getAllDataLoaders } from "./modules/loader/loaderRegister";
-import UserModel from "./modules/user/UserModel";
-import IUserContext from "./types";
+import { JwtPayload, verify } from 'jsonwebtoken';
+import { Context, Request } from 'koa';
+import { GraphQLContext } from './graphql/types';
+import { getAllDataLoaders } from './modules/loader/loaderRegister';
+import UserModel from './modules/user/UserModel';
+import IUserContext from './types';
 
 type ContextVars = {
   user?: IUserContext;
@@ -23,9 +23,9 @@ export const getContext = async (ctx: ContextVars): Promise<GraphQLContext> => {
     } as GraphQLContext;
   }
 
-  const token = authorization.split(" ");
+  const token = authorization.split(' ');
 
-  const authUser = verify(token[1], process.env.JWT_SECRET);
+  const authUser = verify(token[1], process.env.JWT_SECRET!) as JwtPayload;
   if (!authUser) {
     return {
       req: ctx.req,
@@ -36,7 +36,7 @@ export const getContext = async (ctx: ContextVars): Promise<GraphQLContext> => {
   }
 
   const user = await UserModel.findById(authUser.id);
-  user.password = "***";
+  user!.password = '***';
   return {
     req: ctx.req,
     dataloaders,

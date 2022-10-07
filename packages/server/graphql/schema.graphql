@@ -1,0 +1,203 @@
+"""Root query"""
+type Query {
+  movies(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): MovieConnection!
+  user(recovery: String!): User
+}
+
+"""A connection to a list of items."""
+type MovieConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MovieEdge]
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""An edge in a connection."""
+type MovieEdge {
+  """The item at the end of the edge"""
+  node: Movie
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Movie Type"""
+type Movie {
+  id: String
+  title: String
+  genre: String
+  image: String
+  description: String
+  average: Float
+}
+
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String!
+  email: String!
+  recovery: String!
+  helperSeen: Boolean
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Mutation {
+  CreateMovie(input: CreateMovieInput!): CreateMoviePayload
+  DeleteMovie(input: DeleteMovieInput!): DeleteMoviePayload
+  UpdateMovie(input: UpdateMovieInput!): UpdateMoviePayload
+  LoginMutation(input: UserLoginInput!): UserLoginPayload
+  RegisterUserMutation(input: UserRegisterInput!): UserRegisterPayload
+  UpdateUserMutation(input: UpdateUserInput!): UpdateUserPayload
+  CommentCreateMutation(input: CommentCreateInput!): CommentCreatePayload
+}
+
+type CreateMoviePayload {
+  movieEdge: MovieEdge
+  error: String
+  clientMutationId: String
+}
+
+input CreateMovieInput {
+  title: String!
+  genre: String!
+  image: String!
+  description: String!
+  average: Float!
+  clientMutationId: String
+}
+
+type DeleteMoviePayload {
+  error: String
+  deletedId: String
+  clientMutationId: String
+}
+
+input DeleteMovieInput {
+  id: String!
+  clientMutationId: String
+}
+
+type UpdateMoviePayload {
+  movieEdge: MovieEdge
+  error: String
+  clientMutationId: String
+}
+
+input UpdateMovieInput {
+  id: String!
+  title: String
+  genre: String
+  image: String
+  description: String
+  average: Float
+  clientMutationId: String
+}
+
+type UserLoginPayload {
+  token: String
+  me: User
+  error: String
+  clientMutationId: String
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserRegisterPayload {
+  token: String
+  me: User
+  success: String
+  error: String
+  clientMutationId: String
+}
+
+input UserRegisterInput {
+  name: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UpdateUserPayload {
+  success: String
+  error: String
+  clientMutationId: String
+}
+
+input UpdateUserInput {
+  email: String!
+  name: String
+  password: String
+  recovery: String
+  helperSeen: Boolean
+  clientMutationId: String
+}
+
+type CommentCreatePayload {
+  commentEdge: CommentEdge
+  movie: Movie
+  error: String
+  clientMutationId: String
+}
+
+"""An edge in a connection."""
+type CommentEdge {
+  """The item at the end of the edge."""
+  node: Comment
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Comment data"""
+type Comment implements Node {
+  """The ID of an object"""
+  id: ID!
+  text: String
+  user: User
+  movie: Movie
+  createdAt: String
+  updatedAt: String
+}
+
+input CommentCreateInput {
+  movie: ID!
+  text: String!
+  clientMutationId: String
+}

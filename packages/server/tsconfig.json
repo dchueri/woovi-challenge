@@ -1,21 +1,16 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
+    "composite": true,
     "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "declarationMap": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "./dist/tsc",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*", "./package.json"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "test/**/*", "src/**/fixtures/*.ts"]
 }

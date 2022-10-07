@@ -2,3 +2,4 @@
 require('@babel/polyfill');
 
 process.env.TZ = 'GMT';
+process.env.JWT_SECRET = 'TESTENVIRONMENTTOKEN';
