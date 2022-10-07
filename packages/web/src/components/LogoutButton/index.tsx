@@ -2,8 +2,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Button } from "@mui/material";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { useAuth } from "../../context/AuthProvider/useAuth";
-import { getUserLocalStorage } from "../../context/AuthProvider/util";
+import { useAuth } from "../../modules/auth/useAuth";
+import { getUserLocalStorage } from "../../modules/auth/util";
 import { alertDispatch, Severity } from "../../utils/alerts";
 import { alertState } from "../../utils/atom";
 
@@ -28,7 +28,7 @@ export const LogoutButton = () => {
       content: `I hope see you soon ${user.me.name}`,
     };
     alertDispatch(alert, setAlertState);
-    auth.logout();
+    auth.signout();
   };
 
   return (

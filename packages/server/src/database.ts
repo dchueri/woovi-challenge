@@ -1,6 +1,9 @@
-import db from "./config/database";
+import mongoose from 'mongoose';
 
-db.on("error", console.log.bind(console, "Database connection failed"));
-db.once("open", () => {
-  console.log("Database connected successfully.");
-});
+export const connectDatabase = async (): Promise<void> => {
+  mongoose.connection
+    .once('open', () => console.log('Connected with the database!'))
+    .on('error', err => console.log(err))
+    .on('close', () => console.log('Database connection was closed!'));
+  await mongoose.connect(process.env.MONGO_URL!.toString());
+};

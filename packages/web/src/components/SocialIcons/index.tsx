@@ -1,7 +1,6 @@
-//import { IconButton, Link, Tooltip, Zoom } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton, Link, Tooltip, Zoom } from "@mui/material";
-import Resume from "./resume.json";
+import navBarFields from "./navBarFields";
 
 const useStyles = makeStyles((theme) => ({
   socialIcons: {
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 export const SocialIcons = () => {
   const classes = useStyles();
 
-  const socialItems = Resume.profiles.map((socialItem: any) => (
+  const socialItems = navBarFields.fields.map((socialItem: any) => (
     <Link
       href={socialItem.url}
       rel="noopener noreferrer"

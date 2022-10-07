@@ -1,8 +1,13 @@
 # compiled output
 /dist
 /node_modules
+**/node_modules
+**/__generated__
 package-lock.json
 .env
+*.lock
+.yarnrc
+**/build
 
 # Logs
 logs

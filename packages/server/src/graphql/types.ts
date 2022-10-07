@@ -6,7 +6,7 @@ import { DataLoaders } from "../modules/loader/loaderRegister";
 declare type ObjectId = mongoose.Schema.Types.ObjectId;
 
 export type GraphQLContext = {
-  user?: IUser;
+  user?: IUser | null;
   dataloaders: DataLoaders;
 };
 

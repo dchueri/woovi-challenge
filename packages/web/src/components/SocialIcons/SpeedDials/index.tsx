@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import routesConfig from "../../../routes/routesConfig.json";
-import resume from "../resume.json";
+import allRoutes from "../../../routes/routesConfig";
+import navBarFields from "../navBarFields";
 
 const useStyles = makeStyles((theme) => ({
   speedDial: {
@@ -22,10 +22,10 @@ export const SpeedDials = () => {
   const handleClose = (route: string) => {
     setOpen(false);
     if (route === "Login") {
-      navigate(routesConfig.login);
+      navigate(allRoutes.login);
     }
     if (route === "Register") {
-      navigate(routesConfig.register);
+      navigate(allRoutes.register);
     }
   };
 
@@ -33,7 +33,7 @@ export const SpeedDials = () => {
     setOpen(true);
   };
 
-  const actionIcons = resume.profiles.map((action: any, index: number) => (
+  const actionIcons = navBarFields.fields.map((action: any, index: number) => (
     <SpeedDialAction
       key={index}
       icon={<i className={`${action.x_icon}`}></i>}

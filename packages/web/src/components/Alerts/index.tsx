@@ -33,7 +33,7 @@ function Alerts() {
           textAlign: "center",
         }}
       >
-        <Text>{alert.content}</Text>
+        <Text data-testid="alert">{alert.content}</Text>
       </Alert>
     </AlertDiv>
   );

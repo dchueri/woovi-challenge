@@ -1,0 +1,8 @@
+module.exports = {
+    home: "/",
+    login: "/login",
+    register: "/register",
+    movies: "/movies",
+    recovery: "/recovery",
+    passwordChange: "/recovery/:recovery"
+}

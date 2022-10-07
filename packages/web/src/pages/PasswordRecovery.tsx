@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import { LoginBox } from "../components/styleds";
 import { UpdateUserMutation } from "../modules/user/UpdateUserMutation";
 import { UpdateUserMutation as UpdateUserMutationType } from "../modules/user/__generated__/UpdateUserMutation.graphql";
-import routesConfig from "../routes/routesConfig.json";
+import routesConfig from "../routes/routesConfig.js";
 import { alertDispatch, Severity } from "../utils/alerts";
 import { alertState } from "../utils/atom";
 
@@ -26,17 +26,17 @@ export default function PasswordRecoveryForm() {
 
   async function recoveryTokenGenerate(email: string) {
     const recovery = uuidv4();
-    const link = import.meta.env.VITE_WEB_HOST + "recovery/" + recovery;
+    const link = process.env.WEB_HOST + "recovery/" + recovery;
     const emailParams = { email: email, link: link };
     const variables = { email: email, recovery: recovery };
     updateUserMutation({
       variables,
       onCompleted: () => {
         emailjs.send(
-          import.meta.env.VITE_SERVICE_ID,
-          import.meta.env.VITE_TEMPLATE_ID,
+          process.env.SERVICE_ID!,
+          process.env.TEMPLATE_ID!,
           emailParams,
-          import.meta.env.VITE_PUBLIC_KEY
+          process.env.PUBLIC_KEY
         );
         const alert = {
           display: true,
