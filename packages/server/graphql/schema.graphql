@@ -201,3 +201,16 @@ input CommentCreateInput {
   text: String!
   clientMutationId: String
 }
+
+type Subscription {
+  CommentNew(input: CommentNewInput!): CommentNewPayload
+}
+
+type CommentNewPayload {
+  comment: Comment
+  clientSubscriptionId: String
+}
+
+input CommentNewInput {
+  clientSubscriptionId: String
+}

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+require('dotenv').config()
 
 export const connectDatabase = async (): Promise<void> => {
   mongoose.connection
