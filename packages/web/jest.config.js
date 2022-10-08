@@ -12,6 +12,7 @@ module.exports = {
   moduleNameMapper: {
     '^@/tests$': '<rootDir>/test/test-utils.tsx',
     '^@/(.*)': '<rootDir>/src/$1',
+    "\\.(css|less)$": "identity-obj-proxy"
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   transform: {
