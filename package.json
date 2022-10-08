@@ -14,7 +14,7 @@
     "test:watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand",
     "copy-envs": "yarn workspace @movies-catalog/server copy:env && yarn workspace @movies-catalog/web copy-env",
-    "start": "concurrently \"yarn dev:server\" \"yarn dev:web\"",
+    "start": "concurrently \"yarn start:server\" \"yarn start:web\"",
     "start:server": "yarn workspace @movies-catalog/server start:dev",
     "start:web": "yarn workspace @movies-catalog/web start:dev",
     "schema:generate": "yarn workspace @movies-catalog/server schema:generate",

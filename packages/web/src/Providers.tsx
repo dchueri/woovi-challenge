@@ -14,12 +14,14 @@ interface Props {
 export const Providers = ({ children }: Props) => {
   return (
     <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <CssBaseline />
       <RecoilRoot>
         <ThemeProviders>
-          <BrowserRouter>
-            <AuthProvider>{children}</AuthProvider>
-          </BrowserRouter>
+          <>
+            <CssBaseline />
+            <BrowserRouter>
+              <AuthProvider>{children}</AuthProvider>
+            </BrowserRouter>
+          </>
         </ThemeProviders>
       </RecoilRoot>
     </RelayEnvironmentProvider>
