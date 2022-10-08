@@ -9,10 +9,10 @@ import { IndexRoutes } from '../../../routes';
 
 afterEach(cleanup);
 
-it('should redirect to movies panel after login', async () => {
+it('should redirect to movies panel after register', async () => {
   const environment = createMockEnvironment();
   const history = createMemoryHistory({
-    initialEntries: ['/login'],
+    initialEntries: ['/register'],
   });
 
   render(
@@ -27,12 +27,17 @@ it('should redirect to movies panel after login', async () => {
   );
 
   const variables = {
+    name: 'test',
     email: 'test@test.com',
     password: 'testpassword',
   };
 
   await waitFor(() => expect(screen.getByRole('button')).toBeEnabled());
 
+  userEvent.type(
+    screen.getByLabelText('Name', { exact: false }),
+    variables.name,
+  );
   userEvent.type(
     screen.getByLabelText('Email', { exact: false }),
     variables.email,
@@ -46,11 +51,9 @@ it('should redirect to movies panel after login', async () => {
 
   expect(screen.getByRole('button')).toBeDisabled();
 
-  expect(history.location.pathname).toBe('/login');
-
   await waitFor(() => {
     const operation = environment.mock.getMostRecentOperation();
-    
+
     expect(operation.request.variables).toMatchObject(variables);
 
     environment.mock.resolve(
@@ -59,15 +62,17 @@ it('should redirect to movies panel after login', async () => {
     );
   });
 
-  expect(screen.getByTestId('alert')).toHaveTextContent(`Welcome`);
+  expect(screen.getByTestId('alert')).toHaveTextContent(
+    'You have been registered! Welcome!',
+  );
 
   expect(history.location.pathname).toBe('/movies');
 });
 
-it('should display an error if login faild', async () => {
+it('should display an error if register faild', async () => {
   const environment = createMockEnvironment();
   const history = createMemoryHistory({
-    initialEntries: ['/login'],
+    initialEntries: ['/register'],
   });
 
   render(
@@ -81,15 +86,20 @@ it('should display an error if login faild', async () => {
     </TestRouter>,
   );
 
-  expect(await screen.findByRole('button')).toBeEnabled();
-
   await waitFor(() => screen.getByRole('button'));
 
+  await waitFor(() => expect(screen.getByRole('button')).toBeEnabled());
+
   const variables = {
+    name: 'test',
     email: 'test@test.com',
     password: 'testpassword',
   };
 
+  userEvent.type(
+    screen.getByLabelText('Name', { exact: false }),
+    variables.name,
+  );
   userEvent.type(
     screen.getByLabelText('Email', { exact: false }),
     variables.email,
@@ -103,17 +113,20 @@ it('should display an error if login faild', async () => {
 
   expect(await screen.findByRole('button')).toBeDisabled();
 
+  const operation = environment.mock.getMostRecentOperation();
+  const payload = MockPayloadGenerator.generate(operation);
   await waitFor(() => {
-    const operation = environment.mock.getMostRecentOperation();
-    const payload = MockPayloadGenerator.generate(operation)
-    payload.data.LoginMutation.token = null;
+    console.log(payload);
+    payload.data.RegisterUserMutation.token = null;
 
     environment.mock.resolve(operation, payload);
   });
 
   expect(screen.getByTestId('alert')).toHaveTextContent(
-    'Email or password is invalid. Please, try again!',
+    payload.data.RegisterUserMutation.error,
   );
+
+  expect(history.location.pathname).toBe('/register');
 
   expect(await screen.findByRole('button')).toBeEnabled();
 });
