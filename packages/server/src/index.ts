@@ -1,32 +1,26 @@
-import cors from '@koa/cors';
-import 'dotenv/config';
-import Koa from 'koa';
-import { graphqlHTTP } from 'koa-graphql';
-import mount from 'koa-mount';
-import db from './config/database';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import { createServer } from 'http';
+import { WebSocketServer } from 'ws';
+import app from './app';
+import { connectDatabase } from './database';
 import { schema } from './schema';
 
-db.on('error', console.log.bind(console, 'Database connection failed'));
-db.once('open', () => {
-  console.log('Database connected successfully');
-});
+const bootstrap = async () => {
+  try {
+    await connectDatabase();
+  } catch (err) {
+    console.error('Unable to connect to database!', err);
+    process.exit(1);
+  }
 
-const port = process.env.PORT;
+  const server = createServer(app.callback());
 
-const app = new Koa();
+  server.listen(process.env.PORT, () => {
+    console.log(`Running at port ${process.env.PORT}`);
+  });
 
-app.use(cors());
+  const graphqlWs = new WebSocketServer({ server });
+  useServer({ schema }, graphqlWs);
+};
 
-app.use(
-  mount(
-    '/',
-    graphqlHTTP({
-      schema: schema,
-      graphiql: true,
-    }),
-  ),
-);
-
-app.listen(port, () => {
-  console.log(`Server running in port ${port}`);
-});
+bootstrap();
