@@ -1,19 +1,17 @@
-import { GraphQLID, GraphQLNonNull, GraphQLString } from "graphql";
-import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
-import { GraphQLContext } from "../../../graphql/types";
-import MovieLoader from "../../../modules/movie/MovieLoader";
-import MovieModel from "../../../modules/movie/MovieModel";
-import MovieType from "../../../modules/movie/MovieType";
-import CommentLoader from "../CommentLoader";
-import CommentModel from "../CommentModel";
-import { CommentConnection } from "../CommentType";
+import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
+import { getContext } from '../../../getContext';
+import pubSub, { EVENTS } from '../../../pubSub';
+import { IComment } from '../../../types';
+import CommentModel from '../CommentModel';
+import { CommentConnection } from '../CommentType';
 
 type Args = {
   movie: string;
   text: string;
 };
 export default mutationWithClientMutationId({
-  name: "CommentCreate",
+  name: 'CommentCreate',
   inputFields: {
     movie: {
       type: new GraphQLNonNull(GraphQLID),
@@ -22,55 +20,38 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  mutateAndGetPayload: async (args: Args, context: GraphQLContext) => {
+  mutateAndGetPayload: async (args: Args, ctx) => {
+    const context = await getContext(ctx);
     if (!context.user) {
       return {
-        error: "User not logged",
+        error: 'User not logged',
       };
     }
-
-    const movie = await MovieModel.findOne({
-      id: args.movie,
-    });
-
-    if (!movie) {
-      return {
-        error: "movie not found",
-      };
-    }
-
-    const comment = await new CommentModel({
-      user: context.user.id,
-      movie,
+ 
+    const comment: IComment = await new CommentModel({
+      user: context.user._id,
+      movie: args.movie,
       text: args.text,
     }).save();
 
+    await pubSub.publish(EVENTS.COMMENT.NEW, { commentId: comment._id });
+
     return {
-      id: comment.id,
-      movie: movie.id,
-      error: null,
+      comment,
     };
   },
   outputFields: {
     commentEdge: {
       type: CommentConnection.edgeType,
-      resolve: async ({ id }, _, context) => {
-        const comment = await CommentLoader.load(context, id);
-
+      resolve: async ({ comment }) => {
         if (!comment) {
           return null;
         }
 
         return {
-          cursor: toGlobalId("Comment", comment._id),
+          cursor: toGlobalId('Comment', comment._id),
           node: comment,
         };
-      },
-    },
-    movie: {
-      type: MovieType,
-      resolve: async ({ movie }, _, context) => {
-        return await MovieLoader.load(context, movie);
       },
     },
     error: {

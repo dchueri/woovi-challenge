@@ -1,9 +1,9 @@
-import { GraphQLID, GraphQLInputObjectType } from "graphql";
+import { GraphQLID, GraphQLInputObjectType } from 'graphql';
 
 import {
   FILTER_CONDITION_TYPE,
   getObjectId
-} from "@entria/graphql-mongo-helpers";
+} from '@entria/graphql-mongo-helpers';
 
 export const commentFilterMapping = {
   user: {
@@ -17,16 +17,13 @@ export const commentFilterMapping = {
 };
 
 const CommentFilterInputType = new GraphQLInputObjectType({
-  name: "CommentFilter",
-  description: "Used to filter comments",
+  name: 'CommentFilter',
+  description: 'Used to filter comments',
   fields: () => ({
     user: {
       type: GraphQLID,
     },
     movie: {
-      type: GraphQLID,
-    },
-    comment: {
       type: GraphQLID,
     },
   }),
