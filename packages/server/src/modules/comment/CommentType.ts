@@ -1,39 +1,38 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
-import { globalIdField } from "graphql-relay";
+import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { globalIdField } from 'graphql-relay';
 
 import {
   connectionDefinitions,
+  objectIdResolver,
   timestampResolver
-} from "@entria/graphql-mongo-helpers";
+} from '@entria/graphql-mongo-helpers';
 
-import { nodeInterface, registerTypeLoader } from "../node/typeRegister";
-
-import { GraphQLContext } from "../../graphql/types";
-import * as MovieLoader from "../movie/MovieLoader";
-import * as UserLoader from "../user/UserLoader";
-import { UserType } from "../user/UserType";
-
-import { IComment } from "src/types";
-import MovieType from "../movie/MovieType";
-import { load } from "./CommentLoader";
+import { IComment } from 'src/types';
+import { GraphQLContext } from '../../graphql/types';
+import MovieModel from '../movie/MovieModel';
+import MovieType from '../movie/MovieType';
+import { nodeInterface, registerTypeLoader } from '../node/typeRegister';
+import UserModel from '../user/UserModel';
+import { UserType } from '../user/UserType';
+import { load } from './CommentLoader';
 
 const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
-  name: "Comment",
-  description: "Comment data",
+  name: 'Comment',
+  description: 'Comment data',
   fields: () => ({
-    id: globalIdField("Comment"),
+    id: globalIdField('Comment'),
+    ...objectIdResolver,
     text: {
       type: GraphQLString,
-      resolve: (comment) => comment.text,
+      resolve: comment => comment.text,
     },
     user: {
       type: UserType,
-      resolve: (comment, _, context) => UserLoader.load(context, comment.user),
+      resolve: async comment => await UserModel.findById(comment.user),
     },
     movie: {
       type: MovieType,
-      resolve: (comment, _, context) =>
-        MovieLoader.load(context, comment.movie),
+      resolve: async comment => await MovieModel.findById(comment.movie),
     },
     ...timestampResolver,
   }),
@@ -45,6 +44,6 @@ export default CommentType;
 registerTypeLoader(CommentType, load);
 
 export const CommentConnection = connectionDefinitions({
-  name: "Comment",
+  name: 'Comment',
   nodeType: CommentType,
 });
