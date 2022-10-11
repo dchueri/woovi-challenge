@@ -10,8 +10,8 @@ export type FindUserToRecoveryQueryVariables = {
 export type FindUserToRecoveryQueryResponse = {
     readonly user: {
         readonly id: string;
-        readonly name: string;
-        readonly email: string;
+        readonly name: string | null;
+        readonly email: string | null;
     } | null;
 };
 export type FindUserToRecoveryQuery = {

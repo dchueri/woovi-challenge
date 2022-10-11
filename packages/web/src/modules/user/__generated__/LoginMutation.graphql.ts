@@ -13,8 +13,8 @@ export type LoginMutationResponse = {
         readonly token: string | null;
         readonly me: {
             readonly id: string;
-            readonly name: string;
-            readonly email: string;
+            readonly name: string | null;
+            readonly email: string | null;
             readonly helperSeen: boolean | null;
         } | null;
         readonly error: string | null;
@@ -78,7 +78,7 @@ const node: ConcreteRequest = (function () {
                     "name": "input"
                 }
             ],
-            "concreteType": "UserLoginPayload",
+            "concreteType": "LoginMutationPayload",
             "kind": "LinkedField",
             "name": "LoginMutation",
             "plural": false,
