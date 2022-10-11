@@ -14,8 +14,8 @@ export type RegisterUserMutationResponse = {
         readonly token: string | null;
         readonly me: {
             readonly id: string;
-            readonly name: string;
-            readonly email: string;
+            readonly name: string | null;
+            readonly email: string | null;
         } | null;
         readonly error: string | null;
     } | null;
@@ -84,7 +84,7 @@ const node: ConcreteRequest = (function () {
                     "name": "input"
                 }
             ],
-            "concreteType": "UserRegisterPayload",
+            "concreteType": "RegisterUserMutationPayload",
             "kind": "LinkedField",
             "name": "RegisterUserMutation",
             "plural": false,
