@@ -32,9 +32,7 @@ it("should be delete a movie", async () => {
   const token = generateToken(user);
   const rootValue = {};
   let context: any = { user };
-  context = {
-    req: { headers: { authorization: `Bearer ${token}` } },
-  };
+  
   const contextValue = await getContext({ ...context });
 
   const movie = await createMovie();
@@ -70,9 +68,7 @@ it("should not be delete a movie without id input", async () => {
   const token = generateToken(user);
   const rootValue = {};
   let context: any = { user };
-  context = {
-    req: { headers: { authorization: `Bearer ${token}` } },
-  };
+  
   const contextValue = await getContext({ ...context });
 
   await createMovie();
@@ -103,13 +99,10 @@ it("should not be delete a movie with invalid id", async () => {
   const token = generateToken(user);
   const rootValue = {};
   let context: any = { user };
-  context = {
-    req: { headers: { authorization: `Bearer ${token}` } },
-  };
+
   const contextValue = await getContext({ ...context });
 
   const variableValues = { input: { id: "invalidId" } };
-  await createMovie();
 
   const result = await graphql({
     schema,
@@ -119,8 +112,8 @@ it("should not be delete a movie with invalid id", async () => {
     variableValues,
   });
 
-  expect(result.errors).toBeDefined();
-  expect(result.data.DeleteMovie).toBeNull();
+  expect(result.data.DeleteMovie.error).toEqual('Movie does not exist');
+  expect(result.data.DeleteMovie.deletedId).toBeNull();
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
 
@@ -136,6 +129,8 @@ it("should not be delete a movie without auth", async () => {
   const rootValue = {};
   const movie = await createMovie();
 
+  const contextValue = await getContext({});
+
   const variableValues = {
     input: { id: movie.id },
   };
@@ -144,10 +139,11 @@ it("should not be delete a movie without auth", async () => {
     schema,
     source: mutation,
     rootValue,
+    contextValue,
     variableValues,
   });
 
-  expect(result.errors).toBeDefined();
-  expect(result.data.DeleteMovie).toBeNull();
+  expect(result.data.DeleteMovie.error).toEqual("You are not logged in. Please, sign in");
+  expect(result.data.DeleteMovie.deletedId).toBeNull();
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
