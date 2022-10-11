@@ -1,8 +1,8 @@
-import { GraphQLObjectType } from "graphql";
+import { GraphQLObjectType } from 'graphql';
 
-import { fromGlobalId, nodeDefinitions } from "graphql-relay";
+import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
 
-import { GraphQLContext } from "../../graphql/types";
+import { GraphQLContext } from '../../graphql/types';
 
 type Load = (context: GraphQLContext, id: string) => any;
 type TypeLoaders = {
@@ -12,30 +12,44 @@ type TypeLoaders = {
   };
 };
 
-const typesLoaders: TypeLoaders = {};
+const getTypeRegister = () => {
+  const typesLoaders: TypeLoaders = {};
 
-export const { nodeField, nodesField, nodeInterface } = nodeDefinitions(
-  (globalId, context: GraphQLContext) => {
-    const { type, id } = fromGlobalId(globalId);
+  const getTypesLoaders = () => typesLoaders;
 
-    const { load } = typesLoaders[type] || { load: null };
-
-    return (load && load(context, id)) || null;
-  },
-  (obj) => {
-    const { type }: any = typesLoaders[obj.constructor.name] || { type: null };
+  const registerTypeLoader = (type: GraphQLObjectType, load: Load) => {
+    typesLoaders[type.name] = {
+      type,
+      load,
+    };
 
     return type;
-  }
-);
-
-export const getTypesLoaders = () => typesLoaders;
-
-export const registerTypeLoader = (type: GraphQLObjectType, load: Load) => {
-  typesLoaders[type.name] = {
-    type,
-    load,
   };
 
-  return type;
+  const { nodeField, nodesField, nodeInterface } = nodeDefinitions(
+    async (globalId, context: GraphQLContext) => {
+      const { type, id } = fromGlobalId(globalId);
+
+      const { load } = typesLoaders[type] || { load: null };
+
+      return (load && load(context, id)) || null;
+    },
+    obj => {
+      const { type } = typesLoaders[obj.constructor.name] || { type: null };
+
+      return type.name;
+    },
+  );
+
+  return {
+    registerTypeLoader,
+    getTypesLoaders,
+    nodeField,
+    nodesField,
+    nodeInterface,
+  };
 };
+
+const { registerTypeLoader, nodeInterface, nodeField, nodesField } = getTypeRegister();
+
+export { registerTypeLoader, nodeInterface, nodeField, nodesField };

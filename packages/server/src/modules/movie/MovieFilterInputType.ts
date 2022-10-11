@@ -1,9 +1,7 @@
-import { GraphQLID, GraphQLInputObjectType } from "graphql";
+import { GraphQLID, GraphQLInputObjectType } from 'graphql';
 
-import {
-    FILTER_CONDITION_TYPE,
-    getObjectId
-} from "@entria/graphql-mongo-helpers";
+import { FILTER_CONDITION_TYPE, getObjectId } from '@entria/graphql-mongo-helpers';
+
 
 export const movieFilterMapping = {
   author: {
@@ -13,8 +11,8 @@ export const movieFilterMapping = {
 };
 
 const MovieFilterInputType = new GraphQLInputObjectType({
-  name: "movieFilter",
-  description: "Used to filter movies",
+  name: 'MovieFilter',
+  description: 'Used to filter movies',
   fields: () => ({
     author: {
       type: GraphQLID,

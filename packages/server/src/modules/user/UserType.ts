@@ -1,28 +1,61 @@
-import { connectionDefinitions } from "@entria/graphql-mongo-helpers";
+import { GraphQLBoolean, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import { globalIdField } from 'graphql-relay';
+
 import {
-  GraphQLBoolean,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString
-} from "graphql";
-import { globalIdField } from "graphql-relay";
+  connectionArgs,
+  connectionDefinitions,
+  objectIdResolver,
+  timestampResolver,
+  withFilter
+} from '@entria/graphql-mongo-helpers';
 
-import { nodeInterface, registerTypeLoader } from "../node/typeRegister";
+import { nodeInterface, registerTypeLoader } from '../node/typeRegister';
 
-import { IUser } from "../../types";
-import { load } from "./UserLoader";
+import { GraphQLContext } from '../../graphql/types';
 
-export const UserType = new GraphQLObjectType<IUser>({
-  name: "User",
+import * as MovieLoader from '../movie/MovieLoader';
+import { MovieConnection } from '../movie/MovieType';
+
+import * as CommentLoader from '../comment/CommentLoader';
+import { CommentConnection } from '../comment/CommentType';
+
+import { load } from './UserLoader';
+import { IUser } from './UserModel';
+
+const UserType = new GraphQLObjectType<IUser, GraphQLContext>({
+  name: 'User',
+  description: 'User data',
   fields: () => ({
-    id: globalIdField("User"),
+    id: globalIdField('User'),
+    ...objectIdResolver,
     name: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user.name,
+      type: GraphQLString,
+      resolve: user => user.name,
     },
     email: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user.email,
+      type: GraphQLString,
+      resolve: user => user.email,
+    },
+    movies: {
+      type: new GraphQLNonNull(MovieConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (user, args, context) =>
+        await MovieLoader.loadAll(
+          context,
+          withFilter(args, {
+            author: user._id,
+          }),
+        ),
+    },
+    comments: {
+      type: new GraphQLNonNull(CommentConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (user, args, context) =>
+        await CommentLoader.loadAll(context, withFilter(args, { user: user._id })),
     },
     recovery: {
       type: new GraphQLNonNull(GraphQLString),
@@ -32,13 +65,16 @@ export const UserType = new GraphQLObjectType<IUser>({
       type: GraphQLBoolean,
       resolve: (user) => user.helperSeen,
     },
+    ...timestampResolver,
   }),
   interfaces: () => [nodeInterface],
 });
 
-export const { connectionType: UserConnection, edgeType: UserEdge } =
-  connectionDefinitions({
-    nodeType: UserType,
-  });
+export default UserType;
 
 registerTypeLoader(UserType, load);
+
+export const UserConnection = connectionDefinitions({
+  name: 'User',
+  nodeType: UserType,
+});

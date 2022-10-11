@@ -1,9 +1,7 @@
-import CreateMovie from "./CreateMovie";
-import DeleteMovie from "./DeleteMovie";
-import UpdateMovie from "./UpdateMovie";
+import DeleteMovie from './DeleteMovie';
+import MovieCreate from './MovieCreateMutation';
 
 export default {
-  CreateMovie,
+  MovieCreate,
   DeleteMovie,
-  UpdateMovie,
 };
