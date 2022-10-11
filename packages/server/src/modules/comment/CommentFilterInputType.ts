@@ -26,6 +26,9 @@ const CommentFilterInputType = new GraphQLInputObjectType({
     movie: {
       type: GraphQLID,
     },
+    comment: {
+      type: GraphQLID,
+    },
   }),
 });
 
