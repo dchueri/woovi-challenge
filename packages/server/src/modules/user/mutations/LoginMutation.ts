@@ -1,30 +1,47 @@
-import * as bcrypt from "bcrypt";
-import { GraphQLNonNull, GraphQLString } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
+import { errorField, successField } from '@entria/graphql-mongo-helpers';
+import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
+import { generateToken } from '../../../auth';
+import * as UserLoader from '../UserLoader';
+import UserModel from '../UserModel';
+import UserType from '../UserType';
 
-import UserModel from "../UserModel";
-import { UserType } from "../UserType";
-
-import { generateToken } from "../../../auth";
-
-export const LoginMutation = mutationWithClientMutationId({
-  name: "UserLogin",
+export default mutationWithClientMutationId({
+  name: 'LoginMutation',
   inputFields: {
-    email: { type: new GraphQLNonNull(GraphQLString) },
-    password: { type: new GraphQLNonNull(GraphQLString) },
+    email: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    password: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
   },
-  mutateAndGetPayload: async ({ email, password }) => {
-    const user = await UserModel.findOne({ email });
-    const isValidPassword = await bcrypt.compareSync(password, user.password);
-    if (!user || !isValidPassword) {
-      return { error: "User or password is invalid. Please, try again" };
+  mutateAndGetPayload: async ({ email, password }, context) => {
+    const user = await UserModel.findOne({ email: email.trim().toLowerCase() });
+
+    const defaultErrorMessage = 'Invalid credentials';
+    if (!user) {
+      return {
+        error: defaultErrorMessage,
+      };
     }
 
-    const token = generateToken(user._id);
+    const correctPassword = user.authenticate(password);
+
+    if (!correctPassword) {
+      return {
+        error: defaultErrorMessage,
+      };
+    }
+    
+    const token = generateToken(user);
+
+    context.setCookie('moviescatalog', token);
 
     return {
-      token,
-      user,
+      token: generateToken(user),
+      id: user._id,
+      success: 'Logged with success',
     };
   },
   outputFields: {
@@ -34,11 +51,11 @@ export const LoginMutation = mutationWithClientMutationId({
     },
     me: {
       type: UserType,
-      resolve: ({ user }) => user,
+      resolve: async ({ id }, _, context) => {
+        return await UserLoader.load(context, id);
+      },
     },
-    error: {
-      type: GraphQLString,
-      resolve: ({ error }) => error,
-    },
+    ...errorField,
+    ...successField,
   },
 });

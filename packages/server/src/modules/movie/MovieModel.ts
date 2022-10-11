@@ -1,17 +1,39 @@
-import mongoose, { Model } from "mongoose";
-import { IMovie } from "../../types";
+import mongoose, { Document, Model, Types } from 'mongoose';
+const { ObjectId } = mongoose.Schema.Types;
 
-const movieSchema = new mongoose.Schema(
+const MovieSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     genre: { type: String, required: true },
     image: { type: String, required: true },
     description: { type: String, required: true },
     average: { type: Number, required: true },
+    author: {
+      type: ObjectId,
+      ref: 'Users',
+      required: true,
+    },
   },
-  { collection: "Movies" }
+  {
+    timestamps: {
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
+    },
+    collection: 'Movies',
+  },
 );
 
-const MovieModel: Model<IMovie> = mongoose.model<IMovie>("Movies", movieSchema);
+export interface IMovie extends Document {
+  title: string;
+  genre: string;
+  image: string;
+  description: string;
+  average: number;
+  author: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const MovieModel: Model<IMovie> = mongoose.models["Movies"] ||mongoose.model('Movies', MovieSchema);
 
 export default MovieModel;

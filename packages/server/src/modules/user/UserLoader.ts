@@ -1,14 +1,21 @@
-import { createLoader } from "@entria/graphql-mongo-helpers";
+import { createLoader } from '@entria/graphql-mongo-helpers';
 
-import { registerLoader } from "../loader/loaderRegister";
-import UserModel from "./UserModel";
+import { registerLoader } from '../loader/loaderRegister';
 
-const Loader = createLoader({
+import UserModel from './UserModel';
+
+const {
+  Wrapper: User,
+  getLoader,
+  clearCache,
+  load,
+  loadAll,
+} = createLoader({
   model: UserModel,
-  loaderName: "UserLoader",
+  loaderName: 'UserLoader',
 });
 
-export async function getByRecoveryToken(recovery) {
+export async function getByRecoveryToken(recovery: any ) {
   const user = await UserModel.findOne({ recovery: recovery });
   if (!user) {
     return null;
@@ -16,7 +23,7 @@ export async function getByRecoveryToken(recovery) {
   return user;
 }
 
-export default Loader;
-export const { Wrapper: User, getLoader, clearCache, load, loadAll } = Loader;
+export { getLoader, clearCache, load, loadAll };
+export default User;
 
-registerLoader("UserLoader", getLoader);
+registerLoader('UserLoader', getLoader);

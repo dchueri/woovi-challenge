@@ -1,23 +1,23 @@
-import { createLoader } from "@entria/graphql-mongo-helpers";
-import { registerLoader } from "../loader/loaderRegister";
-import { movieFilterMapping } from "./MovieFilterInputType";
-import MovieModel from "./MovieModel";
+import { createLoader } from '@entria/graphql-mongo-helpers';
 
-export async function getAll() {
-  const moviesList = await MovieModel.find({});
-  if (!moviesList) {
-    return null;
-  }
-  return moviesList;
-}
+import { registerLoader } from '../loader/loaderRegister';
 
-const Loader = createLoader({
+import { movieFilterMapping } from './MovieFilterInputType';
+import MovieModel from './MovieModel';
+
+const {
+  Wrapper: Movie,
+  getLoader,
+  clearCache,
+  load,
+  loadAll,
+} = createLoader({
   model: MovieModel,
-  loaderName: "MovieLoader",
+  loaderName: 'MovieLoader',
   filterMapping: movieFilterMapping,
 });
 
-export default Loader;
-export const { Wrapper: Movie, getLoader, clearCache, load, loadAll } = Loader;
+export { getLoader, clearCache, load, loadAll };
+export default Movie;
 
-registerLoader("MovieLoader", getLoader);
+registerLoader('MovieLoader', getLoader);

@@ -1,26 +1,25 @@
-import { GraphQLNonNull, GraphQLString } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
-import { getContext } from "../../../getContext";
-import movies from "../MovieModel";
+import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
+import { mutationWithClientMutationId } from 'graphql-relay';
+import { ID } from 'graphql-ws';
+import movies from '../MovieModel';
 
 export default mutationWithClientMutationId({
-  name: "DeleteMovie",
+  name: 'DeleteMovie',
   inputFields: {
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  mutateAndGetPayload: async ({ id }, ctx) => {
-    const context = await getContext(ctx);
+  mutateAndGetPayload: async ({ id }, context) => {
     if (!context.user) {
-      return { error: "You are not logged in. Please, sign in" };
+      return { error: 'You are not logged in. Please, sign in' };
     }
 
-    const deletedMovie = await movies.findByIdAndDelete({ _id: id });
+    const deletedMovie = await movies.findOneAndDelete({ id: id });
     if (deletedMovie) {
       return { deletedId: id };
     }
-    return { error: "Movie does not exist" };
+    return { error: 'Movie does not exist' };
   },
   outputFields: {
     error: {
@@ -28,8 +27,8 @@ export default mutationWithClientMutationId({
       resolve: ({ error }: { error: string }) => error,
     },
     deletedId: {
-      type: GraphQLString,
-      resolve: ({ deletedId }: { deletedId: string }) => deletedId,
+      type: GraphQLID,
+      resolve: ({ deletedId }: { deletedId: ID }) => deletedId,
     },
   },
 });

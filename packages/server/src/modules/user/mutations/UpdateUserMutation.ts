@@ -1,11 +1,18 @@
 import * as bcrypt from "bcrypt";
 import { GraphQLBoolean, GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
-import { UserUpdate } from "../../../types";
 
 import UserModel from "../UserModel";
 
-export const UpdateUserMutation = mutationWithClientMutationId({
+export interface UserUpdate extends Document {
+  email: string;
+  name?: string;
+  password?: string;
+  recovery?: string | null;
+  helperSeen?: boolean;
+}
+
+export default mutationWithClientMutationId({
   name: "UpdateUser",
   inputFields: {
     email: { type: new GraphQLNonNull(GraphQLString) },
