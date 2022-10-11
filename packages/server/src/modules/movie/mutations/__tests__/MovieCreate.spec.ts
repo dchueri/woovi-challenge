@@ -1,15 +1,15 @@
-import { graphql } from "graphql";
-import { createUser } from "../../../user/fixture/createUser";
+import { graphql } from 'graphql';
+import { createUser } from '../../../user/fixture/createUser';
 
 import {
   clearDbAndRestartCounters,
   connectMongoose,
   disconnectMongoose,
   sanitizeTestObject
-} from "../../../../../test";
-import { generateToken } from "../../../../auth";
-import { getContext } from "../../../../getContext";
-import { schema } from "../../../../schema";
+} from '../../../../../test';
+import { generateToken } from '../../../../auth';
+import { getContext } from '../../../../getContext';
+import { schema } from '../../../../schema';
 
 beforeAll(connectMongoose);
 
@@ -17,10 +17,10 @@ beforeEach(clearDbAndRestartCounters);
 
 afterAll(disconnectMongoose);
 
-it("should be create one movie", async () => {
+it('should be create one movie', async () => {
   const mutation = `
-        mutation CreateMovie($input: CreateMovieInput!) {
-            CreateMovie(input: $input) {
+        mutation MovieCreate($input: MovieCreateInput!) {
+          MovieCreate(input: $input) {
               movieEdge {
                 node {
                   id
@@ -36,20 +36,16 @@ it("should be create one movie", async () => {
         `;
 
   const user = await createUser();
-  const token = generateToken(user);
   let context: any = { user };
-  context = {
-    req: { headers: { authorization: `Bearer ${token}` } },
-  };
 
   const contextValue = await getContext({ ...context });
 
   const variableValues = {
     input: {
-      title: "test",
-      genre: "test",
-      image: "img",
-      description: "some description",
+      title: 'test',
+      genre: 'test',
+      image: 'img',
+      description: 'some description',
       average: 3.5,
     },
   };
@@ -63,15 +59,15 @@ it("should be create one movie", async () => {
     variableValues,
   });
 
-  expect(result.data.CreateMovie.error).toBeNull();
-  expect(result.data.CreateMovie.movieEdge.node).toBeTruthy();
+  expect(result.data.MovieCreate.error).toBeNull();
+  expect(result.data.MovieCreate.movieEdge.node).toBeTruthy();
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
 
-it("should not be create a movie with incomplete input", async () => {
+it('should not be create a movie with incomplete input', async () => {
   const mutation = `
-          mutation CreateMovie($input: CreateMovieInput!) {
-              CreateMovie(input: $input) {
+          mutation MovieCreate($input: MovieCreateInput!) {
+            MovieCreate(input: $input) {
                 movieEdge {
                   node {
                     id
@@ -96,7 +92,7 @@ it("should not be create a movie with incomplete input", async () => {
   const contextValue = await getContext({ ...context });
 
   const variableValues = {
-    input: { genre: "test", image: "img", description: "some description" },
+    input: { genre: 'test', image: 'img', description: 'some description' },
   };
   const rootValue = {};
 
@@ -113,10 +109,10 @@ it("should not be create a movie with incomplete input", async () => {
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
 
-it("should not be create one movie if no auth", async () => {
+it('should not be create one movie if no auth', async () => {
   const mutation = `
-      mutation CreateMovie($input: CreateMovieInput!) {
-          CreateMovie(input: $input) {
+      mutation MovieCreate($input: MovieCreateInput!) {
+        MovieCreate(input: $input) {
             movieEdge {
               node {
                 id
@@ -131,15 +127,14 @@ it("should not be create one movie if no auth", async () => {
           }
         }
       `;
-  const user = await createUser();
-  const contextValue = await getContext({ user });
+  const contextValue = await getContext({});
 
   const variableValues = {
     input: {
-      title: "test",
-      genre: "test",
-      image: "img",
-      description: "some description",
+      title: 'test',
+      genre: 'test',
+      image: 'img',
+      description: 'some description',
       average: 3.5,
     },
   };
@@ -153,7 +148,7 @@ it("should not be create one movie if no auth", async () => {
     variableValues,
   });
 
-  expect(result.data.CreateMovie.movieEdge).toBeNull();
-  expect(result.data.CreateMovie.error).toBeTruthy();
+  expect(result.data.MovieCreate.movieEdge).toBeNull();
+  expect(result.data.MovieCreate.error).toBeTruthy();
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });

@@ -14,12 +14,15 @@ export const createMovie = async (args: DeepPartial<IMovie> = {}) => {
     title = await getOrCreate(User, createUser);
   }
 
+  const user = await createUser()
+
   return new Movie({
     title: `content#${i}`,
     genre: "test",
     image: "test",
     description: "test description",
     average: 3,
+    author: user._id,
     ...rest,
   }).save();
 };

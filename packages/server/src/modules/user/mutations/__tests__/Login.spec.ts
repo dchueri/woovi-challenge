@@ -6,6 +6,7 @@ import {
   disconnectMongoose,
   sanitizeTestObject
 } from "../../../../../test";
+import { getContext } from "../../../../getContext";
 import { schema } from "../../../../schema";
 import { createUser } from "../../fixture/createUser";
 
@@ -17,7 +18,7 @@ afterAll(disconnectMongoose);
 
 it("should login a user", async () => {
   const mutation = `
-  mutation LoginMutation($input: UserLoginInput!) {
+  mutation LoginMutation($input: LoginMutationInput!) {
     LoginMutation(input: $input) {
       token
       me {
@@ -37,10 +38,13 @@ it("should login a user", async () => {
   };
   const rootValue = {};
 
+  const contextValue = getContext({user})
+
   const result = await graphql({
     schema,
     source: mutation,
     rootValue,
+    contextValue,
     variableValues,
   });
 
@@ -52,7 +56,7 @@ it("should login a user", async () => {
 
 it("should not login with wrong password", async () => {
   const mutation = `
-  mutation LoginMutation($input: UserLoginInput!) {
+  mutation LoginMutation($input: LoginMutationInput!) {
     LoginMutation(input: $input) {
       token
       me {

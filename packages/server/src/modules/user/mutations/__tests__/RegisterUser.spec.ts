@@ -1,12 +1,13 @@
-import { graphql } from "graphql";
+import { graphql } from 'graphql';
 import {
   clearDbAndRestartCounters,
   connectMongoose,
   disconnectMongoose,
   sanitizeTestObject
-} from "../../../../../test";
-import { schema } from "../../../../schema";
-import { createUser } from "../../fixture/createUser";
+} from '../../../../../test';
+import MockContext from '../../../../../test/MockContext';
+import { schema } from '../../../../schema';
+import { createUser } from '../../fixture/createUser';
 
 beforeAll(connectMongoose);
 
@@ -14,9 +15,9 @@ beforeEach(clearDbAndRestartCounters);
 
 afterAll(disconnectMongoose);
 
-it("should register a user", async () => {
+it('should register a user', async () => {
   const mutation = `
-  mutation RegisterUserMutation($input: UserRegisterInput!) {
+  mutation RegisterUserMutation($input: RegisterUserMutationInput!) {
     RegisterUserMutation(input: $input) {
       token
       me {
@@ -30,28 +31,29 @@ it("should register a user", async () => {
   `;
 
   const variableValues = {
-    input: { name: "test", email: "test@test.com", password: "123456" },
+    input: { name: 'test', email: 'test@test.com', password: '123456' },
   };
   const rootValue = {};
+
+  const context = new MockContext()
 
   const result = await graphql({
     schema,
     source: mutation,
     rootValue,
+    contextValue: context,
     variableValues,
   });
 
   expect(result.errors).toBeUndefined();
   expect(result.data.RegisterUserMutation.error).toBeNull();
-  expect(result.data.RegisterUserMutation.me.name).toEqual(
-    variableValues.input.name
-  );
+  expect(result.data.RegisterUserMutation.me).toBeDefined();
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
 
-it("should not register a user when email already exists", async () => {
+it('should not register a user when email already exists', async () => {
   const mutation = `
-  mutation RegisterUserMutation($input: UserRegisterInput!) {
+  mutation RegisterUserMutation($input: RegisterUserMutationInput!) {
     RegisterUserMutation(input: $input) {
       token
       me {
@@ -67,7 +69,7 @@ it("should not register a user when email already exists", async () => {
   const user = await createUser();
 
   const variableValues = {
-    input: { name: "test", email: user.email, password: "123456" },
+    input: { name: 'test', email: user.email, password: '123456' },
   };
   const rootValue = {};
 
@@ -84,7 +86,7 @@ it("should not register a user when email already exists", async () => {
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
 
-it("should not be register a user with incomplete input", async () => {
+it('should not be register a user with incomplete input', async () => {
   const mutation = `
   mutation RegisterUserMutation($input: UserRegisterInput!) {
     RegisterUserMutation(input: $input) {
@@ -100,7 +102,7 @@ it("should not be register a user with incomplete input", async () => {
   `;
 
   const variableValues = {
-    input: { email: "test@test.com", password: "123456" },
+    input: { email: 'test@test.com', password: '123456' },
   };
   const rootValue = {};
 

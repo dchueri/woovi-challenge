@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

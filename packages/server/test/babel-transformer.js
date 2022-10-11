@@ -1,5 +1,7 @@
-const { createTransformer } = require("babel-jest").default;
+const config = require('@movies-catalog/babel');
 
-const config = require("@movies-catalog/babel");
+const { createTransformer } = require('babel-jest').default;
 
-module.exports = createTransformer({ ...config });
+module.exports = createTransformer({
+  ...config,
+});

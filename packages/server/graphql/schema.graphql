@@ -1,28 +1,92 @@
-"""Root query"""
+"""The root of all... queries"""
 type Query {
-  movies(
-    """Returns the items in the list that come after the specified cursor."""
-    after: String
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
 
-    """Returns the first n items from the list."""
-    first: Int
-
-    """Returns the items in the list that come before the specified cursor."""
-    before: String
-
-    """Returns the last n items from the list."""
-    last: Int
-  ): MovieConnection!
+  """Fetches objects given their IDs"""
+  nodes(
+    """The IDs of objects"""
+    ids: [ID!]!
+  ): [Node]!
+  me: User
+  movies(after: String, first: Int, before: String, last: Int): MovieConnection!
   user(recovery: String!): User
+  version: String!
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""User data"""
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """mongoose _id"""
+  _id: String!
+  name: String
+  email: String
+  movies(after: String, first: Int, before: String, last: Int): MovieConnection!
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
+  recovery: String!
+  helperSeen: Boolean
+  createdAt: String
+  updatedAt: String
 }
 
 """A connection to a list of items."""
-type MovieConnection {
+type MovieConnection implements Connection {
+  """Number of items in this connection."""
+  count: Int
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+  This allows a client to fetch the first five objects by passing "5" as the
+  argument to "first", then fetch the total count so it could display "5 of 83",
+  for example.
+  """
+  totalCount: Int
+
+  """Offset from start."""
+  startCursorOffset: Int!
+
+  """Offset till end."""
+  endCursorOffset: Int!
+
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [MovieEdge]
+  edges: [MovieEdge]!
+}
+
+"""A connection to a list of items."""
+interface Connection {
+  """Number of items in this connection."""
+  count: Int
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+  This allows a client to fetch the first five objects by passing "5" as the
+  argument to "first", then fetch the total count so it could display "5 of 83",
+  for example.
+  """
+  totalCount: Int
+
+  """Offset from start."""
+  startCursorOffset: Int!
+
+  """Offset till end."""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 }
 
 """Information about pagination in a connection."""
@@ -42,112 +106,129 @@ type PageInfo {
 
 """An edge in a connection."""
 type MovieEdge {
-  """The item at the end of the edge"""
+  """The item at the end of the edge."""
   node: Movie
 
-  """A cursor for use in pagination"""
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
-"""Movie Type"""
-type Movie {
-  id: String
+"""Movie data"""
+type Movie implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """mongoose _id"""
+  _id: String!
   title: String
   genre: String
   image: String
   description: String
   average: Float
+  author: User
+  commentsCount: Int!
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
+  createdAt: String
+  updatedAt: String
 }
 
-type User implements Node {
+"""A connection to a list of items."""
+type CommentConnection implements Connection {
+  """Number of items in this connection."""
+  count: Int
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+  This allows a client to fetch the first five objects by passing "5" as the
+  argument to "first", then fetch the total count so it could display "5 of 83",
+  for example.
+  """
+  totalCount: Int
+
+  """Offset from start."""
+  startCursorOffset: Int!
+
+  """Offset till end."""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CommentEdge]!
+}
+
+"""An edge in a connection."""
+type CommentEdge {
+  """The item at the end of the edge."""
+  node: Comment
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Comment data"""
+type Comment implements Node {
   """The ID of an object"""
   id: ID!
-  name: String!
-  email: String!
-  recovery: String!
-  helperSeen: Boolean
-}
 
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
-  id: ID!
+  """mongoose _id"""
+  _id: String!
+  body: String
+  user: User
+  movie: Movie
+  likesCount: Int!
+
+  """whether logged user liked this movie"""
+  meHasLiked: Boolean!
+  createdAt: String
+  updatedAt: String
 }
 
 type Mutation {
-  CreateMovie(input: CreateMovieInput!): CreateMoviePayload
-  DeleteMovie(input: DeleteMovieInput!): DeleteMoviePayload
-  UpdateMovie(input: UpdateMovieInput!): UpdateMoviePayload
-  LoginMutation(input: UserLoginInput!): UserLoginPayload
-  RegisterUserMutation(input: UserRegisterInput!): UserRegisterPayload
+  LoginMutation(input: LoginMutationInput!): LoginMutationPayload
+  RegisterUserMutation(input: RegisterUserMutationInput!): RegisterUserMutationPayload
   UpdateUserMutation(input: UpdateUserInput!): UpdateUserPayload
-  CommentCreateMutation(input: CommentCreateInput!): CommentCreatePayload
+  MovieCreate(input: MovieCreateInput!): MovieCreatePayload
+  DeleteMovie(input: DeleteMovieInput!): DeleteMoviePayload
+  PostLike(input: PostLikeInput!): PostLikePayload
+  PostUnLike(input: PostUnLikeInput!): PostUnLikePayload
+  CommentLike(input: CommentLikeInput!): CommentLikePayload
+  CommentUnLike(input: CommentUnLikeInput!): CommentUnLikePayload
+  CommentCreateMutation(input: CommentCreateMutationInput!): CommentCreateMutationPayload
 }
 
-type CreateMoviePayload {
-  movieEdge: MovieEdge
-  error: String
-  clientMutationId: String
-}
-
-input CreateMovieInput {
-  title: String!
-  genre: String!
-  image: String!
-  description: String!
-  average: Float!
-  clientMutationId: String
-}
-
-type DeleteMoviePayload {
-  error: String
-  deletedId: String
-  clientMutationId: String
-}
-
-input DeleteMovieInput {
-  id: String!
-  clientMutationId: String
-}
-
-type UpdateMoviePayload {
-  movieEdge: MovieEdge
-  error: String
-  clientMutationId: String
-}
-
-input UpdateMovieInput {
-  id: String!
-  title: String
-  genre: String
-  image: String
-  description: String
-  average: Float
-  clientMutationId: String
-}
-
-type UserLoginPayload {
+type LoginMutationPayload {
   token: String
   me: User
+
+  """Default error field resolver."""
   error: String
+
+  """Default success field resolver."""
+  success: String
   clientMutationId: String
 }
 
-input UserLoginInput {
+input LoginMutationInput {
   email: String!
   password: String!
   clientMutationId: String
 }
 
-type UserRegisterPayload {
+type RegisterUserMutationPayload {
   token: String
   me: User
-  success: String
+
+  """Default error field resolver."""
   error: String
+
+  """Default success field resolver."""
+  success: String
   clientMutationId: String
 }
 
-input UserRegisterInput {
+input RegisterUserMutationInput {
   name: String!
   email: String!
   password: String!
@@ -169,48 +250,128 @@ input UpdateUserInput {
   clientMutationId: String
 }
 
-type CommentCreatePayload {
-  commentEdge: CommentEdge
-  movie: Movie
+type MovieCreatePayload {
+  movieEdge: MovieEdge
+
+  """Default error field resolver."""
   error: String
+
+  """Default success field resolver."""
+  success: String
   clientMutationId: String
 }
 
-"""An edge in a connection."""
-type CommentEdge {
-  """The item at the end of the edge."""
-  node: Comment
-
-  """A cursor for use in pagination."""
-  cursor: String!
+input MovieCreateInput {
+  title: String!
+  genre: String!
+  image: String!
+  description: String!
+  average: Float!
+  clientMutationId: String
 }
 
-"""Comment data"""
-type Comment implements Node {
-  """The ID of an object"""
-  id: ID!
-  text: String
-  user: User
+type DeleteMoviePayload {
+  error: String
+  deletedId: ID
+  clientMutationId: String
+}
+
+input DeleteMovieInput {
+  id: String!
+  clientMutationId: String
+}
+
+type PostLikePayload {
+  post: Movie
+
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
+}
+
+input PostLikeInput {
+  post: ID!
+  clientMutationId: String
+}
+
+type PostUnLikePayload {
+  post: Movie
+
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
+}
+
+input PostUnLikeInput {
+  post: ID!
+  clientMutationId: String
+}
+
+type CommentLikePayload {
+  comment: Comment
+
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
+}
+
+input CommentLikeInput {
+  comment: ID!
+  clientMutationId: String
+}
+
+type CommentUnLikePayload {
+  comment: Comment
+
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
+}
+
+input CommentUnLikeInput {
+  comment: ID!
+  clientMutationId: String
+}
+
+type CommentCreateMutationPayload {
+  commentEdge: CommentEdge
   movie: Movie
-  createdAt: String
-  updatedAt: String
+
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
 }
 
-input CommentCreateInput {
+input CommentCreateMutationInput {
   movie: ID!
   text: String!
   clientMutationId: String
 }
 
 type Subscription {
-  CommentNew(input: CommentNewInput!): CommentNewPayload
+  MovieNew(input: MovieNewInput!): MovieNewPayload
 }
 
-type CommentNewPayload {
-  comment: Comment
+type MovieNewPayload {
+  movie: Movie
   clientSubscriptionId: String
 }
 
-input CommentNewInput {
+input MovieNewInput {
   clientSubscriptionId: String
 }

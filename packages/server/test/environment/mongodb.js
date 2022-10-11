@@ -1,11 +1,15 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import NodeEnvironment from "jest-environment-node";
-import { MongoMemoryServer } from "mongodb-memory-server";
+/* eslint-disable */
+const MMS = require('mongodb-memory-server');
+const NodeEnvironment = require('jest-environment-node');
+
+const { MongoMemoryServer } = MMS;
 
 class MongoDbEnvironment extends NodeEnvironment {
-  constructor(config, context) {
-    super(config, context);
+  constructor(config) {
+    super(config);
 
+    // TODO - enable replset if needed
+    // this.mongod = new MongoMemoryReplSet({
     this.mongod = new MongoMemoryServer({
       instance: {
         // settings here
@@ -13,9 +17,10 @@ class MongoDbEnvironment extends NodeEnvironment {
         // dbName: MONGO_DB_NAME,
       },
       binary: {
-        version: "4.0.5",
+        version: '4.0.5',
       },
       // debug: true,
+      autoStart: false,
     });
   }
 
@@ -82,4 +87,4 @@ class MongoDbEnvironment extends NodeEnvironment {
   }
 }
 
-export default MongoDbEnvironment;
+module.exports = MongoDbEnvironment;
