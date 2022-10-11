@@ -32,9 +32,9 @@ const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
   fields: () => ({
     id: globalIdField('Comment'),
     ...objectIdResolver,
-    body: {
+    text: {
       type: GraphQLString,
-      resolve: comment => comment.body,
+      resolve: comment => comment.text,
     },
     user: {
       type: UserType,

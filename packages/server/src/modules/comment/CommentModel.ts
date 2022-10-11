@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const Schema = new mongoose.Schema(
   {
-    body: {
+    text: {
       type: String,
       required: true,
     },
@@ -35,7 +35,7 @@ const Schema = new mongoose.Schema(
 export interface IComment extends Document {
   user: Types.ObjectId;
   movie: Types.ObjectId;
-  body: string;
+  text: string;
   createdAt: Date;
   updatedAt: Date;
 }
