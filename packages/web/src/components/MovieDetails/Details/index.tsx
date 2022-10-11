@@ -1,10 +1,11 @@
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import CloseIcon from "@mui/icons-material/Close";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import { Button, Typography } from "@mui/material";
-import { motion } from "framer-motion";
-import { IMovie } from "../../../types/MovieTypes";
-import "./style.css";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import CloseIcon from '@mui/icons-material/Close';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import { Button, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
+import CommentForm from '../../../components/Comment/CommentForm';
+import { IMovie } from '../../../types/MovieTypes';
+import './style.css';
 
 const Modal = (props: { movie: IMovie; closeWindow: () => void }) => {
   const variants = {
@@ -16,8 +17,8 @@ const Modal = (props: { movie: IMovie; closeWindow: () => void }) => {
   };
 
   const imageVariants = {
-    open: { opacity: 1, y: "0vh" },
-    closed: { opacity: 0, y: "-10vh" },
+    open: { opacity: 1, y: '0vh' },
+    closed: { opacity: 0, y: '-10vh' },
   };
 
   const infoVariants = {
@@ -27,19 +28,15 @@ const Modal = (props: { movie: IMovie; closeWindow: () => void }) => {
 
   const rowVariants = {
     open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: "10%" },
+    closed: { opacity: 0, x: '10%' },
   };
 
   return (
-    <motion.div
-      className="movie"
-      variants={variants}
-      onClick={(e) => e.stopPropagation()}
-    >
+    <motion.div className="movie" variants={variants}>
       <Button
         onClick={props.closeWindow}
         className="close__button"
-        sx={{ borderRadius: "50px", minWidth: "min-content" }}
+        sx={{ borderRadius: '50px', minWidth: 'min-content' }}
       >
         <CloseIcon />
       </Button>
@@ -66,6 +63,9 @@ const Modal = (props: { movie: IMovie; closeWindow: () => void }) => {
         >
           <p className="movie__description">{props.movie.description}</p>
         </motion.div>
+      </motion.div>
+      <motion.div  className="movie__comments">
+        <CommentForm movie={props.movie.id} />
       </motion.div>
     </motion.div>
   );

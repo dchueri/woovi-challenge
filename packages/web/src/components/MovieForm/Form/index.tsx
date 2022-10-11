@@ -29,6 +29,7 @@ function Form() {
 
     createMovieMutation({
       variables,
+      onCompleted: (res) => console.log(res),
       onError: (error) => console.log(error),
     });
   };

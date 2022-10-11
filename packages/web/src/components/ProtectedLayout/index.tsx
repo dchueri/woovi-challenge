@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import styled from "styled-components";
 import { useAuth } from "../../modules/auth/useAuth";
-import allRoutes from "../../routes/routesConfig.js";
+import allRoutes from "../../routes/routesConfig.json";
 
 export const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
   const StyledH1 = styled.h1`

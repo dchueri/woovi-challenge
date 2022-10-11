@@ -12,7 +12,7 @@ export const fetchGraphQL = async (query: string, variables: Variables) => {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${jwt.token}`,
+      authorization: `${jwt.token}`,
     },
     body: JSON.stringify({
       query,
