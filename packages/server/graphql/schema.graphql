@@ -174,7 +174,7 @@ type Comment implements Node {
 
   """mongoose _id"""
   _id: String!
-  body: String
+  text: String
   user: User
   movie: Movie
   likesCount: Int!
