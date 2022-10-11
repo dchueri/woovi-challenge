@@ -15,7 +15,7 @@ import { useSetRecoilState } from "recoil";
 import { useAuth } from '../../modules/auth/useAuth';
 import { getUserLocalStorage } from "../../modules/auth/util";
 import { RegisterUserMutation } from "../../modules/user/RegisterUserMutation";
-import allRoutes from "../../routes/routesConfig";
+import allRoutes from "../../routes/routesConfig.json";
 import { IUser, RegisterUserResponse } from "../../types/UserTypes";
 import { alertDispatch, Severity } from "../../utils/alerts";
 import { alertState } from "../../utils/atom";

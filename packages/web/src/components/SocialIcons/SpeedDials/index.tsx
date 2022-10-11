@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import allRoutes from "../../../routes/routesConfig";
-import navBarFields from "../navBarFields";
+import allRoutes from "../../../routes/routesConfig.json";
+import navBarFields from "../navBarFields.json";
 
 const useStyles = makeStyles((theme) => ({
   speedDial: {

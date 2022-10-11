@@ -14,7 +14,7 @@ import { useAuth } from '../../modules/auth/useAuth';
 import { getUserLocalStorage } from '../../modules/auth/util';
 import { LoginMutation } from '../../modules/user/LoginMutation';
 import { LoginMutation as LoginMutationType } from '../../modules/user/__generated__/LoginMutation.graphql';
-import allRoutes from '../../routes/routesConfig.js';
+import allRoutes from '../../routes/routesConfig.json';
 import { IUser } from '../../types/UserTypes';
 import { alertDispatch, Severity } from '../../utils/alerts';
 import { alertState } from '../../utils/atom';
@@ -66,7 +66,7 @@ export default function LoginForm() {
         navigate(allRoutes.movies);
         setNewUser(payload);
       },
-      onError: (error) => {
+      onError: error => {
         console.log(error);
       },
     });
@@ -136,7 +136,11 @@ export default function LoginForm() {
           </LoadingButton>
           <Grid container>
             <Grid item xs={12} sx={{ width: '100%' }}>
-              <Link href={allRoutes.register} variant="body2" sx={{ textAlign: 'center' }}>
+              <Link
+                href={allRoutes.register}
+                variant="body2"
+                sx={{ textAlign: 'center' }}
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

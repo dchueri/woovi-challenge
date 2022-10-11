@@ -10,7 +10,6 @@ const MovieDetails = (props: { close: any, children: any }) => {
   return (
     <motion.div
       className="overlay"
-      onClick={props.close}
       variants={variants}
       initial={"closed"}
       animate={"open"}

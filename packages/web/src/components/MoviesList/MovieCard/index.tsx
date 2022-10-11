@@ -37,6 +37,7 @@ export default function MovieCard(props: { movie: IMovieEdge }) {
     const variables = { id: id, connections: [connectionID] };
     deleteMovieMutation({
       variables,
+      onCompleted: (res) => console.log(res),
       onError: (error) => console.log(error),
     });
   };

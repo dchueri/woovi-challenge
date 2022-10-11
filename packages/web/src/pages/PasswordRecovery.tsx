@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import { LoginBox } from "../components/styleds";
 import { UpdateUserMutation } from "../modules/user/UpdateUserMutation";
 import { UpdateUserMutation as UpdateUserMutationType } from "../modules/user/__generated__/UpdateUserMutation.graphql";
-import routesConfig from "../routes/routesConfig.js";
+import routesConfig from "../routes/routesConfig.json";
 import { alertDispatch, Severity } from "../utils/alerts";
 import { alertState } from "../utils/atom";
 
@@ -27,6 +27,7 @@ export default function PasswordRecoveryForm() {
   async function recoveryTokenGenerate(email: string) {
     const recovery = uuidv4();
     const link = process.env.WEB_HOST + "recovery/" + recovery;
+    console.log(link)
     const emailParams = { email: email, link: link };
     const variables = { email: email, recovery: recovery };
     updateUserMutation({

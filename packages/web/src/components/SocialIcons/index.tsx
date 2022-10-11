@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton, Link, Tooltip, Zoom } from "@mui/material";
-import navBarFields from "./navBarFields";
+import navBarFields from "./navBarFields.json";
 
 const useStyles = makeStyles((theme) => ({
   socialIcons: {

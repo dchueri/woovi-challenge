@@ -7,7 +7,7 @@ import MoviesPanel from '../pages/MoviesPanel';
 import PasswordChange from '../pages/PasswordChange';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import { RegisterUser } from '../pages/RegisterUser';
-import allRoutes from './routesConfig';
+import allRoutes from './routesConfig.json';
 
 export const IndexRoutes = () => {
   return (
