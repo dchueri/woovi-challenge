@@ -1,11 +1,11 @@
 import { GraphQLObjectType } from 'graphql';
 
-import CommentNew from '../modules/comment/subscription/CommentNewSubscription';
+import MovieNew from '../modules/movie/subscription/MovieNewSubscription';
 
 const SubscriptionType = new GraphQLObjectType({
   name: 'Subscription',
   fields: {
-    CommentNew: CommentNew as any,
+    MovieNew: MovieNew as any,
   },
 });
 

@@ -9,8 +9,16 @@
     "baseUrl": ".",
     "rootDir": ".",
     "outDir": "./dist/tsc",
-    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": ["src/**/*", "./package.json"],
-  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "test/**/*", "src/**/fixtures/*.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.test.ts",
+    "test/**/*",
+    "src/**/fixtures/*.ts"
+  ]
 }
