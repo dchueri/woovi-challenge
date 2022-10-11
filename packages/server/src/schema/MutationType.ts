@@ -1,14 +1,17 @@
-import { GraphQLObjectType } from "graphql";
-import CommentCreateMutation from "../modules/comment/mutation";
-import MovieMutations from "../modules/movie/mutations";
-import UserMutations from "../modules/user/mutations";
+import { GraphQLObjectType } from 'graphql';
+
+import CommentMutations from '../modules/comment/mutations';
+import LikeMutations from '../modules/like/mutations';
+import MovieMutations from '../modules/movie/mutations';
+import UserMutations from '../modules/user/mutations';
 
 const MutationType = new GraphQLObjectType({
-  name: "Mutation",
+  name: 'Mutation',
   fields: () => ({
-    ...MovieMutations,
     ...UserMutations,
-    ...CommentCreateMutation,
+    ...MovieMutations,
+    ...LikeMutations,
+    ...CommentMutations,
   }),
 });
 

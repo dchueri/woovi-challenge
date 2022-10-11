@@ -1,10 +1,10 @@
+import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
-require('dotenv').config()
+dotenv.config();
+
 
 export const connectDatabase = async (): Promise<void> => {
-  mongoose.connection
-    .once('open', () => console.log('Connected with the database!'))
-    .on('error', err => console.log(err))
-    .on('close', () => console.log('Database connection was closed!'));
-  await mongoose.connect(process.env.MONGO_URL!.toString());
+  mongoose.connection.on('close', () => console.log('Database connection closed.'));
+
+  await mongoose.connect(process.env.MONGO_URI!);
 };

@@ -1,8 +1,9 @@
 export interface DataLoaders {
-  UserLoader: ReturnType<typeof import("../user/UserLoader").getLoader>;
-  MovieLoader: ReturnType<typeof import("../movie/MovieLoader").getLoader>;
+  MovieLoader: ReturnType<typeof import('../movie/MovieLoader').getLoader>;
+  UserLoader: ReturnType<typeof import('../user/UserLoader').getLoader>;
+  LikeLoader: ReturnType<typeof import('../like/LikeLoader').getLoader>;
   CommentLoader: ReturnType<
-    typeof import("../comment/CommentLoader").getLoader
+    typeof import('../comment/CommentLoader').getLoader
   >;
 }
 
@@ -12,18 +13,18 @@ const loaders: {
 
 const registerLoader = <Name extends keyof DataLoaders>(
   key: Name,
-  getLoader: typeof loaders[Name]
+  getLoader: () => DataLoaders[Name],
 ) => {
-  loaders[key] = getLoader;
+  loaders[key] = getLoader as any;
 };
 
-const getAllDataLoaders = (): DataLoaders =>
+const getDataloaders = (): DataLoaders =>
   (Object.keys(loaders) as (keyof DataLoaders)[]).reduce(
     (prev, loaderKey) => ({
       ...prev,
       [loaderKey]: loaders[loaderKey](),
     }),
-    {}
+    {},
   ) as any;
 
-export { registerLoader, getAllDataLoaders };
+export { registerLoader, getDataloaders };

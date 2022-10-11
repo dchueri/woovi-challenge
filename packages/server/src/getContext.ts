@@ -1,46 +1,24 @@
-import { JwtPayload, verify } from 'jsonwebtoken';
 import { Context, Request } from 'koa';
+
 import { GraphQLContext } from './graphql/types';
-import { getAllDataLoaders } from './modules/loader/loaderRegister';
-import UserModel from './modules/user/UserModel';
-import IUserContext from './types';
+import { getDataloaders } from './modules/loader/loaderRegister';
+import { IUser } from './modules/user/UserModel';
 
 type ContextVars = {
-  user?: IUserContext;
-  req: Request;
-  context: Context;
+  user?: IUser | null;
+  req?: Request;
+  koaContext: Context;
+  setCookie: (cookieName: string, token: string) => void;
 };
 
-export const getContext = async (ctx: ContextVars): Promise<GraphQLContext> => {
-  const dataloaders = getAllDataLoaders();
-  const authorization = ctx.req?.headers.authorization;
-  if (!authorization) {
-    return {
-      req: ctx.req,
-      dataloaders,
-      user: null,
-      context: ctx.context,
-    } as GraphQLContext;
-  }
+export const getContext = async (ctx: any) => {
+  const dataloaders = getDataloaders();
 
-  const token = authorization.split(' ');
-
-  const authUser = verify(token[1], process.env.JWT_SECRET!) as JwtPayload;
-  if (!authUser) {
-    return {
-      req: ctx.req,
-      dataloaders,
-      user: null,
-      context: ctx.context,
-    } as GraphQLContext;
-  }
-
-  const user = await UserModel.findById(authUser.id);
-  user!.password = '***';
   return {
     req: ctx.req,
     dataloaders,
-    user: user,
-    context: ctx.context,
+    user: ctx.user,
+    koaContext: ctx.koaContext,
+    setCookie: ctx.setCookie,
   } as GraphQLContext;
 };

@@ -1,11 +1,15 @@
 # compiled output
 /dist
 /node_modules
+**/node_modules
+**/__generated__
 package-lock.json
 .env
-.npmrc
-junit.xml
-/dist
+*.lock
+.yarnrc
+**/build
+**/__snapshots__
+*.xml
 
 # Logs
 logs
@@ -22,8 +26,6 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
-__snapshots__
-.ts.snap
 
 # IDEs and editors
 /.idea
