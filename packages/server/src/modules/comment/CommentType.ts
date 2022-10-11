@@ -1,4 +1,10 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import {
+  GraphQLBoolean,
+  GraphQLInt,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLString
+} from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
 import {
@@ -7,14 +13,18 @@ import {
   timestampResolver
 } from '@entria/graphql-mongo-helpers';
 
-import { IComment } from 'src/types';
-import { GraphQLContext } from '../../graphql/types';
-import MovieModel from '../movie/MovieModel';
-import MovieType from '../movie/MovieType';
 import { nodeInterface, registerTypeLoader } from '../node/typeRegister';
-import UserModel from '../user/UserModel';
-import { UserType } from '../user/UserType';
+
+import { GraphQLContext } from '../../graphql/types';
+import * as MovieLoader from '../movie/MovieLoader';
+import * as UserLoader from '../user/UserLoader';
+import UserType from '../user/UserType';
+
+import LikeModel from '../like/LikeModel';
+import MovieType from '../movie/MovieType';
+
 import { load } from './CommentLoader';
+import { IComment } from './CommentModel';
 
 const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
   name: 'Comment',
@@ -22,17 +32,38 @@ const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
   fields: () => ({
     id: globalIdField('Comment'),
     ...objectIdResolver,
-    text: {
+    body: {
       type: GraphQLString,
-      resolve: comment => comment.text,
+      resolve: comment => comment.body,
     },
     user: {
       type: UserType,
-      resolve: async comment => await UserModel.findById(comment.user),
+      resolve: (comment, _, context) => UserLoader.load(context, comment.user),
     },
     movie: {
       type: MovieType,
-      resolve: async comment => await MovieModel.findById(comment.movie),
+      resolve: (comment, _, context) =>
+        MovieLoader.load(context, comment.movie),
+    },
+    likesCount: {
+      type: new GraphQLNonNull(GraphQLInt),
+      resolve: comment => LikeModel.countDocuments({ comment: comment._id }),
+    },
+    meHasLiked: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      description: 'whether logged user liked this movie',
+      resolve: async (comment, _, context) => {
+        if (!context.user) {
+          return false;
+        }
+
+        return (
+          (await LikeModel.countDocuments({
+            comment: comment._id,
+            user: context.user._id,
+          })) > 0
+        );
+      },
     },
     ...timestampResolver,
   }),
