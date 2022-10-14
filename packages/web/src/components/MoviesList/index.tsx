@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLazyLoadQuery } from "react-relay";
 import { AllMovies } from "../../modules/movie/AllMoviesQuery";
-import { useNewPostSubscription } from "../../modules/movie/useNewMovieSubscription";
+import { useNewMovieSubscription } from "../../modules/movie/useNewMovieSubscription";
 import { AllMoviesQuery } from "../../modules/movie/__generated__/AllMoviesQuery.graphql";
 import MovieCard from "./MovieCard";
 
@@ -31,8 +31,8 @@ function MoviesList() {
   const list = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
   const [moviesList, setMoviesList] = useState(list.movies!.edges);
 
-  useNewPostSubscription();
-  
+  useNewMovieSubscription({});
+
   useEffect(() => {
     setMoviesList(list.movies!.edges);
   });

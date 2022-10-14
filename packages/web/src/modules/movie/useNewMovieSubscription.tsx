@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useSubscription } from 'react-relay';
 import { MovieNewSubscription, updater } from './MovieNewSubscription';
 
-export const useNewPostSubscription = () => {
+export const useNewMovieSubscription = (input: any) => {
   const movieNewConfig = useMemo(
     () => ({
       subscription: MovieNewSubscription,
@@ -12,17 +12,15 @@ export const useNewPostSubscription = () => {
       onCompleted: (...args: any) => {
         console.log('onCompleted: ', args);
       },
-      onError: (...args: any) => {
+      onError: (args: any) => {
         console.log('onError: ', args);
       },
       onNext: ({ MovieNew }: any) => {
-        const movie = MovieNew?.movie;
-        console.log('movie');
-        console.log(movie);
+        console.log('onNext: ', MovieNew);
       },
       updater,
     }),
-    [],
+    [input],
   );
 
   useSubscription(movieNewConfig);

@@ -7,6 +7,7 @@ export const AllMovies = graphql`
       edges {
         node {
           id
+          _id
           title
           genre
           image

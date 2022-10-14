@@ -8,7 +8,7 @@ export const CreateMovieMutation = graphql`
       movieEdge {
         cursor
         node {
-          id
+          _id
           title
           genre
           image
@@ -24,7 +24,6 @@ export const CreateMovieMutation = graphql`
 
 export const updater: SelectorStoreUpdater = store => {
   const newEdge = store.getRootField('MovieCreate')!.getLinkedRecord('movieEdge');
-  console.log(newEdge)
   connectionUpdater({
     store,
     parentId: ROOT_ID,

@@ -13,6 +13,7 @@ export type AllMoviesQueryResponse = {
         readonly edges: ReadonlyArray<{
             readonly node: {
                 readonly id: string;
+                readonly _id: string;
                 readonly title: string | null;
                 readonly genre: string | null;
                 readonly image: string | null;
@@ -48,6 +49,7 @@ query AllMoviesQuery(
     edges {
       node {
         id
+        _id
         title
         genre
         image
@@ -102,6 +104,13 @@ const node: ConcreteRequest = (function () {
                     "plural": false,
                     "selections": [
                         (v1 /*: any*/),
+                        {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "_id",
+                            "storageKey": null
+                        },
                         {
                             "alias": null,
                             "args": null,
@@ -284,7 +293,7 @@ const node: ConcreteRequest = (function () {
             ]
         },
         "params": {
-            "cacheID": "1f347568baa0ee00edaf2bcb9b330965",
+            "cacheID": "7facb1db2b61ea0c69171132d6243588",
             "id": null,
             "metadata": {
                 "connection": [
@@ -300,9 +309,9 @@ const node: ConcreteRequest = (function () {
             },
             "name": "AllMoviesQuery",
             "operationKind": "query",
-            "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        description\n        average\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n  me {\n    name\n    id\n  }\n}\n"
+            "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        _id\n        title\n        genre\n        image\n        description\n        average\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n  me {\n    name\n    id\n  }\n}\n"
         }
     } as any;
 })();
-(node as any).hash = 'cc6497027236de4f8cb77aac910745cd';
+(node as any).hash = 'ccb3dcff09d2596045576694f3dac7a8';
 export default node;

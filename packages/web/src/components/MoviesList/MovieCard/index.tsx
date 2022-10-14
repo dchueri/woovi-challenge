@@ -10,8 +10,8 @@ import { useState } from "react";
 import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
 import styled from "styled-components";
-import { DeleteMovieMutation } from "../../../modules/movie/DeleteMovieMutation";
-import { IMovie, IMovieEdge } from "../../../types/MovieTypes";
+import { DeleteMovieMutation, updater } from "../../../modules/movie/DeleteMovieMutation";
+import { IMovieEdge } from "../../../types/MovieTypes";
 import MovieDetails from "../../MovieDetails";
 import Details from "../../MovieDetails/Details";
 
@@ -31,18 +31,19 @@ export default function MovieCard(props: { movie: IMovieEdge }) {
     setOpen(false);
   };
 
-  const connectionID = ConnectionHandler.getConnectionID(ROOT_ID, "All_movies");
+  const connectionID = ConnectionHandler.getConnectionID(ROOT_ID, "Feed_movies");
 
-  const handleDeleteMovie = async (id: string) => {
-    const variables = { id: id, connections: [connectionID] };
+  const handleDeleteMovie = async (id: string, nodeId: string) => {
+    const variables = { nodeId, id, connections: [connectionID] };
+    
     deleteMovieMutation({
       variables,
-      onCompleted: (res) => console.log(res),
+      updater,
       onError: (error) => console.log(error),
     });
   };
 
-  const card = (movie: IMovie) => (
+  const card = (movie: any) => (
     <motion.div className="listing" onClick={openWindow}>
       <CardContent
         sx={{
@@ -79,7 +80,7 @@ export default function MovieCard(props: { movie: IMovieEdge }) {
             <DeleteForeverOutlinedIcon
               color="action"
               onClick={() => {
-                handleDeleteMovie(movie.id);
+                handleDeleteMovie(movie._id, movie.id);
               }}
             />
           </Button>

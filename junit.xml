@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="0" errors="0" time="1.149">
-  <testsuite name="undefined" errors="0" failures="0" skipped="3" timestamp="2022-10-11T17:01:23" time="0.907" tests="4">
+<testsuites name="jest tests" tests="4" failures="0" errors="0" time="1.027">
+  <testsuite name="undefined" errors="0" failures="0" skipped="3" timestamp="2022-10-14T23:19:43" time="0.787" tests="4">
     <testcase classname=" should be delete a movie" name=" should be delete a movie" time="0">
       <skipped/>
     </testcase>
     <testcase classname=" should not be delete a movie without id input" name=" should not be delete a movie without id input" time="0">
       <skipped/>
     </testcase>
-    <testcase classname=" should not be delete a movie with invalid id" name=" should not be delete a movie with invalid id" time="0.034">
+    <testcase classname=" should not be delete a movie with invalid id" name=" should not be delete a movie with invalid id" time="0.036">
     </testcase>
     <testcase classname=" should not be delete a movie without auth" name=" should not be delete a movie without auth" time="0">
       <skipped/>
