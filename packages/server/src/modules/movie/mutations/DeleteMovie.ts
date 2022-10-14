@@ -1,6 +1,5 @@
 import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
-import { ID } from 'graphql-ws';
 import movies from '../MovieModel';
 
 export default mutationWithClientMutationId({
@@ -9,15 +8,18 @@ export default mutationWithClientMutationId({
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    nodeId: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
   },
-  mutateAndGetPayload: async ({ id }, context) => {
+  mutateAndGetPayload: async ({ id, nodeId }, context) => {
     if (!context.user) {
       return { error: 'You are not logged in. Please, sign in' };
     }
 
-    const deletedMovie = await movies.findOneAndDelete({ id: id });
+    const deletedMovie = await movies.findOneAndDelete({ _id: id });
     if (deletedMovie) {
-      return { deletedId: id };
+      return { deletedId: nodeId };
     }
     return { error: 'Movie does not exist' };
   },
@@ -28,7 +30,7 @@ export default mutationWithClientMutationId({
     },
     deletedId: {
       type: GraphQLID,
-      resolve: ({ deletedId }: { deletedId: ID }) => deletedId,
+      resolve: ({ deletedId }) => deletedId,
     },
   },
 });

@@ -38,7 +38,7 @@ it("should be delete a movie", async () => {
   const movie = await createMovie();
 
   const variableValues = {
-    input: { id: movie.id },
+    input: { id: movie.id, nodeId: 'someNodeID' },
   };
 
   const result = await graphql({
@@ -50,7 +50,7 @@ it("should be delete a movie", async () => {
   });
 
   expect(result.data.DeleteMovie.error).toBeNull();
-  expect(result.data.DeleteMovie.deletedId).toEqual(movie.id);
+  expect(result.data.DeleteMovie.deletedId).toEqual('someNodeID');
   expect(sanitizeTestObject(result.data)).toMatchSnapshot();
 });
 
@@ -102,7 +102,7 @@ it("should not be delete a movie with invalid id", async () => {
 
   const contextValue = await getContext({ ...context });
 
-  const variableValues = { input: { id: "invalidId" } };
+  const variableValues = { input: { id: user.id, nodeId: 'someNodeID' } };
 
   const result = await graphql({
     schema,
@@ -132,7 +132,7 @@ it("should not be delete a movie without auth", async () => {
   const contextValue = await getContext({});
 
   const variableValues = {
-    input: { id: movie.id },
+    input: { id: movie.id, nodeId: 'someNodeID' },
   };
 
   const result = await graphql({
