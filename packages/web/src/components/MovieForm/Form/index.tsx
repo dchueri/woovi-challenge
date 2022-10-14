@@ -3,11 +3,12 @@ import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { ConnectionHandler, useMutation } from "react-relay";
 import { ROOT_ID } from "relay-runtime";
-import { CreateMovieMutation } from "../../../modules/movie/CreateMovieMutation";
+import { CreateMovieMutation, updater } from "../../../modules/movie/CreateMovieMutation";
+import { CreateMovieMutation as CreateMovieMutationType } from "../../../modules/movie/__generated__/CreateMovieMutation.graphql";
 import { getMovieInfos } from "../../../utils/moviesDB";
 
 function Form() {
-  const [createMovieMutation] = useMutation(CreateMovieMutation);
+  const [createMovieMutation] = useMutation<CreateMovieMutationType>(CreateMovieMutation);
 
   const connectionID = ConnectionHandler.getConnectionID(ROOT_ID, "All_movies");
 
@@ -29,6 +30,7 @@ function Form() {
 
     createMovieMutation({
       variables,
+      updater,
       onCompleted: (res) => console.log(res),
       onError: (error) => console.log(error),
     });
