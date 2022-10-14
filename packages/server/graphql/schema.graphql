@@ -278,6 +278,7 @@ type DeleteMoviePayload {
 
 input DeleteMovieInput {
   id: String!
+  nodeId: String!
   clientMutationId: String
 }
 

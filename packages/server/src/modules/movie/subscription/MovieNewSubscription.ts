@@ -2,7 +2,7 @@ import { subscriptionWithClientId } from 'graphql-relay-subscription';
 
 import { GraphQLContext } from '../../../graphql/types';
 import pubSub, { EVENTS } from '../../../pubSub';
-import * as MovieLoader from '../MovieLoader';
+import MovieModel from '../MovieModel';
 import MovieType from '../MovieType';
 
 type MovieNew = {
@@ -15,7 +15,7 @@ const MovieNewSubscription = subscriptionWithClientId<MovieNew, GraphQLContext>(
     movie: {
       type: MovieType,
       resolve: async ({ id }: any, _, context) => {
-        const result = await MovieLoader.load(context, id);
+        const result = await MovieModel.findById(id);
         return result;
       },
     },

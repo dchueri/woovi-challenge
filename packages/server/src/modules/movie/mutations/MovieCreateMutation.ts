@@ -68,7 +68,6 @@ const mutation = mutationWithClientMutationId({
       type: MovieConnection.edgeType,
       resolve: async ({ id }, _, context) => {
         const movie = await MovieLoader.load(context, id);
-
         if (!movie) {
           return null;
         }
