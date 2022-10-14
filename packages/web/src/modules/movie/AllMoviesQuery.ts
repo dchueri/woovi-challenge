@@ -2,7 +2,7 @@ import { graphql } from 'relay-runtime';
 
 export const AllMovies = graphql`
   query AllMoviesQuery($first: Int) {
-    movies(first: $first) @connection(key: "All_movies") {
+    movies(first: $first) @connection(key: "Feed_movies") {
       __id
       edges {
         node {
@@ -21,6 +21,10 @@ export const AllMovies = graphql`
         startCursor
         endCursor
       }
+    }
+    me {
+      name
+      id
     }
   }
 `;

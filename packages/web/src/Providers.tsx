@@ -13,7 +13,7 @@ interface Props {
 
 export const Providers = ({ children }: Props) => {
   return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
+    <RelayEnvironmentProvider environment={RelayEnvironment as any}>
       <RecoilRoot>
         <ThemeProviders>
           <>

@@ -28,6 +28,10 @@ export type AllMoviesQueryResponse = {
             readonly endCursor: string | null;
         };
     };
+    readonly me: {
+        readonly name: string | null;
+        readonly id: string;
+    } | null;
 };
 export type AllMoviesQuery = {
     readonly response: AllMoviesQueryResponse;
@@ -60,6 +64,10 @@ query AllMoviesQuery(
       endCursor
     }
   }
+  me {
+    name
+    id
+  }
 }
 */
 
@@ -70,7 +78,13 @@ const node: ConcreteRequest = (function () {
             "kind": "LocalArgument",
             "name": "first"
         } as any
-    ], v1 = [
+    ], v1 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null
+    } as any, v2 = [
         {
             "alias": null,
             "args": null,
@@ -87,13 +101,7 @@ const node: ConcreteRequest = (function () {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                        {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null
-                        },
+                        (v1 /*: any*/),
                         {
                             "alias": null,
                             "args": null,
@@ -200,7 +208,25 @@ const node: ConcreteRequest = (function () {
                 }
             ]
         } as any
-    ], v2 = [
+    ], v3 = {
+        "alias": null,
+        "args": null,
+        "concreteType": "User",
+        "kind": "LinkedField",
+        "name": "me",
+        "plural": false,
+        "selections": [
+            {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "name",
+                "storageKey": null
+            },
+            (v1 /*: any*/)
+        ],
+        "storageKey": null
+    } as any, v4 = [
         {
             "kind": "Variable",
             "name": "first",
@@ -219,11 +245,12 @@ const node: ConcreteRequest = (function () {
                     "args": null,
                     "concreteType": "MovieConnection",
                     "kind": "LinkedField",
-                    "name": "__All_movies_connection",
+                    "name": "__Feed_movies_connection",
                     "plural": false,
-                    "selections": (v1 /*: any*/),
+                    "selections": (v2 /*: any*/),
                     "storageKey": null
-                }
+                },
+                (v3 /*: any*/)
             ],
             "type": "Query",
             "abstractKey": null
@@ -236,27 +263,28 @@ const node: ConcreteRequest = (function () {
             "selections": [
                 {
                     "alias": null,
-                    "args": (v2 /*: any*/),
+                    "args": (v4 /*: any*/),
                     "concreteType": "MovieConnection",
                     "kind": "LinkedField",
                     "name": "movies",
                     "plural": false,
-                    "selections": (v1 /*: any*/),
+                    "selections": (v2 /*: any*/),
                     "storageKey": null
                 },
                 {
                     "alias": null,
-                    "args": (v2 /*: any*/),
+                    "args": (v4 /*: any*/),
                     "filters": null,
                     "handle": "connection",
-                    "key": "All_movies",
+                    "key": "Feed_movies",
                     "kind": "LinkedHandle",
                     "name": "movies"
-                }
+                },
+                (v3 /*: any*/)
             ]
         },
         "params": {
-            "cacheID": "1a1bc41e631a590de3fe17cb61b4931c",
+            "cacheID": "1f347568baa0ee00edaf2bcb9b330965",
             "id": null,
             "metadata": {
                 "connection": [
@@ -272,9 +300,9 @@ const node: ConcreteRequest = (function () {
             },
             "name": "AllMoviesQuery",
             "operationKind": "query",
-            "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        description\n        average\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n}\n"
+            "text": "query AllMoviesQuery(\n  $first: Int\n) {\n  movies(first: $first) {\n    edges {\n      node {\n        id\n        title\n        genre\n        image\n        description\n        average\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n      startCursor\n      endCursor\n    }\n  }\n  me {\n    name\n    id\n  }\n}\n"
         }
     } as any;
 })();
-(node as any).hash = '639e7fe9d9c8fb4bab54691d912e60a1';
+(node as any).hash = 'cc6497027236de4f8cb77aac910745cd';
 export default node;
