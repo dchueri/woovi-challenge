@@ -25,7 +25,6 @@ export default function PasswordChangeForm() {
   const [loading, setLoading] = useState(false);
   const setAlertState = useSetRecoilState(alertState);
   const { recovery } = useParams();
-  console.log(recovery)
   const data = useLazyLoadQuery<FindUserToRecoveryQueryType>(
     FindUserToRecovery,
     { recovery: recovery! }
@@ -33,7 +32,6 @@ export default function PasswordChangeForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(data)
     if (!data.user) {
       navigate(allRoutes.home);
       return;

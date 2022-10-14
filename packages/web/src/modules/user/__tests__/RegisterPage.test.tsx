@@ -116,7 +116,6 @@ it('should display an error if register faild', async () => {
   const operation = environment.mock.getMostRecentOperation();
   const payload = MockPayloadGenerator.generate(operation);
   await waitFor(() => {
-    console.log(payload);
     payload.data.RegisterUserMutation.token = null;
 
     environment.mock.resolve(operation, payload);

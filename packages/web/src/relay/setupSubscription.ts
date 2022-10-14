@@ -12,7 +12,6 @@ export const setupSubscription: any = (
 ) => {
   const authorization = getUserLocalStorage().token;
   const connectionParams = { authorization: '' };
-  console.log('oooo');
 
   if (authorization) {
     connectionParams['authorization'] = authorization;

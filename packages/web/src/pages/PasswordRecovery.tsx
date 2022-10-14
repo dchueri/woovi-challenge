@@ -27,7 +27,6 @@ export default function PasswordRecoveryForm() {
   async function recoveryTokenGenerate(email: string) {
     const recovery = uuidv4();
     const link = process.env.WEB_HOST + "recovery/" + recovery;
-    console.log(link)
     const emailParams = { email: email, link: link };
     const variables = { email: email, recovery: recovery };
     updateUserMutation({

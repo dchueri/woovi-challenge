@@ -16,7 +16,7 @@ export type CreateMovieMutationResponse = {
         readonly movieEdge: {
             readonly cursor: string;
             readonly node: {
-                readonly id: string;
+                readonly _id: string;
                 readonly title: string | null;
                 readonly genre: string | null;
                 readonly image: string | null;
@@ -47,12 +47,13 @@ mutation CreateMovieMutation(
     movieEdge {
       cursor
       node {
-        id
+        _id
         title
         genre
         image
         description
         average
+        id
       }
     }
     error
@@ -84,134 +85,91 @@ const node: ConcreteRequest = (function () {
         "name": "title"
     } as any, v5 = [
         {
-            "alias": null,
-            "args": [
+            "fields": [
                 {
-                    "fields": [
-                        {
-                            "kind": "Variable",
-                            "name": "average",
-                            "variableName": "average"
-                        },
-                        {
-                            "kind": "Variable",
-                            "name": "description",
-                            "variableName": "description"
-                        },
-                        {
-                            "kind": "Variable",
-                            "name": "genre",
-                            "variableName": "genre"
-                        },
-                        {
-                            "kind": "Variable",
-                            "name": "image",
-                            "variableName": "image"
-                        },
-                        {
-                            "kind": "Variable",
-                            "name": "title",
-                            "variableName": "title"
-                        }
-                    ],
-                    "kind": "ObjectValue",
-                    "name": "input"
-                }
-            ],
-            "concreteType": "MovieCreatePayload",
-            "kind": "LinkedField",
-            "name": "MovieCreate",
-            "plural": false,
-            "selections": [
-                {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "MovieEdge",
-                    "kind": "LinkedField",
-                    "name": "movieEdge",
-                    "plural": false,
-                    "selections": [
-                        {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "cursor",
-                            "storageKey": null
-                        },
-                        {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Movie",
-                            "kind": "LinkedField",
-                            "name": "node",
-                            "plural": false,
-                            "selections": [
-                                {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null
-                                },
-                                {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null
-                                },
-                                {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "genre",
-                                    "storageKey": null
-                                },
-                                {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "image",
-                                    "storageKey": null
-                                },
-                                {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "description",
-                                    "storageKey": null
-                                },
-                                {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "average",
-                                    "storageKey": null
-                                }
-                            ],
-                            "storageKey": null
-                        }
-                    ],
-                    "storageKey": null
+                    "kind": "Variable",
+                    "name": "average",
+                    "variableName": "average"
                 },
                 {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "error",
-                    "storageKey": null
+                    "kind": "Variable",
+                    "name": "description",
+                    "variableName": "description"
                 },
                 {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "success",
-                    "storageKey": null
+                    "kind": "Variable",
+                    "name": "genre",
+                    "variableName": "genre"
+                },
+                {
+                    "kind": "Variable",
+                    "name": "image",
+                    "variableName": "image"
+                },
+                {
+                    "kind": "Variable",
+                    "name": "title",
+                    "variableName": "title"
                 }
             ],
-            "storageKey": null
+            "kind": "ObjectValue",
+            "name": "input"
         } as any
-    ];
+    ], v6 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "cursor",
+        "storageKey": null
+    } as any, v7 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "_id",
+        "storageKey": null
+    } as any, v8 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "title",
+        "storageKey": null
+    } as any, v9 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "genre",
+        "storageKey": null
+    } as any, v10 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "image",
+        "storageKey": null
+    } as any, v11 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "description",
+        "storageKey": null
+    } as any, v12 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "average",
+        "storageKey": null
+    } as any, v13 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "error",
+        "storageKey": null
+    } as any, v14 = {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "success",
+        "storageKey": null
+    } as any;
     return {
         "fragment": {
             "argumentDefinitions": [
@@ -224,7 +182,50 @@ const node: ConcreteRequest = (function () {
             "kind": "Fragment",
             "metadata": null,
             "name": "CreateMovieMutation",
-            "selections": (v5 /*: any*/),
+            "selections": [
+                {
+                    "alias": null,
+                    "args": (v5 /*: any*/),
+                    "concreteType": "MovieCreatePayload",
+                    "kind": "LinkedField",
+                    "name": "MovieCreate",
+                    "plural": false,
+                    "selections": [
+                        {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "MovieEdge",
+                            "kind": "LinkedField",
+                            "name": "movieEdge",
+                            "plural": false,
+                            "selections": [
+                                (v6 /*: any*/),
+                                {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Movie",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": [
+                                        (v7 /*: any*/),
+                                        (v8 /*: any*/),
+                                        (v9 /*: any*/),
+                                        (v10 /*: any*/),
+                                        (v11 /*: any*/),
+                                        (v12 /*: any*/)
+                                    ],
+                                    "storageKey": null
+                                }
+                            ],
+                            "storageKey": null
+                        },
+                        (v13 /*: any*/),
+                        (v14 /*: any*/)
+                    ],
+                    "storageKey": null
+                }
+            ],
             "type": "Mutation",
             "abstractKey": null
         },
@@ -239,17 +240,67 @@ const node: ConcreteRequest = (function () {
             ],
             "kind": "Operation",
             "name": "CreateMovieMutation",
-            "selections": (v5 /*: any*/)
+            "selections": [
+                {
+                    "alias": null,
+                    "args": (v5 /*: any*/),
+                    "concreteType": "MovieCreatePayload",
+                    "kind": "LinkedField",
+                    "name": "MovieCreate",
+                    "plural": false,
+                    "selections": [
+                        {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "MovieEdge",
+                            "kind": "LinkedField",
+                            "name": "movieEdge",
+                            "plural": false,
+                            "selections": [
+                                (v6 /*: any*/),
+                                {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Movie",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": [
+                                        (v7 /*: any*/),
+                                        (v8 /*: any*/),
+                                        (v9 /*: any*/),
+                                        (v10 /*: any*/),
+                                        (v11 /*: any*/),
+                                        (v12 /*: any*/),
+                                        {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null
+                                        }
+                                    ],
+                                    "storageKey": null
+                                }
+                            ],
+                            "storageKey": null
+                        },
+                        (v13 /*: any*/),
+                        (v14 /*: any*/)
+                    ],
+                    "storageKey": null
+                }
+            ]
         },
         "params": {
-            "cacheID": "f38d3b9c24a9b1d5fbbbff54c6af92f2",
+            "cacheID": "f4f9cfe83c3e8e625b0035ca5beb7d5e",
             "id": null,
             "metadata": {},
             "name": "CreateMovieMutation",
             "operationKind": "mutation",
-            "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n  $description: String!\n  $average: Float!\n) {\n  MovieCreate(input: {title: $title, genre: $genre, image: $image, description: $description, average: $average}) {\n    movieEdge {\n      cursor\n      node {\n        id\n        title\n        genre\n        image\n        description\n        average\n      }\n    }\n    error\n    success\n  }\n}\n"
+            "text": "mutation CreateMovieMutation(\n  $title: String!\n  $genre: String!\n  $image: String!\n  $description: String!\n  $average: Float!\n) {\n  MovieCreate(input: {title: $title, genre: $genre, image: $image, description: $description, average: $average}) {\n    movieEdge {\n      cursor\n      node {\n        _id\n        title\n        genre\n        image\n        description\n        average\n        id\n      }\n    }\n    error\n    success\n  }\n}\n"
         }
     } as any;
 })();
-(node as any).hash = '6d9cad00361dcd85e4406bf87e6be3c9';
+(node as any).hash = '68238d9e4ccdd874599a0ccf92d742c8';
 export default node;

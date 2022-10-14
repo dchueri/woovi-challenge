@@ -1,16 +1,13 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
-import { ConnectionHandler, useMutation } from "react-relay";
-import { ROOT_ID } from "relay-runtime";
+import { useMutation } from "react-relay";
 import { CreateMovieMutation, updater } from "../../../modules/movie/CreateMovieMutation";
 import { CreateMovieMutation as CreateMovieMutationType } from "../../../modules/movie/__generated__/CreateMovieMutation.graphql";
 import { getMovieInfos } from "../../../utils/moviesDB";
 
 function Form() {
   const [createMovieMutation] = useMutation<CreateMovieMutationType>(CreateMovieMutation);
-
-  const connectionID = ConnectionHandler.getConnectionID(ROOT_ID, "All_movies");
 
   const handleCreateMovie = async (
     title: string,
@@ -25,14 +22,12 @@ function Form() {
       image: image,
       description: description,
       average: average,
-      connections: [connectionID],
     };
 
     createMovieMutation({
       variables,
-      updater,
-      onCompleted: (res) => console.log(res),
       onError: (error) => console.log(error),
+      updater,
     });
   };
 

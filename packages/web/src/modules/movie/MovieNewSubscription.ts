@@ -25,9 +25,7 @@ export const updater = (store: RecordSourceSelectorProxy) => {
   const movieNode = store.getRootField('MovieNew')!.getLinkedRecord('movie');
 
   const movieId = movieNode!.getValue('id');
-
   const movieStore = store.get(movieId!.toString());
-
   if (!movieStore) {
     const movieConnection = ConnectionHandler.getConnection(store.getRoot(), 'Feed_movies');
 
