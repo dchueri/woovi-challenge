@@ -15,5 +15,5 @@ export function alertDispatch(alert: Alert, setState: any) {
   setState(alert);
   setTimeout(() => {
     setState({ ...alert, display: false });
-  }, 3000);
+  }, 5000);
 }

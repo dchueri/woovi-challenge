@@ -31,4 +31,5 @@ export const updater: SelectorStoreUpdater = store => {
     edge: newEdge!,
     before: true,
   });
+  store.invalidateStore();
 };
