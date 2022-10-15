@@ -17,7 +17,7 @@ import * as CommentLoader from '../comment/CommentLoader';
 import CommentModel from '../comment/CommentModel';
 import { CommentConnection } from '../comment/CommentType';
 
-import * as UserLoader from '../user/UserLoader';
+import UserModel from '../user/UserModel';
 import UserType from '../user/UserType';
 import { load } from './MovieLoader';
 import { IMovie } from './MovieModel';
@@ -50,7 +50,7 @@ const MovieType = new GraphQLObjectType<IMovie, GraphQLContext>({
     },
     author: {
       type: UserType,
-      resolve: (movie, _, context) => UserLoader.load(context, movie.author),
+      resolve: (movie, _, context) => UserModel.findById(movie.author),
     },
     commentsCount: {
       type: new GraphQLNonNull(GraphQLInt),
