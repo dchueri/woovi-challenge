@@ -31,7 +31,7 @@ function MoviesList() {
   const list = useLazyLoadQuery<AllMoviesQuery>(AllMovies, {});
   const [moviesList, setMoviesList] = useState(list.movies!.edges);
 
-  useNewMovieSubscription({});
+  useNewMovieSubscription(list.me!.id);
 
   useEffect(() => {
     setMoviesList(list.movies!.edges);
